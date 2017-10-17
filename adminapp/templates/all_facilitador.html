@@ -1,0 +1,374 @@
+{% extends "base_in.html" %}
+
+{% block container %}
+    <div class="container-fluid">
+
+<div >
+    <br><h1 class="text-center">Lista de Facilitadores <a href="{% url 'new_facilitador' %}" class="btn btn-info">Nuevo</a></h1>
+    <br>
+    
+    <table style="display:block; width:auto" id="example" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
+    	<thead class="blue lighten-2 text-white">
+    		<tr>
+    			<th>Identidad</th>
+    			<th>Nombre Completo</th>
+    			<th>Domicilio</th>
+    			<th>Lugar Residencia</th>
+    			<th>Telefonos</th>
+    			<th>Correo</th>
+    			<th>Sexo</th>
+    			<th>Fecha de Nacimiento</th>
+    			<th>Ocupación u Oficio</th>
+          <th>Lugar de Trabajo</th>
+          <th>Formación Académica</th>
+          <th>Tiempo de ser Facilitador</th>
+          <th>Becado</th>
+          <th>Estudia Actualmente</th>
+          <th>Donde Estudia</th>
+          <th>Que Estudia</th>
+    			<th></th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	{% for d in data %}
+    		<tr>
+    				<td>{{d.numid}}</td>
+    				<td>{{d.nombre}} {{d.apellido}}</td>
+    				<td>{{d.domicilio}}</td>
+    				<td>{{d.municipio.municipio}} | {{d.tipo_residencia}}</td>
+    				<td>{{d.telefono}}</td>
+    				<td>{{d.correo}}</td>
+    				<td>{{d.sexo.sexo}}</td>
+    				<td>{{d.fecha_nacimiento}}</td>
+    				<td>{{d.ocupacion}}</td>
+            <td>{{d.lugar_trabajo}}</td>
+            <td>{{d.formacion_academica}}</td>
+            <td>{{d.tiempo_facilitador}}</td>
+            {% if d.becado == True %}
+                <td>Si</td>
+              {% else %}
+                <td>No</td>
+            {% endif %}
+            {% if d.estudia == True %}
+                <td>Si</td>
+              {% else %}
+                <td>No</td>
+            {% endif %}
+            <td>{{d.donde_estudia}}</td>
+            <td>{{d.que_estudia}}</td>
+    				<td>
+    					<div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle btn btn-info" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones </a>
+                                <div class="dropdown-menu dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                                    <a id="btn-editar" class="dropdown-item" href="" data-id="{{ d.id }}" data-numid="{{ d.numid }}" data-nombre="{{ d.nombre }}" data-apellido="{{ d.apellido }}" data-direccion="{{ d.domicilio }}" data-tipor="{{ d.tipo_residencia.id }}" data-muni="{{ d.municipio.id }}" data-telefono="{{ d.telefono }}" data-correo="{{ d.correo }}" data-sexo="{{ d.sexo.id }}" data-fechan="{{ d.fecha_nacimiento }}"  data-lugart="{{ d.lugar_trabajo }}" data-ocupacion="{{ d.ocupacion }}" data-formacion="{{d.formacion_academica}}" data-tiempof="{{d.tiempo_facilitador}}" data-becado="{{d.becado}}" data-estudia="{{d.estudia}}" data-dondee="{{d.donde_estudia}}" data-quee="{{d.que_estudia}}" data-toggle="modal" data-target="#edit_student">Editar</a>
+                                    <a class="dropdown-item btn-eliminar" href="{% url 'delete_facilitador' d.id %}">Eliminar</a>
+                                </div>
+                        </div>
+    				</td>
+    		</tr>
+    		{% empty %}
+                    <h2>No hay facilitadores registrados</h2>
+    	{% endfor %}
+    	</tbody>
+    </table>
+    
+</div>
+
+
+</div>
+
+<!--Modal: Contact form-->
+<div class="modal fade" id="edit_student" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="title"><i class="fa fa-pencil"></i>Editar Facilitador</h4>
+                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-0">
+            
+            	<form action="" method="post">
+		          {% csrf_token %}
+            	 <div class="row">
+               <div class="col-md-4">
+                    <input type="hidden" id="idfacilitadoredit" name="id">
+
+                    <div class="form-group">
+                        <i class="fa fa-id-card prefix grey-text"></i>
+                        <label for="numid">Identidad</label>
+                        <input type="text" id="numid" name="numid" class="form-control" required="">
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" class="form-control" required="">
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <label for="apellido">Apellido</label>
+                        <input type="text" id="apellido" class="form-control" required="">
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <i class="fa fa-phone prefix grey-text"></i>
+                        <label for="telefono">Teléfono o Celular</label>
+                        <input type="text" id="telefono" class="form-control">
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <i class="fa fa-envelope prefix grey-text"></i>
+                        <label for="correo">Correo</label>
+                        <input type="email" id="correo" class="form-control" required="">
+                    </div>
+
+
+                    <div class="form-group">
+                        <i class="fa fa-pencil prefix grey-text"></i>
+                        <label for="lugar">Lugar de Residencia</label>
+                        <select class="mdb-selec colorful-select dropdown-primary" id="tipor">
+                          {% for t in tipor %}
+                            <option value="{{t.id}}">{{t}}</option> 
+                          {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fa fa-bus prefix grey-text"></i>
+                        <label for="direccion">Domicilio Exacto</label>
+                        <input type="text" id="direccion" class="form-control" required="">
+                    </div>
+
+
+                  </div>
+
+                  <div class="col-md-4">
+
+                     <div class="form-group">
+                      <i class="fa fa-globe prefix grey-text"></i>
+                        <label for="muni">Seleccione Municipio</label>
+                        <select class="mdb-selec colorful-select dropdown-primary" id="muni">
+                        {% for m in muni %}
+                        <option value="{{m.id}}"> {{m}} </option>
+                        {% endfor %}
+                    </select>
+                    </div>
+
+                  <div class="form-group">
+                        <i class="fa fa-briefcase prefix grey-text"></i>
+                        <label for="ocupacion">Ocupación u Oficio</label>
+                        <input type="text" id="ocupacion" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fa fa-briefcase prefix grey-text"></i>
+                        <label for="lugart">Lugar de Trabajo</label>
+                        <input type="text" id="lugart" class="form-control">
+                    </div>
+                    
+                   <div class="form-group">
+                        <i class="fa fa-briefcase prefix grey-text"></i>
+                        <label for="formacion">Formación Académica</label>
+                        <input type="text" id="formacion" class="form-control">
+                    </div>
+
+                    <div class="form-group form-check">
+                        <i class="fa fa-birthday-cake prefix grey-text"></i>
+                        <label for="date-picker-example">Fecha de Nacimiento</label>
+                        <input id="fechan" placeholder="Seleccione fecha" type="text" id="date-picker-example" class="form-control datepicker">
+                    </div>
+
+                    <div class="form-group form-check">
+                        <i class="fa fa-calendar-o prefix grey-text"></i>
+                        <label for="date-picker-example">Fecha desde ser Facilitador</label>
+                        <input id="fechaf" placeholder="Seleccione fecha" type="text" id="date-picker-example2" class="form-control datepicker">
+                    </div>
+
+                  </div>
+                  <div class="col-md-4">
+
+                    <div class="form-group">
+                        <i class="fa fa-pencil prefix grey-text"></i>
+                        <label for="becado">Es Becado?</label>
+                        <select class="mdb-selec colorful-select dropdown-primary" id="becado">
+                            <option value="1">SI</option>
+                            <option value="2">NO</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fa fa prefix grey-text"></i>
+                        <label for="estudia">Estudia Actualmente?</label>
+                        <select class="mdb-selec colorful-select dropdown-primary" id="estudia">
+                            <option value="1">SI</option>
+                            <option value="2">NO</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fa fa-briefcase prefix grey-text"></i>
+                        <label for="dondee">Donde Estudia?</label>
+                        <input type="text" id="dondee" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fa fa-briefcase prefix grey-text"></i>
+                        <label for="quee">Qué Estudia?</label>
+                        <input type="text" id="quee" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <i class="fa fa-venus-mars prefix grey-text"></i>
+                        <label for="sexo">Seleccione Sexo</label>
+                        <select class="mdb-selec colorful-select dropdown-primary" id="sexo">
+                        {% for s in sexo %}
+                        <option value="{{s.id}}"> {{s}} </option>
+                        {% endfor %}
+                    </select>
+                    </div>
+                  <div class="text-center mt-1-half">
+                        <button type="button" class="btn btn-danger btn-3d" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
+                    <button type="submit" class="btn btn-success btn-3d btn-actualizar"><i class="fa fa-check"></i>Actualizar</button>
+                    </div>
+		                      
+                  
+                  </div>
+               </div>
+              </form>
+            
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: Contact form-->
+    
+{% endblock container %}
+
+{% block js %}
+  <script>
+  $(document).ready(function() {
+  	$('.datatable').DataTable();
+    $('#btn-editar').click(function(e)
+    {
+      e.preventDefault();
+      var _id = $(this).attr('data-id');
+      var _numid = $(this).attr('data-numid');
+      var _nombre = $(this).attr('data-nombre');
+      var _apellido = $(this).attr('data-apellido');
+      var _direccion = $(this).attr('data-direccion');
+      var _tipor = $(this).attr('data-tipor');
+      var _muni = $(this).attr('data-muni');
+      var _telefono = $(this).attr('data-telefono');
+      var _correo = $(this).attr('data-correo');
+      var _sexo = $(this).attr('data-sexo');
+      var _fechan = $(this).attr('data-fechan');
+      var _lugart = $(this).attr('data-lugart');
+      var _ocupacion = $(this).attr('data-ocupacion');
+      var _formacion = $(this).attr('data-formacion');
+      var _tiempof = $(this).attr('data-tiempof');
+      var _becado = $(this).attr('data-becado');
+      var _estudia = $(this).attr('data-estudia');
+      var _dondee = $(this).attr('data-dondee');
+      var _quee = $(this).attr('data-quee');
+          $('#numid').val(_numid)
+          $('#nombre').val(_nombre)
+          $('#apellido').val(_apellido)
+          $('#direccion').val(_direccion)
+          $('#tipor').val(_tipor)
+          $('#telefono').val(_telefono)
+          $('#ocupacion').val(_ocupacion)
+          $('#fechan').val(_fechan)
+          $('#lugart').val(_lugart)
+          $('#fechaf').val(_tiempof)
+          $('#correo').val(_correo)
+          $('#dondee').val(_dondee)
+          $('#quee').val(_quee)
+          $('#muni').val(_muni)
+          $('#becado').val(_becado)
+          $('#estudia').val(_estudia)
+          $('#sexo').val(_sexo)
+          $('#formacion').val(_formacion)
+          $("#idfacilitadoredit").val(_id);  
+    });
+
+        $('.btn-actualizar').click(function(e){
+          var _numid = $('#numid').val()
+          var _nombre = $('#nombre').val()
+          var _apellido = $('#apellido').val()
+          var _muni = $('#muni').val()
+          var _tipor = $("#tipor").val()
+          var _direccion = $('#direccion').val()
+          var _tel = $('#telefono').val()
+          var _ocupacion = $('#ocupacion').val()
+          var _fechan = $('#fechan').val()
+          var _lugart = $('#lugart').val()
+          var _fechaf = $('#fechaf').val()
+          var _correo = $('#correo').val()
+          var _dondee = $('#dondee').val()
+          var _quee = $('#quee').val()
+          var _becado = $('#becado').val()
+          var _estudia = $('#estudia').val()
+          var _formacion = $('#formacion').val()
+          var _sexo = $('#sexo').val()
+          var _id = $('#idfacilitadoredit').val()
+          var csfrm = $('input[name=csrfmiddlewaretoken]').val()
+          $.ajax({
+            type:'POST',
+            url:'/principal/facilitador/edit/' + _id + '/',
+            data:{
+            id: _id,
+      			numid: _numid,
+            nombre: _nombre,
+            apellido: _apellido,
+            telefono: _tel,
+            direccion: _direccion,
+            muni: _muni,
+            opcio: _opcio,
+            sexo: _sexo,
+            correo: _correo,
+            ocupacion: _ocupacion,
+            lugart: _lugart,
+            formacion: _formacion,
+            fechan: _fechan,
+            fechaf: _fechaf,
+            becado: _becado,
+            estudia: _estudia,
+            dondee: _dondee,
+            quee: _quee,
+            csrfmiddlewaretoken: csfrm
+            },
+            success: function(){
+              location.reload()
+            },
+            error: function()
+            {
+              console.log('error')
+            }
+
+        });
+});
+});
+  $(document).ready(function(){
+        	$("#numid").mask("9999-9999-99999");
+            $("#telefono").mask("9999-9999");
+            $("#fechan").mask("9999/99/99");
+            $('#fechan').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+
+            $('.button-collapse').sideNav({
+		        edge: 'left', // Choose the horizontal origin
+		        closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+		      });
+            
+        })
+  </script>  
+{% endblock  %}

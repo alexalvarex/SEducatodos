@@ -1,0 +1,262 @@
+{% extends "base_in.html" %}
+
+{% block container %}
+
+<div style="margin-left: 340px" class="col-md-6 text-center" id="mensaje" >
+  
+</div>
+<div style="border: 2px solid #D3D0D0" class="container-fluid col-md-12">
+
+<form id="new_facilitador" action="" method="post">
+{% csrf_token %}
+<br>
+    <h2 class="text-center">Registrar Facilitador <a href="{% url 'all_facilitador' %}" class="btn info-color-dark">Ver</a></h2>
+    <hr>
+	<div class="row">
+	<div class="col-md-4">
+
+    <div class="md-form">
+        <i class="fa fa-id-card prefix grey-text"></i>
+        <input type="text" id="numid" name="numid" class="form-control" required="">
+        <label for="numid">Identidad</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-user prefix grey-text"></i>
+        <input type="text" id="nombre" class="form-control" required="">
+        <label for="nombre">Nombre</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-user prefix grey-text"></i>
+        <input type="text" id="apellido" class="form-control" required="">
+        <label for="apellido">Apellido</label>
+    </div>
+
+    
+    <div class="md-form">
+        <i class="fa fa-phone prefix grey-text"></i>
+        <input type="text" id="telefono" class="form-control">
+        <label for="telefono">Teléfono o Celular</label>
+    </div>
+    
+
+    <div class="md-form">
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <input type="email" id="correo" class="form-control" required="">
+        <label for="correo">Correo</label>
+    </div>
+
+
+    <div class="form-group">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <label for="lugar">Lugar de Residencia</label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="lugar">
+        <option value="" disabled selected>Seleccione</option>
+        	{% for t in tipor %}
+        		<option value="{{t.id}}">{{t}}</option>	
+        	{% endfor %}
+        </select>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-bus prefix grey-text"></i>
+        <input type="text" id="direccion" class="form-control" required="">
+        <label for="direccion">Domicilio Exacto</label>
+    </div>
+
+
+	</div>
+
+	<div class="col-md-4">
+
+     <div class="form-group">
+    	<i class="fa fa-globe prefix grey-text"></i>
+        <label for="muni">Seleccione Municipio</label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="muni">
+        <option value="" disabled selected>Seleccione</option>
+        {% for m in muni %}
+		    <option value="{{m.id}}"> {{m}} </option>
+        {% endfor %}
+		</select>
+    </div>
+
+	<div class="md-form">
+        <i class="fa fa-briefcase prefix grey-text"></i>
+        <input type="text" id="ocupacion" class="form-control">
+        <label for="ocupacion">Ocupación u Oficio</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-briefcase prefix grey-text"></i>
+        <input type="text" id="lugart" class="form-control">
+        <label for="lugart">Lugar de Trabajo</label>
+    </div>
+		
+	 <div class="md-form">
+        <i class="fa fa-briefcase prefix grey-text"></i>
+        <input type="text" id="formacion" class="form-control">
+        <label for="formacion">Formación Académica</label>
+    </div>
+
+    <div class="md-form form-check">
+        <i class="fa fa-birthday-cake prefix grey-text"></i>
+        <input id="fechan" placeholder="Seleccione fecha" type="text" id="date-picker-example" class="form-control datepicker">
+        <label for="date-picker-example">Fecha de Nacimiento</label>
+    </div>
+
+    <div class="md-form form-check">
+        <i class="fa fa-calendar-o prefix grey-text"></i>
+        <input id="fechaf" placeholder="Seleccione fecha" type="text" id="date-picker-example2" class="form-control datepicker">
+        <label for="date-picker-example">Fecha desde ser Facilitador</label>
+    </div>
+
+	</div>
+	<div class="col-md-4">
+
+    <div class="form-group">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <label for="becado">Es Becado?</label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="becado">
+            <option value="" disabled selected>Seleccione</option>
+            {% for d in des %}
+                <option value="{{d.id}}">{{d}}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <i class="fa fa prefix grey-text"></i>
+        <label for="estudia">Estudia Actualmente?</label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="estudia">
+            <option value="" disabled selected>Seleccione</option>
+            {% for d in des %}
+                <option value="{{d.id}}">{{d}}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-briefcase prefix grey-text"></i>
+        <input type="text" id="dondee" class="form-control">
+        <label for="dondee">Donde Estudia?</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-briefcase prefix grey-text"></i>
+        <input type="text" id="quee" class="form-control">
+        <label for="quee">Qué Estudia?</label>
+    </div>
+
+    <div class="form-group">
+    	<i class="fa fa-venus-mars prefix grey-text"></i>
+        <label for="sexo">Seleccione Sexo</label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="sexo">
+        <option value="" disabled selected>Seleccione</option>
+        {% for s in sexo %}
+		    <option value="{{s.id}}"> {{s}} </option>
+        {% endfor %}
+		</select>
+    </div>
+	
+	<div class="form-group text-center">
+        <input type="submit" class="btn info-color-dark z-depth-2" value="Guardar">
+    </div>
+	</div>
+	</div>
+    
+</form>
+</div>
+
+
+{% endblock container %}
+
+{% block js %}
+	<script>
+		$(document).on('submit', '#new_facilitador', function(e){
+			e.preventDefault();
+			var _numid = $('#numid').val()
+			var _nombre = $('#nombre').val()
+			var _apellido = $('#apellido').val()
+			var _tel = $('#telefono').val()
+			var _direccion = $('#direccion').val()
+			var _muni = $('#muni').val()
+			var _opcio = $("#lugar").val()
+			var _sexo = $('#sexo').val()
+			var _correo = $('#correo').val()
+			var _ocupacion = $('#ocupacion').val()
+			var _lugart = $('#lugart').val()
+			var _formacion = $('#formacion').val()
+			var _fechan = $('#fechan').val()
+			var _fechaf = $('#fechaf').val()
+			var _becado = $('#becado').val()
+			var _estudia = $('#estudia').val()
+			var _dondee = $('#dondee').val()
+			var _quee = $('#quee').val()
+			var csfrm = $('input[name=csrfmiddlewaretoken]').val()
+
+			$.ajax({
+				type:'POST',
+				url:'/principal/facilitador/new/add/',
+				data:{
+					numid: _numid,
+					nombre: _nombre,
+					apellido: _apellido,
+					telefono: _tel,
+					direccion: _direccion,
+					muni: _muni,
+					opcio: _opcio,
+					sexo: _sexo,
+					correo: _correo,
+					ocupacion: _ocupacion,
+					lugart: _lugart,
+					formacion: _formacion,
+					fechan: _fechan,
+					fechaf: _fechaf,
+					becado: _becado,
+					estudia: _estudia,
+					dondee: _dondee,
+					quee: _quee,
+					csrfmiddlewaretoken: csfrm
+				},
+				success: function(data){
+					var html = '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><strong><span class="fa fa-check fa-2x"></span></strong> Se ingreso con exito el Facilitador ' + _nombre + ' ' + _apellido + ' satisfactoriamente.</div>'
+					$('#mensaje').html(html)
+					$('#numid').val('')
+					$('#nombre').val('')
+					$('#direccion').val('')
+					$('#apellido').val('')
+					$('#trabaja').val('')
+					$('#telefono').val('')
+					$('#ocupacion').val('')
+					$('#fechan').val('')
+					$('#lugart').val('')
+					$('#fechaf').val('')
+					$('#correo').val('')
+					$('#dondee').val('')
+					$('#quee').val('')
+					$('#muni').val('')
+					$('#becado').val('')
+					$('#estudia').val('')
+					$('#sexo').val('')
+					$('#formacion').val('')
+					
+				}
+			});
+		});
+		$(document).ready(function(){
+        	$("#numid").mask("9999-9999-99999");
+            $("#telefono").mask("9999-9999");
+            $("#fechan").mask("9999-99-99");
+            $("#fechaf").mask("9999-99-99");
+            $('#fechan').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+            $('#fechaf').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+
+            $('.button-collapse').sideNav({
+                edge: 'left', // Choose the horizontal origin
+                closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+              });
+            
+        })
+	</script>
+{% endblock  %}

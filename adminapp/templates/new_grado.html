@@ -1,0 +1,72 @@
+{% extends "base_in.html" %}
+
+{% block container %}
+
+<div style="margin-left: 340px" class="col-md-6 text-center" id="mensaje" >
+  
+</div>
+<div style="border: 2px solid #D3D0D0" class="container col-sm-6 col-md-12 col-lg-6 mt-4">
+
+<form id="new_grado" action="" method="post">
+{% csrf_token %}
+<br>
+    <h2 class="text-center"> <a href="{% url 'all_grados' %}" class="btn cyan">Ver</a> Aperturar Grado</h2>
+    <hr>
+	<div class="row">
+	<div class="col-md-12">
+
+    <div class="md-form">
+        <i class="fa fa-users prefix grey-text"></i>
+        <input type="text" id="grado" name="grado" class="form-control" required="">
+        <label for="grado">Grado</label>
+    </div>
+    <div class="form-group">
+        <i class="fa fa-user prefix grey-text"></i>
+        <label for="faci">Facilitador</label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="faci">
+        <option value="" disabled selected>Seleccione</option>
+        {% for g in faci %}
+            <option value="{{g.id}}"> {{g}} </option>
+        {% endfor %}
+        </select>
+    </div>
+    
+	<div class="form-group text-center">
+        <input type="submit" class="btn info-color-dark z-depth-2" value="Guardar">
+    </div>
+</div>
+    </div>
+</form>
+</div>
+
+
+{% endblock container %}
+
+{% block js %}
+	<script>
+		$(document).on('submit', '#new_grado', function(e){
+			e.preventDefault();
+			var _grado = $('#grado').val()
+			var _faci = $('#faci').val()
+			var csfrm = $('input[name=csrfmiddlewaretoken]').val()
+
+			$.ajax({
+				type:'POST',
+				url:'/principal/grados/new/add/',
+				data:{
+					grado: _grado,
+					faci: _faci,
+					csrfmiddlewaretoken: csfrm
+				},
+				success: function(data){
+					var html = '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><strong><span class="fa fa-check fa-2x"></span></strong> Se aperturó con exito el grado ' + _grado + ' satisfactoriamente.</div>'
+					$('#mensaje').html(html)
+					$('#grado').val('')
+					console.log(data)
+					
+				}
+			});
+		});
+
+	</script>
+{% endblock  %}

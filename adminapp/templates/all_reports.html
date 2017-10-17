@@ -1,0 +1,43 @@
+{% extends "base_in.html" %}
+
+{% block container %}
+    <div class="container">
+    	<br><h1 class="text-center"><span class="badge blue">REPORTES</span></h1>
+    	<br><div class="row">
+    	<!-- Card -->
+		<br><div class="card card-image" style="background-image: url(http://www.yomeanimoyvos.com/wp-content/uploads/2011/02/estadisticas-viaje.jpg); width:40%; margin-left:50px">
+
+		    <!-- Content -->
+		    <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-5">
+		        <div>
+		            <h5 class="blue-text"><i class="fa fa-pie-chart"></i>Gráficos</h5>
+		            <h3 class="card-title pt-2"><strong>Reportes Estadísticos</strong></h3>
+		            <p>
+		            	Ver los reportes estadísticos de alumnos, grados y centros. 
+		            </p>
+		            <a href="{% url 'all_graphics' %}" class="btn btn-info"><i class="fa fa-clone left"></i> Ver Gráficos</a>
+		        </div>
+		    </div>
+		    <!-- Content -->
+		</div>
+		<!-- Card -->
+		<!-- Card -->
+		<br><div class="card card-image" style="background-image: url(http://e.rpp-noticias.io/medium/2017/01/10/portada_561656.jpg); width:40%; margin-left:100px">
+
+		    <!-- Content -->
+		    <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-5">
+		        <div>
+		            <h5 class="blue-text"><i class="fa fa-pie-chart"></i>Reportes</h5>
+		            <h3 class="card-title pt-2"><strong>Reportes en Físico</strong></h3>
+		            <p>
+		            	Ver multiples reportes para imprimirlos o exportarlos.
+		            </p>
+		            <a href="{% url 'reportes' %}" class="btn btn-info"><i class="fa fa-clone left"></i> Ver Reportes</a>
+		        </div>
+		    </div>
+		    <!-- Content -->
+		</div>
+		<!-- Card -->
+		</div>
+    </div>
+{% endblock container %}

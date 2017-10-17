@@ -1,0 +1,507 @@
+{% extends "base_in.html" %}
+
+{% block container %}
+<div class="container">
+
+  <br><div class="row">
+  <!-- Card -->
+    <br><div class="card card-image" style="background-image: url(http://www.yomeanimoyvos.com/wp-content/uploads/2011/02/estadisticas-viaje.jpg); width:50%; margin:auto; padding:auto">
+
+        <!-- Content -->
+        <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-5">
+            <div>
+                <h5 class="blue-text"><i class="fa fa-file-pdf-o"></i>Reportes</h5>
+                <h3 class="card-title pt-2"><strong>Reportes y Exportación</strong></h3>
+                <p>
+                  Ver los reportes para imprimirlos y/o guardarlos
+                </p>
+                <a class="btn btn-info" data-toggle="modal" data-target="#listaEstudiantes">Lista de Estudiantes</a>
+                <a class="btn btn-info" data-toggle="modal" data-target="#listaMatriculas">Lista de Matriculas</a>
+                <a class="btn btn-info" data-toggle="modal" data-target="#listaFacilitadores">Lista de Facilitadores</a>
+                <a class="btn btn-info" data-toggle="modal" data-target="#listaGrados">Lista de Grados y Centros</a>
+            </div>
+        </div>
+        <!-- Content -->
+    </div>
+    <!-- Card -->
+                      
+  
+</div>
+</div>
+
+<!--Modal: Contact form-->
+<div class="modal fade" id="listaEstudiantes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fluid cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="title"><i class="fa fa-pencil"></i>Lista</h4>
+                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-0">
+            
+            	<div >
+    <br><h1 class="text-center">Lista de Alumnos</h1>
+    
+    <br>
+    <div class="table-responsive">
+    <table id="datatable" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
+      <thead class="blue lighten-2 text-white">
+        <tr>
+          <th>Identidad</th>
+          <th>Nombre Completo</th>
+          <th>Domicilio</th>
+          <th>Municipio</th>
+          <th>Telefonos</th>
+          <th>Grupo Etnico</th>
+          <th>Sexo</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Trabaja Actualmente</th>
+          <th>Ocupación u Oficio</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+      {% for d in data %}
+        <tr>
+            <td>{{d.numid}}</td>
+            <td>{{d.nombre}} {{d.apellido}}</td>
+            <td>{{d.domicilio}}</td>
+            <td>{{d.municipio.municipio}}</td>
+            <td>{{d.telefono}}</td>
+            <td>{{d.grupo_etnico.grupo_etnico}}</td>
+            <td>{{d.sexo.sexo}}</td>
+            <td>{{d.fecha_nacimiento}}</td>
+            <td>{{d.trabaja}}</td>
+            <td>{{d.ocupacion}}</td>
+        </tr>
+        {% empty %}
+                    <h2>No hay alumnos registrados</h2>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+</div>
+            
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: Contact form-->
+
+<!--Modal: Contact form-->
+<div class="modal fade" id="listaMatriculas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fluid cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="title"><i class="fa fa-pencil"></i>Lista</h4>
+                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-0">
+            
+              <div >
+    <br><h1 class="text-center">Lista de Matriculas</h1>
+    
+    <br>
+    <div class="table-responsive">
+    <table id="datatable1" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
+      <thead class="blue lighten-2 text-white">
+        <tr>
+          <th>Fecha de Matricula</th>
+                  <th>Alumno</th>
+                  <th>Grado</th>
+                  <th>Facilitador</th>
+                  <th>Centro</th>
+                  <th>Primer Periodo</th>
+                  <th>Segundo Periodo</th>
+                  <th>Horario</th>
+                  <th>Inicio de Clases</th>
+                  <th>Fin de Clases</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+      {% for mat in m %}
+                    <tr> 
+                      <td>{{ mat.fecha }}</td> 
+                      <td>{{ mat.persona }}</td>
+                      <td>{{ mat.grado.grado }}</td> 
+                      <td>{{ mat.grado.facilitador }}</td> 
+                      <td>{{ mat.centro }}</td> 
+                      <td>{{ mat.primer_periodo }}</td> 
+                      <td>{{ mat.segundo_periodo }}</td> 
+                      <td>{{ mat.horario }}</td> 
+                      <td>{{ mat.inicio_clases }}</td> 
+                      <td>{{ mat.fin_clases }}</td> 
+                    </tr>
+                  {% endfor %}          
+      </tbody>
+    </table>
+    </div>
+</div>
+            
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: Contact form-->
+
+
+<!--Modal: Contact form-->
+<div class="modal fade" id="listaFacilitadores" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fluid cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="title"><i class="fa fa-pencil"></i>Lista</h4>
+                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-0">
+            
+              <div >
+    <br><h1 class="text-center">Lista de Facilitadores</h1>
+    
+    <br>
+    <div class="table-responsive">
+    <table id="datatable2" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
+      <thead class="blue lighten-2 text-white">
+        <tr>
+          <th>Identidad</th>
+          <th>Nombre Completo</th>
+          <th>Domicilio</th>
+          <th>Lugar Residencia</th>
+          <th>Telefonos</th>
+          <th>Correo</th>
+          <th>Sexo</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Ocupación u Oficio</th>
+          <th>Lugar de Trabajo</th>
+          <th>Formación Académica</th>
+          <th>Tiempo de ser Facilitador</th>
+          <th>Becado</th>
+          <th>Estudia Actualmente</th>
+          <th>Donde Estudia</th>
+          <th>Que Estudia</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+      {% for d in faci %}
+                    <tr> 
+                      <td>{{d.numid}}</td>
+                      <td>{{d.nombre}} {{d.apellido}}</td>
+                      <td>{{d.domicilio}}</td>
+                      <td>{{d.municipio.municipio}} | {{d.tipo_residencia}}</td>
+                      <td>{{d.telefono}}</td>
+                      <td>{{d.correo}}</td>
+                      <td>{{d.sexo.sexo}}</td>
+                      <td>{{d.fecha_nacimiento}}</td>
+                      <td>{{d.ocupacion}}</td>
+                      <td>{{d.lugar_trabajo}}</td>
+                      <td>{{d.formacion_academica}}</td>
+                      <td>{{d.tiempo_facilitador}}</td>
+                      {% if d.becado == True %}
+                          <td>Si</td>
+                        {% else %}
+                          <td>No</td>
+                      {% endif %}
+                      {% if d.estudia == True %}
+                          <td>Si</td>
+                        {% else %}
+                          <td>No</td>
+                      {% endif %}
+                      <td>{{d.donde_estudia}}</td>
+                      <td>{{d.que_estudia}}</td>
+                    </tr>
+      {% endfor %}          
+      </tbody>
+    </table>
+    </div>
+</div>
+            
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+<!--Modal: Contact form-->
+<div class="modal fade" id="listaGrados" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fluid cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="title"><i class="fa fa-pencil"></i>Lista</h4>
+                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-0">
+            
+              <div >
+    <br><h1 class="text-center">Lista de Grados</h1>
+    
+    <br>
+    <div class="table-responsive">
+    <table id="datatable3" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
+      <thead class="blue lighten-2 text-white">
+        <tr>
+          <th>Grado</th>
+          <th>Facilitador</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+      {% for d in grado %}
+                    <tr> 
+                        <td>{{d.grado}}</td>
+                        <td>{{d.facilitador}}</td>
+                    </tr>
+                  {% endfor %}          
+      </tbody>
+    </table>
+    <br><h1 class="text-center">Lista de Centros</h1>
+    <table id="datatable4" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
+      <thead class="blue lighten-2 text-white">
+        <tr>
+          <th>Centro</th>
+          <th>Tipo de Centro</th>
+          <th>Zona</th>
+          <th>Patrocinador</th>
+          <th>Incentivo del Patrocinador</th>
+          <th>Que Recibe</th>
+          <th>Cuando lo recibe</th>
+          <th>Promotor</th>
+          <th>Donde funciona</th>
+          <th>Dirección del Centro</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+      {% for d in centro %}
+                    <tr> 
+                        <td>{{d.centro}}</td>
+                        <td>{{d.tipo_centro.tipo_centro}}</td>
+                        <td>{{d.zona.zona}}</td>
+                        <td>{{d.patrocinador}}</td>
+                        <td>{{d.patro_incentivo}}</td>
+                        <td>{{d.patro_recibe}}</td>
+                        <td>{{d.cada_cuando}}</td>
+                        <td>{{d.promotor}}</td>
+                        <td>{{d.donde_funciona}}</td>
+                        <td>{{d.direccion}}</td>
+                    </tr>
+                  {% endfor %}          
+      </tbody>
+    </table>
+    </div>
+</div>
+            
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: Contact form-->
+    
+{% endblock container %}
+
+{% block js %}
+  <script>
+  $(document).ready(function() {
+  	
+        var hoy = new Date();
+        var dd = hoy.getDate();
+        var mm = hoy.getMonth()+1; //hoy es 0!
+        var yyyy = hoy.getFullYear();
+
+      if(dd<10) {
+          dd='0'+dd
+      } 
+
+      if(mm<10) {
+          mm='0'+mm
+      } 
+
+    hoy = dd+'/'+mm+'/'+yyyy;
+
+      var table = $('#datatable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fa fa-file-excel-o fa-2x"></i>',
+                titleAttr: 'Exportar a Excel',
+                filename: 'Listado de Alumnos Registrados',
+                title: 'Educatodos - La Grecia             \n' + hoy + '\n \n Listado de Alumnos'
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<i class="fa fa-file-pdf-o fa-2x"></i>',
+                titleAttr: 'Descargar PDF',
+                orientation: 'landscape',
+                pageSize: 'LETTER',
+                filename: 'Listado de Alumnos Registrados',
+                title: 'Educatodos - La Grecia             \n' + hoy + '\n \n Listado de Alumnos'
+            },
+            {
+                extend:    'print',
+                text:      '<i class="fa fa-print fa-2x"></i>',
+                titleAttr: 'Imprimir',
+                title: 'Listado de Alumnos Registrados'
+            },
+        ]
+    } );
+      var table1 = $('#datatable1').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fa fa-file-excel-o fa-2x"></i>',
+                titleAttr: 'Exportar a Excel',
+                filename: 'Listado Matriculas',
+                title: 'Educatodos - La Grecia             \n' + hoy + '\n \n Listado de Matriculas'
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<i class="fa fa-file-pdf-o fa-2x"></i>',
+                titleAttr: 'Descargar PDF',
+                orientation: 'landscape',
+                pageSize: 'LETTER',
+                filename: 'Listado de Matriculas',
+                title: 'Educatodos - La Grecia             \n' + hoy + '\n \n Listado de Matriculas'
+            },
+            {
+                extend:    'print',
+                text:      '<i class="fa fa-print fa-2x"></i>',
+                titleAttr: 'Imprimir',
+                title: 'Listado de Matriculas'
+            },
+        ]
+    } );
+
+      var table2 = $('#datatable2').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fa fa-file-excel-o fa-2x"></i>',
+                titleAttr: 'Exportar a Excel',
+                filename: 'Listado Facilitadores',
+                title: 'Educatodos - La Grecia             \n' + hoy + '\n \n Listado de Facilitadores'
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<i class="fa fa-file-pdf-o fa-2x"></i>',
+                titleAttr: 'Descargar PDF',
+                orientation: 'landscape',
+                pageSize: 'LEGAL',
+                filename: 'Listado de Facilitadores',
+                title: 'Educatodos - La Grecia             \n' + hoy + '\n \n Listado de Facilitadores'
+            },
+            {
+                extend:    'print',
+                text:      '<i class="fa fa-print fa-2x"></i>',
+                titleAttr: 'Imprimir',
+                pageSize: 'LEGAL',
+                title: 'Listado de Facilitadores'
+            },
+        ]
+    } );
+      var table3 = $('#datatable3').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fa fa-file-excel-o fa-2x"></i>',
+                titleAttr: 'Exportar a Excel',
+                filename: 'Listado Grados',
+                title: 'Educatodos - La Grecia             \n' + hoy + '\n \n Listado de Grados'
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<i class="fa fa-file-pdf-o fa-2x"></i>',
+                titleAttr: 'Descargar PDF',
+                orientation: 'landscape',
+                pageSize: 'LETTER',
+                filename: 'Listado de Grados',
+                title: 'Educatodos - La Grecia             \n' + hoy + '\n \n Listado de Grados'
+            },
+            {
+                extend:    'print',
+                text:      '<i class="fa fa-print fa-2x"></i>',
+                titleAttr: 'Imprimir',
+                pageSize: 'LETTER',
+                title: 'Listado de Grados'
+            },
+        ]
+    } );
+      var table4 = $('#datatable4').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fa fa-file-excel-o fa-2x"></i>',
+                titleAttr: 'Exportar a Excel',
+                filename: 'Listado Centros',
+                title: 'Educatodos - La Grecia             \n' + hoy + '\n \n Listado de Centros'
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<i class="fa fa-file-pdf-o fa-2x"></i>',
+                titleAttr: 'Descargar PDF',
+                orientation: 'landscape',
+                pageSize: 'LEGAL',
+                filename: 'Listado de Centros',
+                title: 'Educatodos - La Grecia             \n' + hoy + '\n \n Listado de Centros'
+            },
+            {
+                extend:    'print',
+                text:      '<i class="fa fa-print fa-2x"></i>',
+                titleAttr: 'Imprimir',
+                pageSize: 'LEGAL',
+                title: 'Listado de Centros'
+            },
+        ]
+    } );
+
+
+    
+});
+  $(document).ready(function(){
+        	$("#numid").mask("9999-9999-99999");
+            $("#telefono").mask("9999-9999");
+            $("#fechan").mask("9999/99/99");
+            $('#fechan').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+
+            $('.button-collapse').sideNav({
+		        edge: 'left', // Choose the horizontal origin
+		        closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+		      });
+
+
+            
+        })
+  </script>  
+{% endblock  %}

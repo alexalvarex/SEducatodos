@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <div class="container">
+            <form class="form-signin" action="/account/login/" method="post">
+            {% csrf_token %}
+              <div class="col-md-4 mb-r pb-5" style="margin: 0 auto; margin-top:100px;">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="form-header default-color">
+                      <h3>Iniciar Sesión:</h3>
+                    </div>
+                    <div class="md-form">
+                      <input type="hidden" name="username" id="username" value="{{ username }}">
+                    </div>
+                    <div class="md-form">
+                      <i class="fa fa-lock prefix grey-text"></i>
+                      {{ form.password }}
+                      <label for="defaultForm-pass">Contraseña</label>
+                    </div>
+
+                    <div class="text-center">
+                      <input id="b" type="submit" class="btn btn-default bmd-ripple" value="Entrar" style="color: red;"/>
+                    </div>
+                    <div class="text-center" style="padding:5px;">
+                      <a href="/account/forgotpass/">¿Has olvidado tu contraseña? </a>
+                    </div>
+              </form>
+    </div>
+{% endblock %}

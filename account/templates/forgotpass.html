@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block container %}
+	    <div class="container">
+            <form class="form-signin" action="" method="post">
+                    {% csrf_token %}
+                    <div class="panel periodic-login">
+                    <div class="panel-body text-center">
+                  <h1>.<span class="fa fa-graduation-cap fa-2x"></span></h1>
+                  <p class="element-name">SCHOOL WEB</p>
+
+               	<div class="form-group form-animate-text" style="margin-top:40px !important;">
+                    <input type="text" class="form-text" required>
+                    <span class="bar"></span>
+                    <label>Correo</label>
+                    <p>Ingrese su correo para restablecer la contraseña</p>
+                  </div>
+
+                  <input type="submit" class="btn col-md-12" value="Reestablecer"/>
+              </div>
+                <div class="text-center" style="padding:5px;">
+                    <a href="{% url 'login' %}">Iniciar sesión</a>
+                </div>
+                </div>
+            </form>
+            </div>
+{% endblock %}

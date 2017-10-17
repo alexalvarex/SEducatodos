@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block navtop %}
+<header>
+<!--Navbar-->
+        <nav class="navbar fixed navbar-expand-lg navbar-dark cyan ">
+            <!-- SideNav slide-out button -->
+<a href="#" data-activates="slide-out" class="p-3 button-collapse"><i class="fa fa-bars"></i></a>
+
+<!-- SideNav Menu -->
+<ul id="slide-out" class="side-nav unique-color custom-scrollbar">
+
+    <!-- Logo -->
+    <li>
+        <div class="logo-wrapper waves-light">
+            <br><a href="/" class="text-white"><h1 class="text-center">EDUCATODOS</h1></a>
+        </div>
+    </li>
+    <!--/. Logo -->
+
+    <!--Social
+    <li>
+        <ul class="social">
+            <li><a class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a></li>
+            <li><a class="icons-sm pin-ic"><i class="fa fa-pinterest"> </i></a></li>
+            <li><a class="icons-sm gplus-ic"><i class="fa fa-google-plus"> </i></a></li>
+            <li><a class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a></li>
+        </ul>
+    </li> 
+    /Social-->
+
+    
+
+    <!-- Side navigation links -->
+    <li>
+        <ul class="collapsible collapsible-accordion">
+
+            <!-- Collapsible link -->
+            <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-graduation-cap"></i> Alumnos<i class="fa fa-angle-down rotate-icon"></i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{% url 'all_students' %}" class="waves-effect">Listado de Alumnos</a>
+                        </li>
+                        <li><a href="{% url 'new_student' %}" class="waves-effect">Registrar Alumno</a>
+                        </li>
+                        <li><a href="#" class="waves-effect">Alumnos Matriculados</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- Collapsible link -->
+            <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i> Facilitadores<i class="fa fa-angle-down rotate-icon"></i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{% url 'all_facilitador' %}" class="waves-effect">Listado de Facilitadores</a>
+                        </li>
+                        <li><a href="{% url 'new_facilitador' %}" class="waves-effect">Nuevo Facilitador</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- Collapsible link -->
+            <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-sitemap"></i>Grados<i class="fa fa-angle-down rotate-icon"></i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{% url 'all_grados' %}" class="waves-effect">Listado de Grados</a>
+                        </li>
+                        <li><a href="{% url 'new_grado' %}" class="waves-effect">Asignar Grado</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-sitemap"></i>Centros<i class="fa fa-angle-down rotate-icon"></i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{% url 'all_centros' %}" class="waves-effect">Listado de Centros</a>
+                        </li>
+                        <li><a href="{% url 'new_centro' %}" class="waves-effect">Asignar Centro</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+             <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-users"></i>Matricula<i class="fa fa-angle-down rotate-icon"></i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{% url 'all_enroll' %}" class="waves-effect">Lista de Matriculas</a>
+                        </li>
+                        <li><a href="{% url 'new_enroll' %}" class="waves-effect">Matricular Alumno</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <!-- Simple link -->
+            <li><a href="{% url 'all_reports' %}" class="waves-effect"><i class="fa fa-file-pdf-o"></i>Reportes</a></li>
+    
+
+        </ul>
+    </li>
+    <!-- Side navigation links -->
+
+</ul>
+<!-- SideNav Menu -->
+                    <img src="{% static 'img/logo2.png' %}" style="width: 10%;" alt="">
+                    <a class="navbar-brand" href="/">Azucarera La Grecia</a>
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{uausuario}} </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                                    <a class="dropdown-item" href="#">Mi Perfil</a>
+                                    <a class="dropdown-item" href="/account/blockscreen/">Bloquear Pantalla</a>
+                                    <a class="dropdown-item" href="/account/logout/">Cerrar Sesión</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+        <!--/.Navbar-->
+</header>
+{% endblock %}
+{% block container %}
+<div class="container-fluid mimin-wrapper">
+      <div id="left-menu">
+      {% block navbar %}{% endblock %}
+      </div>
+       
+      <div id="content">   
+      {% block info %}{% endblock %}
+      </div>
+</div>
+{% endblock %}

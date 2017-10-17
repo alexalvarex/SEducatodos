@@ -1,0 +1,147 @@
+{% extends "base_in.html" %}
+
+{% block container %}
+    
+<div class="container">
+
+<br><h1 class="text-center"><span class="badge blue">GRÁFICOS</span></h1>
+	<br><div class="row">
+	<!--Card Wider-->
+	<div style="width:30%; margin-left:50px" class="card card-cascade narrower">
+
+	    <!--Card image-->
+	    <div class="view overlay hm-white-slight">
+	        <img src="http://www.observatoriobioetica.org/wp-content/uploads/2016/07/genero-551x300.jpg" class="img-fluid">
+	        <a href="#!">
+	            <div class="mask"></div>
+	        </a>
+	    </div>
+	    <!--/Card image-->
+
+	    <!--Card content-->
+	    <div class="card-body text-center">
+	        <!--Title-->
+	        <br><h4 class="card-title"><strong>Por Sexo</strong></h4>
+	        <h5 class="indigo-text"><strong>Gráfico</strong></h5>
+
+	        <p class="card-text">Ver gráfico de los alumnos por su sexo</p>
+
+	        
+	        <button data-toggle="modal" data-target="#modalSexo" class="btn btn-info">Ver</button>
+
+	    </div>
+	    <!--/.Card content-->
+
+	</div>
+	<!--/.Card Wider-->
+
+
+	<!--Card Narrower-->
+	<div style="width:30%" class="card card-cascade narrower">
+
+	    <!--Card image-->
+	    <div class="view overlay hm-white-slight">
+	        <img src="https://cdn.shopify.com/s/files/1/0229/0839/files/conocimiento.jpg?v=1482772593" class="img-fluid">
+	        <a href="#!">
+	            <div class="mask"></div>
+	        </a>
+	    </div>
+	    <!--/Card image-->
+
+	    <!--Card content-->
+	    <div class="card-body text-center">
+	        <!--Title-->
+	        <h4 class="card-title"><strong>Por Grado</strong></h4>
+	        <h5 class="indigo-text"><strong>Gráfico</strong></h5>
+
+	        <p class="card-text">Ver gráfico de la cantidad de alumnos por cada grado aperturado</p>
+
+	        
+	        <a data-toggle="modal" data-target="#modalGrado" class="btn btn-info">Ver</a>
+
+	    </div>
+	    <!--/.Card content-->
+
+	</div>
+	<!--/.Card Narrower-->
+
+
+	<!--Card Regular-->
+	<div style="width:30%" class="card card-cascade narrower">
+
+	   <!--Card image-->
+	    <div class="view overlay hm-white-slight">
+	        <img src="http://web.minsal.cl/wp-content/uploads/2015/08/ESCUELA.png" class="img-fluid">
+	        <a href="#!">
+	            <div class="mask"></div>
+	        </a>
+	    </div>
+	    <!--/Card image-->
+
+	    <!--Card content-->
+	    <div class="card-body text-center">
+	        <!--Title-->
+	        <br><h4 class="card-title"><strong>Por Centro</strong></h4>
+	        <h5 class="indigo-text"><strong>Gráfico</strong></h5>
+
+	        <p class="card-text">Ver gráfico de los centros de educación.</p>
+
+	        
+	        <a class="btn btn-info">Ver</a>
+
+	    </div>
+	    <!--/.Card content-->
+
+	    </div>
+	    <!--/.Card content-->
+
+	</div>
+	<!--/.Card Regular-->
+	</div>
+</div>
+
+
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalSexo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Gráfico por Sexo</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            	<input type="hidden" value="{{numm}}" id="masculino">
+            	<input type="hidden" value="{{nummf}}" id="femenino">
+                <div id="chartContainer" style="height: 500px; width: 100%; "></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalGrado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Gráfico por Grado</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            	<input type="hidden" value="{{primero}}" id="primero">
+            	<input type="hidden" value="{{segundo}}" id="segundo">
+            	<input type="hidden" value="{{tercero}}" id="tercero">
+            	<input type="hidden" value="{{cuarto}}" id="cuarto">
+            	<input type="hidden" value="{{quinto}}" id="quinto">
+            	<input type="hidden" value="{{sexto}}" id="sexto">
+            	<input type="hidden" value="{{septimo}}" id="septimo">
+            	<input type="hidden" value="{{octavo}}" id="octavo">
+            	<input type="hidden" value="{{noveno}}" id="noveno">
+                <div id="grado" style="height: 500px; width: 100%; "></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock container %}

@@ -1,0 +1,155 @@
+{% extends "base_in.html" %}
+
+{% block container %}
+    <div class="container-fluid">
+
+<div >
+    <br><h1 class="text-center">Lista de Grados <a href="{% url 'new_grado' %}" class="btn btn-info">Nuevo</a></h1>
+    <br>
+    
+    <table id="example" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
+    	<thead class="blue lighten-2 text-white">
+    		<tr>
+          <th>Grado</th>
+    			<th>Facilitador</th>
+    			<th></th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	{% for d in data %}
+    		<tr>
+            <td>{{d.grado}}</td>
+    				<td>{{d.facilitador}}</td>
+    				
+    				<td>
+    					<div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle btn btn-info" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones </a>
+                                <div class="dropdown-menu dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                                    <a id="btn-editar" class="dropdown-item" href="" data-id="{{ d.id }}" data-grado="{{ d.grado }}" data-faci="d.facilitador.id" data-toggle="modal" data-target="#edit_grado">Editar</a>
+                                    <a class="dropdown-item btn-eliminar" href="{% url 'delete_grado' d.id %}">Eliminar</a>
+                                </div>
+              </div>
+    				</td>
+    		</tr>
+    		{% empty %}
+                    <h2>No hay Grados aperturados</h2>
+    	{% endfor %}
+    	</tbody>
+    </table>
+    
+</div>
+
+
+</div>
+
+<!--Modal: Contact form-->
+<div class="modal fade" id="edit_grado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="title"><i class="fa fa-pencil"></i>Editar Grado</h4>
+                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-0">
+            
+            	<form action="" method="post">
+		          {% csrf_token %}
+            	 <div class="row">
+               <div class="col-md-4">
+                    <input type="hidden" id="idgradoedit" name="id">
+
+                    <div class="form-group">
+                        <i class="fa fa-users prefix grey-text"></i>
+                        <label for="grado">Grado</label>
+                        <input type="text" id="grado" name="grado" class="form-control" required="">
+                    </div>
+                    <div class="form-group">
+                      <i class="fa fa-user prefix grey-text"></i>
+                      <label for="faci">Facilitador</label>
+                      <select class="mdb-selec colorful-select dropdown-primary" id="faci">
+                      {% for g in faci %}
+                          <option value="{{g.id}}"> {{g}} </option>
+                      {% endfor %}
+                      </select>
+                  </div>
+                          
+                  
+                  </div>
+                  <div class="text-center mt-1-half">
+                        <button type="button" class="btn btn-danger btn-3d" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
+                    <button type="submit" class="btn btn-success btn-3d btn-actualizar"><i class="fa fa-check"></i>Actualizar</button>
+                    </div>
+               </div>
+              </form>
+            
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: Contact form-->
+    
+{% endblock container %}
+
+{% block js %}
+  <script>
+  $(document).ready(function() {
+  	$('.datatable').DataTable();
+    $('#btn-editar').click(function(e)
+    {
+      e.preventDefault();
+      var _id = $(this).attr('data-id');
+      var _grado = $(this).attr('data-grado');
+      var _faci = $(this).attr('data-faci');
+      
+          $('#grado').val(_grado)
+          $('#faci').val(_faci)
+          
+          $("#idgradoedit").val(_id);  
+    });
+
+        $('.btn-actualizar').click(function(e){
+          var _grado = $('#grado').val()
+          
+          var _id = $('#idgradoedit').val()
+          var csfrm = $('input[name=csrfmiddlewaretoken]').val()
+          $.ajax({
+            type:'POST',
+            url:'/principal/grados/edit/' + _id + '/',
+            data:{
+            id: _id,
+            grado: _grado,
+      			faci: _faci,
+            csrfmiddlewaretoken: csfrm
+            },
+            success: function(){
+              location.reload()
+            },
+            error: function()
+            {
+              console.log('error')
+            }
+
+        });
+});
+});
+  $(document).ready(function(){
+        	$("#numid").mask("9999-9999-99999");
+            $("#telefono").mask("9999-9999");
+            $("#fechan").mask("9999/99/99");
+            $('#fechan').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+
+            $('.button-collapse').sideNav({
+		        edge: 'left', // Choose the horizontal origin
+		        closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+		      });
+            
+        })
+  </script>  
+{% endblock  %}
