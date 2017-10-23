@@ -3,7 +3,7 @@
 {% block info %}
      
    <br>
-	<h2 class="text-center">Historial de matriculas <a href="{% url 'new_enroll' %}" class="btn btn-primary">Nueva matricula</a></h2>
+	<h2 class="text-center">Historial de matriculas <a href="{% url 'new_enroll' %}" class="btn btn-primary">Nueva matricula</a></h2><img src="/{{MEDIA}}/img/{{ mat.requisito }}" alt=""><a href="http://127.0.0.1:8000/media/img/gobierno.jpg">sf</a>
 	<br>
 
             <table id="example" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
@@ -14,11 +14,11 @@
                   <th>Grado</th>
                   <th>Facilitador</th>
                   <th>Centro</th>
-                  <th>Primer Periodo</th>
-                  <th>Segundo Periodo</th>
+                  <th>Número Periodo</th>
                   <th>Horario</th>
                   <th>Inicio de Clases</th>
                   <th>Fin de Clases</th>
+                  <th>Hoja de requisito</th>
                 </tr>
               </thead>
               <tbody> 
@@ -29,11 +29,11 @@
                       <td>{{ mat.grado.grado }}</td> 
 	                    <td>{{ mat.grado.facilitador }}</td> 
 	                    <td>{{ mat.centro }}</td> 
-	                    <td>{{ mat.primer_periodo }}</td> 
-	                    <td>{{ mat.segundo_periodo }}</td> 
+	                    <td>{{ mat.num_periodo }}</td> 
 	                    <td>{{ mat.horario }}</td> 
 	                    <td>{{ mat.inicio_clases }}</td> 
-	                    <td>{{ mat.fin_clases }}</td> 
+                      <td>{{ mat.fin_clases }}</td> 
+	                    <td><a href="/media/{{mat.requisito}}" alt="">ver imágen</a></td> 
                     </tr>
                   {% endfor %}          
               </tbody>

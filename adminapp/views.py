@@ -21,7 +21,6 @@ from django.contrib.auth.models import User
 @login_required()
 def index(request):
 	return render(request, 'index.html')
-
 @login_required()
 def all_students(request):
 	perfil = Personas.objects.all()
@@ -119,6 +118,7 @@ def edit_students(request, pk):
 			P.save()
 		return HttpResponseRedirect('/principal/alumnos/')
 
+
 @login_required()
 def delete_student(request, pk):
 	alumno = Personas.objects.get(pk = pk)
@@ -127,6 +127,117 @@ def delete_student(request, pk):
 		return HttpResponseRedirect('/principal/alumnos/')
 	except Exception, e:
 		return HttpResponse(e)
+
+# PROMOTORES
+@login_required()
+def all_promotores(request):
+	perfil = Personas.objects.all()
+	sexo = Sexo.objects.all()
+	ge = GrupoEtnico.objects.all()
+	municipio = Municipio.objects.all()
+	tp = TipoPersona.objects.get(pk = 2)
+	des = Descicion.objects.all()
+	promotor = Personas.objects.filter(tipo_persona = tp)
+	numu = promotor.count()
+	return render(request, 'all_promotores.html', {'data':promotor, 'des':des, 'ge':ge, 'numu':numu, 'sexo':sexo, 'muni':municipio})
+
+
+@login_required()
+def new_promotor(request):
+	sexo = Sexo.objects.all()
+	ge = GrupoEtnico.objects.all()
+	municipio = Municipio.objects.all()
+	des = Descicion.objects.all()
+	return render(request, 'new_promotor.html', {'ge':ge, 'des':des, 'sexo':sexo, 'muni':municipio})
+
+
+@login_required()
+def new_promotor_add(request):
+	if request.method == 'POST':
+		try:
+			numid = request.POST.get('numid')
+			nombre = request.POST.get('nombre')
+			apellido = request.POST.get('apellido')
+			direccion = request.POST.get('direccion')
+			muni = request.POST.get('muni')
+			ge = request.POST.get('ge')
+			mu = Municipio.objects.get(pk = muni)
+			grupoe = GrupoEtnico.objects.get(pk = ge)
+			tel = request.POST.get('telefono')
+			fechan = request.POST.get('fechan')
+			trabaja = request.POST.get('trabaja')
+			des = Descicion.objects.get(pk = trabaja)
+			ocupacion = request.POST.get('ocupacion')
+			sex =  request.POST.get('sexo')
+			sexo = Sexo.objects.get(pk = sex)
+			tp = TipoPersona.objects.get(pk = 2)
+
+			persona = Personas(
+					numid = numid, 
+					nombre = nombre,
+					apellido = apellido,
+					municipio = mu,
+					domicilio = direccion,
+					telefono = tel,
+					sexo = sexo,
+					tipo_persona = tp,
+					grupo_etnico = grupoe,
+					trabaja = des,
+					ocupacion = ocupacion,
+					fecha_nacimiento = fechan)
+			persona.save()
+			return HttpResponseRedirect('/principal/promotores/')
+		except Exception as e:
+			return HttpResponse(e)
+
+@login_required()
+def edit_promotores(request, pk):
+		if request.method == 'POST':
+			numid = request.POST.get('numid')
+			nombre = request.POST.get('nombre')
+			apellido = request.POST.get('apellido')
+			direccion = request.POST.get('direccion')
+			muni = request.POST.get('muni')
+			ge = request.POST.get('ge')
+			mu = Municipio.objects.get(pk = muni)
+			grupoe = GrupoEtnico.objects.get(pk = ge)
+			tel = request.POST.get('telefono')
+			fechan = request.POST.get('fechan')
+			trabaja = request.POST.get('trabaja')
+			des = Descicion.objects.get(pk = trabaja)
+			ocupacion = request.POST.get('ocupacion')
+			sexo =  request.POST.get('sexo')
+			sex = Sexo.objects.get(pk = sexo)
+			tp = TipoPersona.objects.get(pk = 2)
+
+			P = Personas.objects.get(pk=pk)
+			P.numid = numid
+			P.nombre = nombre
+			P.apellido = apellido
+			P.domicilio = direccion
+			P.telefono = tel
+			P.municipio = mu
+			P.grupo_etnico = grupoe
+			P.fecha_nacimiento = fechan
+			P.trabaja = des
+			P.ocupacion = ocupacion
+			P.sexo = sex
+			P.tipo_persona = tp
+			P.save()
+		return HttpResponseRedirect('/principal/promotores/')
+
+
+@login_required()
+def delete_promotor(request, pk):
+	promotor = Personas.objects.get(pk = pk)
+	try:
+		promotor.delete()
+		return HttpResponseRedirect('/principal/promotores/')
+	except Exception, e:
+		return HttpResponse(e)
+
+
+# FACILITADORES
 
 @login_required()
 def all_facilitador(request):
@@ -420,8 +531,10 @@ def new_enroll(request):
 		mat = Matricula.objects.all()
 		matri = Matricula.objects.filter(grado = grado).values_list('persona_id', flat=True)
 		alumnos = persona.exclude(id__in = matri)
+		periodo = Periodo.objects.all()
 		des = Descicion.objects.all()
-		return render(request, 'new_enroll.html', {'des':des, 'alumnos':alumnos, 'grado': grado, 'centro':centro, 'mat':mat})
+		return render(request, 'new_enroll.html', {'des':des, 'alumnos':alumnos, 'grado': grado, 
+			'centro':centro, 'mat':mat, 'periodo':periodo})
 
 
 @login_required()
@@ -432,21 +545,19 @@ def new_enroll_add(request):
 			grado = request.POST.get('grado')
 			centro = request.POST.get('centro')
 			primer = request.POST.get('primer')
-			segundo = request.POST.get('segundo')
-			segundo = request.POST.get('segundo')
 			horario = request.POST.get('horario')
 			fechai = request.POST.get('fechai')
 			fechaf = request.POST.get('fechaf')
+			archivos = request.FILES['archivos']
 
 			g = Grado.objects.get(pk=grado)
 			c = Centro.objects.get(pk = centro)
-			d = Descicion.objects.get(pk=primer)
-			dd = Descicion.objects.get(pk=segundo)
+			d = Periodo.objects.get(pk=primer)
 			for alumno in alumnos:	
 				a = Personas.objects.get(pk=alumno)
 				mat = Matricula(fecha = datetime.now() , persona = a, centro = c, grado = g, 
-					primer_periodo = d, horario = horario, segundo_periodo = dd, 
-					inicio_clases = fechai, fin_clases = fechaf)	
+					num_periodo = d, horario = horario, 
+					inicio_clases = fechai, fin_clases = fechaf, requisito = archivos)	
 				mat.save()
 			return HttpResponseRedirect('/principal/enroll/new/')
 		except Exception as e:
@@ -555,15 +666,47 @@ def all_graphics(request):
 
 @login_required()
 def reportes(request):
-	perfil = Personas.objects.all()
+	# ALUMNOS
+	personas = Personas.objects.all()
 	sexo = Sexo.objects.all()
 	ge = GrupoEtnico.objects.all()
 	municipio = Municipio.objects.all()
 	tp = TipoPersona.objects.get(pk = 1)
+	tpromo = TipoPersona.objects.get(pk = 2)
 	des = Descicion.objects.all()
 	alumnos = Personas.objects.filter(tipo_persona = tp)
+	year = datetime.now()
 	numu = alumnos.count()
 	m = Matricula.objects.all()
+	# MATRICULA POR GRADO: PRIMERO
+	primer = Grado.objects.get(grado = "Primero")
+	primero = m.filter(grado=primer)
+	# MATRICULA POR GRADO: SEGUNDO
+	segu = Grado.objects.get(grado = "Segundo")
+	segundo = m.filter(grado=segu)
+	# MATRICULA POR GRADO: TERCERO
+	terc = Grado.objects.get(grado = "Tercero")
+	tercero = m.filter(grado=terc)
+	# MATRICULA POR GRADO: CUARTO
+	cuar = Grado.objects.get(grado = "Cuarto")
+	cuarto = m.filter(grado=cuar)
+	# MATRICULA POR GRADO: QUINTO
+	quin = Grado.objects.get(grado = "Quinto")
+	quinto = m.filter(grado=quin)
+	# MATRICULA POR GRADO: SEXTO
+	sex = Grado.objects.get(grado = "Sexto")
+	sexto = m.filter(grado=sex)
+	# MATRICULA POR GRADO: SEPTIMO
+	sep = Grado.objects.get(grado = "Septimo")
+	septimo = m.filter(grado=sep)
+	# MATRICULA POR GRADO: OCTAVO
+	octa = Grado.objects.get(grado = "Octavo")
+	octavo = m.filter(grado=octa)
+	# MATRICULA POR GRADO: NOVENO
+	nove = Grado.objects.get(grado = "Noveno")
+	noveno = m.filter(grado=nove)
+	# PROMOTORES
+	promotor = Personas.objects.filter(tipo_persona = tpromo)
 	# Facilitadores
 	faci = Facilitador.objects.all()
 	sexo = Sexo.objects.all()
@@ -582,9 +725,11 @@ def reportes(request):
 	zona = Zona.objects.all()
 	des = Descicion.objects.all()
 	tp = TipoPersona.objects.get(pk = 2)
-	promotor = Personas.objects.filter(tipo_persona = tp)
 
 
-	return render(request, 'reportes_fisico.html', {'grado':grado,'faci':faci,'m':m, 'data':alumnos, 
-		'des':des, 'ge':ge, 'numu':numu, 'sexo':sexo, 'muni':municipio,
-		'centro':centro, 'des':des, 'tipoc':tipoc, 'patro':patro, 'zona':zona, 'promo': promotor})
+	return render(request, 'reportes_fisico.html', {'grado':grado,'faci':faci,'m':primero, 'data':alumnos, 
+		'des':des, 'ge':ge, 'numu':numu, 'sexo':sexo, 'muni':municipio, 'year':year,
+		'centro':centro, 'des':des, 'tipoc':tipoc, 'patro':patro, 'zona':zona, 'promo': promotor,
+		'segundo':segundo,'tercero':tercero,'cuarto':cuarto,
+		'quinto':quinto,'sexto':sexto,'septimo':septimo, 'octavo':octavo,
+		'noveno':noveno})

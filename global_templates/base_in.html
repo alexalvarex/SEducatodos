@@ -44,9 +44,17 @@
                         <li><a href="{% url 'all_students' %}" class="waves-effect">Listado de Alumnos</a>
                         </li>
                         <li><a href="{% url 'new_student' %}" class="waves-effect">Registrar Alumno</a>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- Collapsible link -->
+            <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-graduation-cap"></i> Promotores<i class="fa fa-angle-down rotate-icon"></i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="{% url 'all_promotores' %}" class="waves-effect">Listado de Promotores</a>
                         </li>
-                        <li><a href="#" class="waves-effect">Alumnos Matriculados</a>
-                        </li>
+                        <li><a href="{% url 'new_promotor' %}" class="waves-effect">Registrar Promotor</a>
                     </ul>
                 </div>
             </li>

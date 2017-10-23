@@ -10,7 +10,7 @@
 <form id="new_student" action="" method="post">
 {% csrf_token %}
 <br>
-    <h2 class="text-center"> <a href="{% url 'all_students' %}" class="btn cyan">Ver</a> Registrar Alumno</h2>
+    <h2 class="text-center"> <a href="{% url 'all_promotores' %}" class="btn cyan">Ver</a> Registrar Promotor</h2>
     <hr>
 	<div class="row">
 	<div class="col-md-6">
@@ -137,7 +137,7 @@
 
 			$.ajax({
 				type:'POST',
-				url:'/principal/alumnos/new/add/',
+				url:'/principal/promotores/new/add/',
 				data:{
 					numid: _numid,
 					nombre: _nombre,
@@ -153,7 +153,7 @@
 					csrfmiddlewaretoken: csfrm
 				},
 				success: function(data){
-					var html = '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><strong><span class="fa fa-check fa-2x"></span></strong> Se ingreso con exito el alumno ' + _nombre + ' ' + _apellido + ' satisfactoriamente.</div>'
+					var html = '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><strong><span class="fa fa-check fa-2x"></span></strong> Se ingreso con exito el promotor ' + _nombre + ' ' + _apellido + ' satisfactoriamente.</div>'
 					$('#mensaje').html(html)
 					$('#numid').val('')
 					$('#nombre').val('')

@@ -6,8 +6,8 @@
 <div >
     <br><h1 class="text-center">Lista de Facilitadores <a href="{% url 'new_facilitador' %}" class="btn btn-info">Nuevo</a></h1>
     <br>
-    
-    <table style="display:block; width:auto" id="example" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
+    <div class="table-responsive">
+    <table id="example" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
     	<thead class="blue lighten-2 text-white">
     		<tr>
     			<th>Identidad</th>
@@ -44,16 +44,8 @@
             <td>{{d.lugar_trabajo}}</td>
             <td>{{d.formacion_academica}}</td>
             <td>{{d.tiempo_facilitador}}</td>
-            {% if d.becado == True %}
-                <td>Si</td>
-              {% else %}
-                <td>No</td>
-            {% endif %}
-            {% if d.estudia == True %}
-                <td>Si</td>
-              {% else %}
-                <td>No</td>
-            {% endif %}
+            <td>{{d.becado}}</td>
+            <td>{{d.estudia}}</td>
             <td>{{d.donde_estudia}}</td>
             <td>{{d.que_estudia}}</td>
     				<td>
@@ -71,6 +63,7 @@
     	{% endfor %}
     	</tbody>
     </table>
+    </div>
     
 </div>
 
@@ -257,7 +250,7 @@
 {% block js %}
   <script>
   $(document).ready(function() {
-  	$('.datatable').DataTable();
+  	
     $('#btn-editar').click(function(e)
     {
       e.preventDefault();

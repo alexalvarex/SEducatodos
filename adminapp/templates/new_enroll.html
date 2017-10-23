@@ -9,21 +9,22 @@
 		<div style="border: 2px solid #D3D0D0" class="col-sm-6 col-md-12 col-lg-12 mt-4">
 	<h1>Matricular <a href="{% url 'all_enroll' %}" class="btn info-color-dark">Ver</a></h1>
 	
-			<form action="/principal/enroll/new/add/" method="post">
+			<form action="/principal/enroll/new/add/" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 			<div class="row">
 				<div class="col-md-6">
 				<div class="form-group">
-					<label for="alumno">Alumno</label>
-					<select name="alumno[]" id="alumno" class="fmdb-selec colorful-select dropdown-primary selectpiker" multiple required>
+					<h5 for="alumno">Alumno</h5>
+					<select name="alumno[]" style="width:100%" id="alumno" class="js-example-basic-multiples selectpicker" multiple="multiple" required>
 						<option value="" disabled selected>Seleccione</option>
-						{% for a in alumnos %}
+					  {% for a in alumnos %}
 							<option value="{{ a.id }}">{{ a }}</option>
 						{% endfor %}
 					</select>
+					
 				</div>
 				<div class="form-group">
-					<label for="grado">Grados ofertados</label>
+					<h5 for="grado">Grados ofertados</h5>
 						<select name="grado" id="grado" class="mdb-selec colorful-select dropdown-primary" required>
 							<option value="" disabled selected>Seleccione</option>
   							{% for g in grado %}
@@ -32,7 +33,7 @@
 						</select>
 				</div>
 				<div class="form-group">
-			        <label for="centro">Centro</label>
+			        <h5 for="centro">Centro</h5>
 			        <select name="centro" class="mdb-selec colorful-select dropdown-primary" id="centro">
 			        <option value="" disabled selected>Seleccione</option>
 			        {% for g in centro %}
@@ -41,35 +42,36 @@
 			        </select>
 			    </div>
 				<div class="form-group">
-					<label for="primer">Primer Periodo</label>
+					<h5 for="primer">Número de Periodo</h5>
 						<select name="primer" id="primer" class="mdb-selec colorful-select dropdown-primary" required>
 						<option value="" disabled selected>Seleccione</option>
-  							{% for p in des %}
+  							{% for p in periodo %}
 							<option value="{{ p.id }}">{{ p }}</option>
-						{% endfor %}
-						</select>
-				</div>
-				<div class="form-group">
-					<label for="segundo">Segundo Periodo</label>
-						<select name="segundo" id="segundo" class="mdb-selec colorful-select dropdown-primary" required>
-						<option value="" disabled selected>Seleccione</option>
-  							{% for d in des %}
-							<option value="{{ d.id }}">{{ d }}</option>
 						{% endfor %}
 						</select>
 				</div>
 				</div>
 				<div class="col-md-6">
+				<div class="file-field">
+	                <h5>Subir Archivo</h5>
+	                <div class="btn btn-primary btn-sm">
+	                    <span>Elegir Archivos</span>
+	                    <input id="archivos" name="archivos" type="file">
+	                </div>
+	                <div class="file-path-wrapper">
+	                    <input class="file-path validate" type="text" placeholder="Sube los archivos necesarios">
+	                </div>
+	            </div>
 				<div class="form-group">
-			        <label for="horario">Horario</label>
+			        <h5 for="horario">Horario</h5>
 			        <input type="text" id="horario" name="horario" class="form-control">
 			    </div>
 			    <div class="form-group">
-			        <label for="fechai">Inicio de Clases</label>
+			        <h5 for="fechai">Inicio de Clases</h5>
 			        <input type="text" id="fechai" name="fechai" class="form-control">
 			    </div>
 			    <div class="form-group">
-			        <label for="fechaf">Fin de Clases</label>
+			        <h5 for="fechaf">Fin de Clases</h5>
 			        <input type="text" id="fechaf" name="fechaf" class="form-control">
 			    </div>
 			    </div>
@@ -97,6 +99,9 @@
 		        edge: 'left', // Choose the horizontal origin
 		        closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
 		      });
+            $('#alumno').select2({
+				  placeholder: 'Escriba el nombre del alumno'
+				});
             
         })
     </script>

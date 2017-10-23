@@ -6,6 +6,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.auth.models import User
 from django.utils import timezone
+from datetime import datetime
 now = timezone.now()
 
 @python_2_unicode_compatible
@@ -96,10 +97,11 @@ class Personas(models.Model):
 	trabaja = models.ForeignKey(Descicion, related_name='trabaja')
 	ocupacion = models.CharField(max_length=70)
 	fecha_nacimiento = models.DateField(blank=True, null=True)
+	edad = models.IntegerField(blank=True, null=True)
 
 	def __str__(self):
 		return "%s %s" %(self.nombre, self.apellido)
-
+	
 @python_2_unicode_compatible
 class Centro(models.Model):
 	centro = models.CharField(max_length=50)
@@ -111,6 +113,7 @@ class Centro(models.Model):
 	cada_cuando = models.CharField(max_length=50, blank=True, null=True)
 	promotor = models.ForeignKey(Personas, blank=True, null=True)
 	donde_funciona = models.CharField(max_length=50, blank=True, null=True)
+	municipio = models.ForeignKey(Municipio)
 	direccion = models.CharField(max_length=100, blank=True, null=True)
 
 	def __str__(self):
@@ -140,6 +143,7 @@ class Facilitador(models.Model):
 	lugar_trabajo = models.CharField(max_length=70, blank=True, null=True)
 	formacion_academica = models.CharField(max_length=70, blank=True, null=True)
 	fecha_nacimiento = models.DateField(blank=True, null=True)
+	edad = models.IntegerField(blank=True, null=True)
 	fecha_llenado = models.DateField(blank=True, null=True)
 	tiempo_facilitador = models.DateField(blank=True, null=True)
 	becado = models.ForeignKey(Descicion, related_name='becado')
@@ -160,16 +164,23 @@ class Grado(models.Model):
 		return self.grado
 
 @python_2_unicode_compatible
+class Periodo(models.Model):
+	num_periodo = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.num_periodo
+
+@python_2_unicode_compatible
 class Matricula(models.Model):
 	fecha = models.DateTimeField(auto_now_add=True)
 	persona = models.ForeignKey(Personas)
 	centro = models.ForeignKey(Centro)
 	grado = models.ForeignKey(Grado)
-	primer_periodo = models.ForeignKey(Descicion, related_name='Primer_Periodo')
-	segundo_periodo = models.ForeignKey(Descicion, related_name='Segundo_Periodo')
+	num_periodo = models.ForeignKey(Periodo, related_name='Num_Periodo')
 	horario = models.CharField(max_length=80, blank=True, null=True)
-	inicio_clases = models.DateTimeField(blank=True, null=True)
-	fin_clases = models.DateTimeField(blank=True, null=True)
+	inicio_clases = models.DateField(blank=True, null=True)
+	fin_clases = models.DateField(blank=True, null=True)
+	requisito = models.FileField(upload_to='imagenes')
 
 	def __str__(self):
 		return "%s %s" %(self.persona.nombre, self.grado.grado)

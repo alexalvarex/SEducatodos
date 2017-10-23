@@ -12,11 +12,11 @@
 	<link rel="stylesheet" href="{% static 'css/compiled2.min.css' %}">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
 	<link rel="stylesheet" href="{% static 'css/bootstrap-material-datetimepicker.css' %}">
 	<link href="{% static 'css/plugins/datatables.bootstrap.min.css' %}" rel="stylesheet">
 	<link href="{% static 'css/jquery.dataTables.min.css' %}" rel="stylesheet">
 	<link href="{% static 'css/buttons.dataTables.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/select2.min.css' %}" rel="stylesheet">
 
 	
 	{% block css %}{% endblock %}
@@ -51,6 +51,9 @@
     <script src="{% static 'js/vfs_fonts.js' %}"></script>
     <script src="{% static 'js/buttons.html5.min.js' %}"></script>
     <script src="{% static 'js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'js/select2.full.min.js' %}"></script>
+    <script src="{% static 'js/jspdf.js' %}"></script>
+    <script src="{% static 'js/FileSaver.min.js' %}"></script>
     
 	{% block js %}
 		<script>

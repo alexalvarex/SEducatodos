@@ -123,10 +123,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR + '/global_static/img'
+MEDIA_ROOT = BASE_DIR + '/media'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'global_static'),
+    os.path.join(BASE_DIR, 'media'),
     )
 
 LOGIN_URL = '/'
