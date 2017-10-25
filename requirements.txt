@@ -15,7 +15,7 @@ packaging==16.8
 Pillow==4.0.0
 pip==9.0.1
 psycopg2==2.7.3.2
-pymysql==0.7.11)
+pymysql==0.7.11
 pyparsing==2.2.0
 pystache==0.5.4
 pyyaml==3.12
