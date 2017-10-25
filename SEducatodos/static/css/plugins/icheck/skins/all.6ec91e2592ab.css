@@ -1,0 +1,61 @@
+/* iCheck plugin skins
+----------------------------------- */
+@import url("minimal/_all.2bc1b75d54f5.css");
+/*
+@import url("minimal/minimal.eaa831bc62a7.css");
+@import url("minimal/red.98a1da8fe9ad.css");
+@import url("minimal/green.808a6f0003f1.css");
+@import url("minimal/blue.9721b4b356f1.css");
+@import url("minimal/aero.fc6457385cc8.css");
+@import url("minimal/grey.837fa83753ce.css");
+@import url("minimal/orange.9854b4c70b95.css");
+@import url("minimal/yellow.348bc72eb492.css");
+@import url("minimal/pink.e65dbbc2919f.css");
+@import url("minimal/purple.91bcb2231b0d.css");
+*/
+
+@import url("square/_all.44c32ea78a86.css");
+/*
+@import url("square/square.7844b2c5d1bf.css");
+@import url("square/red.0175478df0bb.css");
+@import url("square/green.0e33b463986e.css");
+@import url("square/blue.c577ebbc9c5e.css");
+@import url("square/aero.afc3191d6ff5.css");
+@import url("square/grey.eb1e1ad50554.css");
+@import url("square/orange.3c56492402d0.css");
+@import url("square/yellow.d7970fb864ab.css");
+@import url("square/pink.ba402ab11c02.css");
+@import url("square/purple.1e3a9c38c58c.css");
+*/
+
+@import url("flat/_all.ea6df21adeee.css");
+/*
+@import url("flat/flat.bc289948f179.css");
+@import url("flat/red.321450d8fe35.css");
+@import url("flat/green.7246617ea208.css");
+@import url("flat/blue.37562e0163b1.css");
+@import url("flat/aero.c04d06bdf19a.css");
+@import url("flat/grey.5a72822da353.css");
+@import url("flat/orange.cdcba7159de6.css");
+@import url("flat/yellow.c88badaffe83.css");
+@import url("flat/pink.066bb1468bd6.css");
+@import url("flat/purple.f7e1c6fbc155.css");
+*/
+
+@import url("line/_all.4fb7de27621a.css");
+/*
+@import url("line/line.81b13ca75bdd.css");
+@import url("line/red.afd18ad4b7f7.css");
+@import url("line/green.5770d7e7a430.css");
+@import url("line/blue.a0766f945b9a.css");
+@import url("line/aero.d7f56d9d7005.css");
+@import url("line/grey.326e47e5d345.css");
+@import url("line/orange.480a7f411631.css");
+@import url("line/yellow.fc588c84cad3.css");
+@import url("line/pink.e398b068b733.css");
+@import url("line/purple.b5e55243c77b.css");
+*/
+
+@import url("polaris/polaris.da8d103c67c0.css");
+
+@import url("futurico/futurico.ed093ab84327.css");
