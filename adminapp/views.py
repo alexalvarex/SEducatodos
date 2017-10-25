@@ -13,10 +13,18 @@ from cStringIO import StringIO
 from io import BytesIO
 from django.conf import settings
 from django.views.generic import View
+from django.http import Http404  
 
 from django.contrib.auth.models import User
 
 # Create your views here.
+
+# HTTP Error 400
+def notFound(request, param):  
+	if not param:  
+		raise Http404  
+	return render_to_response('404.html')  
+
 
 @login_required()
 def index(request):

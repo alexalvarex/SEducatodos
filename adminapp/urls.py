@@ -1,6 +1,11 @@
-from django.conf.urls import url
+from django.conf.urls import (url, handler400, handler403, handler404, handler500 )
 from . import views
 from django.views.generic import TemplateView
+
+handler400 = 'adminapp.views.bad_request'
+handler403 = 'adminapp.views.permission_denied'
+handler404 = 'adminapp.views.page_not_found'
+handler500 = 'adminapp.views.server_error'
 
 urlpatterns = [
 	url(r'^$', views.index, name='index'),

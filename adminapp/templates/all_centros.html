@@ -38,7 +38,7 @@
     					<div class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-info" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones </a>
                                 <div class="dropdown-menu dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                                    <a id="btn-editar" class="dropdown-item" href="http://127.0.0.1:8000/admin/adminapp/centros/{{d.id}}/change/" target="_blank" data-id="{{ d.id }}" data-centro="{{ d.centro }}" data-tipoc="{{ d.tipo_centro.id }}" data-patrocinador="{{ d.patrocinador.id }}" data-zona="{{ d.zona.id }}" data-patroi="{{ d.patro_incentivo.id }}" data-patror="{{ d.patro_recibe }}" data-cuando="{{ d.cada_cuando }}" data-promotor="{{ d.promotor.id }}" data-donde="{{ d.donde_funciona }}" data-direccion="{{ d.direccion }}" data-toggle="modal" data-target="#edit_centro">Editar</a>
+                                    <!--<a id="btn-editar" class="dropdown-item" href="http://127.0.0.1:8000/admin/adminapp/centros/{{d.id}}/change/" target="_blank" data-id="{{ d.id }}" data-centro="{{ d.centro }}" data-tipoc="{{ d.tipo_centro.id }}" data-patrocinador="{{ d.patrocinador.id }}" data-zona="{{ d.zona.id }}" data-patroi="{{ d.patro_incentivo.id }}" data-patror="{{ d.patro_recibe }}" data-cuando="{{ d.cada_cuando }}" data-promotor="{{ d.promotor.id }}" data-donde="{{ d.donde_funciona }}" data-direccion="{{ d.direccion }}" data-toggle="modal" data-target="#edit_centro">Editar</a>-->
                                     <a class="dropdown-item dropdown-danger" href="{% url 'delete_centro' d.id %}">Eliminar</a>
                                 </div>
                         </div>
