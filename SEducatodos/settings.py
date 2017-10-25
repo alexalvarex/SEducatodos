@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
+# obtener la configuracion de la base de dato a partir de la variable $DATABASE_URL
+import dj_database_url
 
 import os
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'bemz2*h!-a@&39-ah%3ibp8zllj&vgea#a94g*4xa$qu_jigyn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -76,12 +78,8 @@ WSGI_APPLICATION = 'SEducatodos.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+db_from_env = dj_database_url.config(conn_max_age=500)  
+DATABASES['default'].update(db_from_env)  
 
 
 # Password validation
@@ -129,5 +127,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'global_static'),
     os.path.join(BASE_DIR, 'media'),
     )
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 LOGIN_URL = '/'
