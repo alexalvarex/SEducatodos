@@ -30,7 +30,7 @@ img{max-width:100%;}
 /*end reset*/
 body{
 	font-family:Arial, Helvetica, sans-serif;
-	background:url(../images/bg2.png);
+	/*background:url(../images/bg2.png);*/
 }
 .wrap{
 	width:1000px;

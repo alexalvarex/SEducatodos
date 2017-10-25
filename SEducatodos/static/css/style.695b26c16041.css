@@ -1,0 +1,192 @@
+.mini-submenu{
+  display:none;  
+  background-color: rgba(0, 0, 0, 0);  
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  border-radius: 4px;
+  padding: 9px;  
+  margin-top: 15px;
+  /*position: relative;*/
+  width: 42px;
+
+}
+a.d:hover{
+  background-color: #DBD9D9;
+}
+#d1, #d2{
+  display: inline-block;
+}
+#b{
+  background-color: #64B28E;
+}
+.mini-submenu:hover{
+  cursor: pointer;
+}
+
+.mini-submenu .icon-bar {
+  border-radius: 1px;
+  display: block;
+  height: 2px;
+  width: 22px;
+  margin-top: 3px;
+}
+
+.mini-submenu .icon-bar {
+  background-color: #000;
+}
+
+#slide-submenu{
+  background: rgba(0, 0, 0, 0.45);
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+html {
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+h5 {
+    font-size: 1.28571429em;
+    font-weight: 700;
+    line-height: 1.2857em;
+    margin: 0;
+}
+
+.card1 {
+    font-size: 1em;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+    border-radius: .28571429rem;
+    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+}
+
+.card1-block {
+    font-size: 1em;
+    position: relative;
+    margin: 0;
+    padding: 1em;
+    border: none;
+    border-top: 1px solid rgba(34, 36, 38, .1);
+    box-shadow: none;
+}
+
+.card1-img-top {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.card1-title {
+    font-size: 1.28571429em;
+    font-weight: 700;
+    line-height: 1.2857em;
+}
+
+.card1-text {
+    clear: both;
+    margin-top: .5em;
+    color: rgba(0, 0, 0, .68);
+}
+
+.card1-footer {
+    font-size: 1em;
+    position: static;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    padding: .75em 1em;
+    color: rgba(0, 0, 0, .4);
+    border-top: 1px solid rgba(0, 0, 0, .05) !important;
+    background: #fff;
+}
+
+.card1-inverse .btn {
+    border: 1px solid rgba(0, 0, 0, .05);
+}
+
+.profile {
+    position: absolute;
+    top: -12px;
+    display: inline-block;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    border: 1px solid #fff;
+    border-radius: 50%;
+}
+
+.profile-avatar {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.profile-inline {
+    position: relative;
+    top: 0;
+    display: inline-block;
+}
+
+.profile-inline ~ .card1-title {
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: top;
+}
+
+.text-bold {
+    font-weight: 700;
+}
+
+.meta {
+    font-size: 1em;
+    color: rgba(0, 0, 0, .4);
+}
+
+.meta a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, .4);
+}
+
+                
+table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_desc:after {
+   padding: 5px;
+}
+.dataTables_wrapper .mdb-select {
+    border: none;
+}
+.dataTables_wrapper .mdb-select.form-control {
+    padding-top: 0;
+    margin-top: -1rem;
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
+    width: 100px;
+}
+.dataTables_length label {
+    display: flex;
+    justify-content: left;
+}
+.dataTables_filter label {
+    margin-bottom: 0;
+}
+.dataTables_filter label input.form-control {
+    margin-top: -0.6rem;
+    padding-bottom: 0;
+}
+table.dataTable {
+    margin-bottom: 3rem!important;
+}
+div.dataTables_wrapper div.dataTables_info {
+    padding-top: 0;
+}
+
+/*login*/
+.intro-2 {
+    background: url("https://www.pantaleon.com/wp-content/uploads/bfi_thumb/Ingenios-Honduras-mugbrq2s261di6y8414q3mx320d5x14ogiiuabuy00.jpg")no-repeat center center;
+    background-size: cover;
+}
