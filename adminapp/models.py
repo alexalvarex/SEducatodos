@@ -180,7 +180,6 @@ class Matricula(models.Model):
 	horario = models.CharField(max_length=80, blank=True, null=True)
 	inicio_clases = models.DateField(blank=True, null=True)
 	fin_clases = models.DateField(blank=True, null=True)
-	requisito = models.FileField(upload_to='imagenes')
 
 	def __str__(self):
 		return "%s %s" %(self.persona.nombre, self.grado.grado)

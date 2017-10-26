@@ -556,7 +556,7 @@ def new_enroll_add(request):
 			horario = request.POST.get('horario')
 			fechai = request.POST.get('fechai')
 			fechaf = request.POST.get('fechaf')
-			archivos = request.FILES['archivos']
+			# archivos = request.FILES['archivos']
 
 			g = Grado.objects.get(pk=grado)
 			c = Centro.objects.get(pk = centro)
@@ -565,7 +565,7 @@ def new_enroll_add(request):
 				a = Personas.objects.get(pk=alumno)
 				mat = Matricula(fecha = datetime.now() , persona = a, centro = c, grado = g, 
 					num_periodo = d, horario = horario, 
-					inicio_clases = fechai, fin_clases = fechaf, requisito = archivos)	
+					inicio_clases = fechai, fin_clases = fechaf)	
 				mat.save()
 			return HttpResponseRedirect('/principal/enroll/new/')
 		except Exception as e:

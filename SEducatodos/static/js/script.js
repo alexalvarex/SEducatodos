@@ -186,9 +186,9 @@ $(document).ready(function(){
                 filename: 'Listado de Matriculas 2°',
                 title: 'SECRETARÍA DE EDUCACIÓN             \n' + 'REGISTRO DE MATRÍCULA POR FACILITADOR DE 1° a 6°' + '\n' + 'DIRECCIÓN GENERAL DE MODALIDADES EDUCATIVAS' + '\n' + 'SUB-DIRECCIÓN GENERAL DE EDUCACIÓN PARA JOVENES Y ADULTOS',
                 message: 
-                'Departamento: ' + $('#depto2').val() + '                                       Nombre del Centro: ' + $('#nombrec2').val() + '                           DATOS DE INSCRIPCIÓN' +
+                'Departamento: ' + $('#depto2').val() + '                                                Nombre del Centro: ' + $('#nombrec2').val() + '                           DATOS DE INSCRIPCIÓN' +
                 '\nMunicipio: ' + $('#municipio2').val() + '                                             Tipo de Centro: ' + $('#tipoc2').val() + '                                               N° Periodo: ' + $('#periodo2').val() +
-                '\nTipo Residencia: ' + $('#tipor2').val() + '                                        Funciona en: '  + $('#funciona2').val() + '                                                      Fecha inicio de clases: ' + $('#fechai2').val() +
+                '\nTipo Residencia: ' + $('#tipor2').val() + '                                        Funciona en: '  + $('#funciona2').val() + '                                           Fecha inicio de clases: ' + $('#fechai2').val() +
                 '\nDirección: ' + $('#direccion2').val() + '                                              Patrocinador: ' + $('#patrocinador2').val() + '                                         Fecha fin de clases: ' + $('#fechaf2').val() +
                 '\nNombre del Promotor: ' + $('#nombrep2').val() + '                         N° Identidad: ' + $('#idpromo2').val() +
                 '\nNombre del facilitador: ' + $('#nombref2').val() + '                  N° Identidad: ' + $('#idfaci2').val(),
