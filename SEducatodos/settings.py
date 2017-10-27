@@ -78,8 +78,14 @@ import dj_database_url
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 DATABASE_URL = 'sqlite://' + os.path.join(BASE_DIR, 'db.sqlite3')
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
-DATABASES['default'] =  dj_database_url.config()
+# DATABASES['default'] =  dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # ON_HEROKU = os.environ.get('ON_HEROKU')
