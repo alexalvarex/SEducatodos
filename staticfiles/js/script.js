@@ -116,12 +116,12 @@ $(document).ready(function(){
                 title: 'SECRETARÍA DE EDUCACIÓN             \n' + 'REGISTRO DE MATRÍCULA POR FACILITADOR DE 1° a 6°' + '\n' + 'DIRECCIÓN GENERAL DE MODALIDADES EDUCATIVAS' + '\n' + 'SUB-DIRECCIÓN GENERAL DE EDUCACIÓN PARA JOVENES Y ADULTOS',
                 
                 message:
-                'Departamento: ' + $('#depto').val() + '                                       Nombre del Centro: ' + $('#nombrec').val() + '                           DATOS DE INSCRIPCIÓN' +
-                '\nMunicipio: ' + $('#municipio').val() + '                                    Tipo de Centro: ' + $('#tipoc').val() + '                                               N° Periodo: ' + $('#periodo').val() +
-                '\nTipo Residencia: ' + $('#tipor').val() + '                                         Funciona en: '  + $('#funciona').val() + '                                       Fecha inicio de clases: ' + $('#fechai').val() +
-                '\nDirección: ' + $('#direccion').val() + '                                              Patrocinador: ' + $('#patrocinador').val() + '                                       Fecha fin de clases: ' + $('#fechaf').val() +
-                '\nNombre del Promotor: ' + $('#nombrep').val() + '                         N° Identidad: ' + $('#idpromo').val() +
-                '\nNombre del facilitador: ' + $('#nombref').val() + '                  N° Identidad: ' + $('#idfaci').val(),
+                'Departamento: ' + $('#depto1').val() + '                                       Nombre del Centro: ' + $('#nombrec1').val() + '                           DATOS DE INSCRIPCIÓN' +
+                '\nMunicipio: ' + $('#municipio1').val() + '                                             Tipo de Centro: ' + $('#tipoc1').val() + '                                                            N° Periodo: ' + $('#periodo1').val() +
+                '\nTipo Residencia: ' + $('#tipor1').val() + '                                          Funciona en: '  + $('#funciona1').val() + '                              Fecha inicio de clases: ' + $('#fechai1').val() +
+                '\nDirección: ' + $('#direccion1').val() + '                                              Patrocinador: ' + $('#patrocinador1').val() + '                                         Fecha fin de clases: ' + $('#fechaf1').val() +
+                '\nNombre del Promotor: ' + $('#nombrep1').val() + '                         N° Identidad: ' + $('#idpromo1').val() +
+                '\nNombre del facilitador: ' + $('#nombref1').val() + '                       N° Identidad: ' + $('#idfaci1').val() + '                                     Grado: Primero',
 
                  customize: function ( doc ) {
                   doc.content.splice( 1, 0, {
@@ -186,12 +186,12 @@ $(document).ready(function(){
                 filename: 'Listado de Matriculas 2°',
                 title: 'SECRETARÍA DE EDUCACIÓN             \n' + 'REGISTRO DE MATRÍCULA POR FACILITADOR DE 1° a 6°' + '\n' + 'DIRECCIÓN GENERAL DE MODALIDADES EDUCATIVAS' + '\n' + 'SUB-DIRECCIÓN GENERAL DE EDUCACIÓN PARA JOVENES Y ADULTOS',
                 message: 
-                'Departamento: ' + $('#depto2').val() + '                                                   Nombre del Centro: ' + $('#nombrec2').val() + '                           DATOS DE INSCRIPCIÓN' +
-                '\nMunicipio: ' + $('#municipio2').val() + '                                             Tipo de Centro: ' + $('#tipoc2').val() + '                                               N° Periodo: ' + $('#periodo2').val() +
-                '\nTipo Residencia: ' + $('#tipor2').val() + '                                                  Funciona en: '  + $('#funciona2').val() + '                           Fecha inicio de clases: ' + $('#fechai2').val() +
-                '\nDirección: ' + $('#direccion2').val() + '                                                    Patrocinador: ' + $('#patrocinador2').val() + '                                         Fecha fin de clases: ' + $('#fechaf2').val() +
+                'Departamento: ' + $('#depto2').val() + '                                       Nombre del Centro: ' + $('#nombrec2').val() + '                           DATOS DE INSCRIPCIÓN' +
+                '\nMunicipio: ' + $('#municipio2').val() + '                                             Tipo de Centro: ' + $('#tipoc2').val() + '                                                            N° Periodo: ' + $('#periodo2').val() +
+                '\nTipo Residencia: ' + $('#tipor2').val() + '                                          Funciona en: '  + $('#funciona2').val() + '                              Fecha inicio de clases: ' + $('#fechai2').val() +
+                '\nDirección: ' + $('#direccion2').val() + '                                              Patrocinador: ' + $('#patrocinador2').val() + '                                         Fecha fin de clases: ' + $('#fechaf2').val() +
                 '\nNombre del Promotor: ' + $('#nombrep2').val() + '                         N° Identidad: ' + $('#idpromo2').val() +
-                '\nNombre del facilitador: ' + $('#nombref2').val() + '                  N° Identidad: ' + $('#idfaci2').val(),
+                '\nNombre del facilitador: ' + $('#nombref2').val() + '                       N° Identidad: ' + $('#idfaci2').val() + '                                     Grado: Segundo',
                  customize: function ( doc ) {
                     doc.content.splice( 1, 0, {
                         margin: [ -30, -100, 0, 90 ],
@@ -257,11 +257,11 @@ $(document).ready(function(){
                 title: 'SECRETARÍA DE EDUCACIÓN             \n' + 'REGISTRO DE MATRÍCULA POR FACILITADOR DE 1° a 6°' + '\n' + 'DIRECCIÓN GENERAL DE MODALIDADES EDUCATIVAS' + '\n' + 'SUB-DIRECCIÓN GENERAL DE EDUCACIÓN PARA JOVENES Y ADULTOS',
                 message: 
                  'Departamento: ' + $('#depto3').val() + '                                       Nombre del Centro: ' + $('#nombrec3').val() + '                           DATOS DE INSCRIPCIÓN' +
-                '\nMunicipio: ' + $('#municipio3').val() + '                                             Tipo de Centro: ' + $('#tipoc3').val() + '                                               N° Periodo: ' + $('#periodo3').val() +
-                '\nTipo Residencia: ' + $('#tipor3').val() + '                                        Funciona en: '  + $('#funciona3').val() + '                                                      Fecha inicio de clases: ' + $('#fechai3').val() +
+                '\nMunicipio: ' + $('#municipio3').val() + '                                             Tipo de Centro: ' + $('#tipoc3').val() + '                                                            N° Periodo: ' + $('#periodo3').val() +
+                '\nTipo Residencia: ' + $('#tipor3').val() + '                                          Funciona en: '  + $('#funciona3').val() + '                              Fecha inicio de clases: ' + $('#fechai3').val() +
                 '\nDirección: ' + $('#direccion3').val() + '                                              Patrocinador: ' + $('#patrocinador3').val() + '                                         Fecha fin de clases: ' + $('#fechaf3').val() +
                 '\nNombre del Promotor: ' + $('#nombrep3').val() + '                         N° Identidad: ' + $('#idpromo3').val() +
-                '\nNombre del facilitador: ' + $('#nombref3').val() + '                  N° Identidad: ' + $('#idfaci3').val(),
+                '\nNombre del facilitador: ' + $('#nombref3').val() + '                       N° Identidad: ' + $('#idfaci3').val() + '                                     Grado: Tercero',
                  customize: function ( doc ) {
                     doc.content.splice( 1, 0, {
                         margin: [ -30, -100, 0, 90 ],
@@ -327,11 +327,11 @@ $(document).ready(function(){
                 title: 'SECRETARÍA DE EDUCACIÓN             \n' + 'REGISTRO DE MATRÍCULA POR FACILITADOR DE 1° a 6°' + '\n' + 'DIRECCIÓN GENERAL DE MODALIDADES EDUCATIVAS' + '\n' + 'SUB-DIRECCIÓN GENERAL DE EDUCACIÓN PARA JOVENES Y ADULTOS',
                 message: 
                  'Departamento: ' + $('#depto4').val() + '                                       Nombre del Centro: ' + $('#nombrec4').val() + '                           DATOS DE INSCRIPCIÓN' +
-                '\nMunicipio: ' + $('#municipio4').val() + '                                             Tipo de Centro: ' + $('#tipoc4').val() + '                                               N° Periodo: ' + $('#periodo4').val() +
-                '\nTipo Residencia: ' + $('#tipor4').val() + '                                        Funciona en: '  + $('#funciona4').val() + '                                                      Fecha inicio de clases: ' + $('#fechai4').val() +
+                '\nMunicipio: ' + $('#municipio4').val() + '                                             Tipo de Centro: ' + $('#tipoc4').val() + '                                                            N° Periodo: ' + $('#periodo4').val() +
+                '\nTipo Residencia: ' + $('#tipor4').val() + '                                          Funciona en: '  + $('#funciona4').val() + '                              Fecha inicio de clases: ' + $('#fechai4').val() +
                 '\nDirección: ' + $('#direccion4').val() + '                                              Patrocinador: ' + $('#patrocinador4').val() + '                                         Fecha fin de clases: ' + $('#fechaf4').val() +
                 '\nNombre del Promotor: ' + $('#nombrep4').val() + '                         N° Identidad: ' + $('#idpromo4').val() +
-                '\nNombre del facilitador: ' + $('#nombref4').val() + '                  N° Identidad: ' + $('#idfaci4').val(),
+                '\nNombre del facilitador: ' + $('#nombref4').val() + '                       N° Identidad: ' + $('#idfaci4').val() + '                                     Grado: Cuarto',
                  customize: function ( doc ) {
                     doc.content.splice( 1, 0, {
                         margin: [ -30, -100, 0, 90 ],
@@ -397,11 +397,11 @@ $(document).ready(function(){
                 title: 'SECRETARÍA DE EDUCACIÓN             \n' + 'REGISTRO DE MATRÍCULA POR FACILITADOR DE 1° a 6°' + '\n' + 'DIRECCIÓN GENERAL DE MODALIDADES EDUCATIVAS' + '\n' + 'SUB-DIRECCIÓN GENERAL DE EDUCACIÓN PARA JOVENES Y ADULTOS',
                 message: 
                  'Departamento: ' + $('#depto5').val() + '                                       Nombre del Centro: ' + $('#nombrec5').val() + '                           DATOS DE INSCRIPCIÓN' +
-                '\nMunicipio: ' + $('#municipio5').val() + '                                             Tipo de Centro: ' + $('#tipoc5').val() + '                                               N° Periodo: ' + $('#periodo5').val() +
-                '\nTipo Residencia: ' + $('#tipor5').val() + '                                        Funciona en: '  + $('#funciona5').val() + '                                                      Fecha inicio de clases: ' + $('#fechai5').val() +
+                '\nMunicipio: ' + $('#municipio5').val() + '                                             Tipo de Centro: ' + $('#tipoc5').val() + '                                                            N° Periodo: ' + $('#periodo5').val() +
+                '\nTipo Residencia: ' + $('#tipor5').val() + '                                          Funciona en: '  + $('#funciona5').val() + '                              Fecha inicio de clases: ' + $('#fechai5').val() +
                 '\nDirección: ' + $('#direccion5').val() + '                                              Patrocinador: ' + $('#patrocinador5').val() + '                                         Fecha fin de clases: ' + $('#fechaf5').val() +
                 '\nNombre del Promotor: ' + $('#nombrep5').val() + '                         N° Identidad: ' + $('#idpromo5').val() +
-                '\nNombre del facilitador: ' + $('#nombref5').val() + '                  N° Identidad: ' + $('#idfaci5').val(),
+                '\nNombre del facilitador: ' + $('#nombref5').val() + '                       N° Identidad: ' + $('#idfaci5').val() + '                                     Grado: Quinto',
                  customize: function ( doc ) {
                     doc.content.splice( 1, 0, {
                         margin: [ -30, -100, 0, 90 ],
@@ -467,11 +467,11 @@ $(document).ready(function(){
                 title: 'SECRETARÍA DE EDUCACIÓN             \n' + 'REGISTRO DE MATRÍCULA POR FACILITADOR DE 1° a 6°' + '\n' + 'DIRECCIÓN GENERAL DE MODALIDADES EDUCATIVAS' + '\n' + 'SUB-DIRECCIÓN GENERAL DE EDUCACIÓN PARA JOVENES Y ADULTOS',
                 message: 
                  'Departamento: ' + $('#depto6').val() + '                                       Nombre del Centro: ' + $('#nombrec6').val() + '                           DATOS DE INSCRIPCIÓN' +
-                '\nMunicipio: ' + $('#municipio6').val() + '                                             Tipo de Centro: ' + $('#tipoc6').val() + '                                               N° Periodo: ' + $('#periodo6').val() +
-                '\nTipo Residencia: ' + $('#tipor6').val() + '                                        Funciona en: '  + $('#funciona6').val() + '                                                      Fecha inicio de clases: ' + $('#fechai6').val() +
+                '\nMunicipio: ' + $('#municipio6').val() + '                                             Tipo de Centro: ' + $('#tipoc6').val() + '                                                            N° Periodo: ' + $('#periodo6').val() +
+                '\nTipo Residencia: ' + $('#tipor6').val() + '                                          Funciona en: '  + $('#funciona6').val() + '                              Fecha inicio de clases: ' + $('#fechai6').val() +
                 '\nDirección: ' + $('#direccion6').val() + '                                              Patrocinador: ' + $('#patrocinador6').val() + '                                         Fecha fin de clases: ' + $('#fechaf6').val() +
                 '\nNombre del Promotor: ' + $('#nombrep6').val() + '                         N° Identidad: ' + $('#idpromo6').val() +
-                '\nNombre del facilitador: ' + $('#nombref6').val() + '                  N° Identidad: ' + $('#idfaci6').val(),
+                '\nNombre del facilitador: ' + $('#nombref6').val() + '                       N° Identidad: ' + $('#idfaci6').val() + '                                     Grado: Sexto',
                  customize: function ( doc ) {
                     doc.content.splice( 1, 0, {
                         margin: [ -30, -100, 0, 90 ],
@@ -537,11 +537,11 @@ $(document).ready(function(){
                 title: 'SECRETARÍA DE EDUCACIÓN             \n' + 'REGISTRO DE MATRÍCULA POR FACILITADOR DE 1° a 6°' + '\n' + 'DIRECCIÓN GENERAL DE MODALIDADES EDUCATIVAS' + '\n' + 'SUB-DIRECCIÓN GENERAL DE EDUCACIÓN PARA JOVENES Y ADULTOS',
                 message: 
                  'Departamento: ' + $('#depto7').val() + '                                       Nombre del Centro: ' + $('#nombrec7').val() + '                           DATOS DE INSCRIPCIÓN' +
-                '\nMunicipio: ' + $('#municipio7').val() + '                                             Tipo de Centro: ' + $('#tipoc7').val() + '                                               N° Periodo: ' + $('#periodo7').val() +
-                '\nTipo Residencia: ' + $('#tipor7').val() + '                                        Funciona en: '  + $('#funciona7').val() + '                                                      Fecha inicio de clases: ' + $('#fechai7').val() +
+                '\nMunicipio: ' + $('#municipio7').val() + '                                             Tipo de Centro: ' + $('#tipoc7').val() + '                                                            N° Periodo: ' + $('#periodo7').val() +
+                '\nTipo Residencia: ' + $('#tipor7').val() + '                                          Funciona en: '  + $('#funciona7').val() + '                              Fecha inicio de clases: ' + $('#fechai7').val() +
                 '\nDirección: ' + $('#direccion7').val() + '                                              Patrocinador: ' + $('#patrocinador7').val() + '                                         Fecha fin de clases: ' + $('#fechaf7').val() +
                 '\nNombre del Promotor: ' + $('#nombrep7').val() + '                         N° Identidad: ' + $('#idpromo7').val() +
-                '\nNombre del facilitador: ' + $('#nombref7').val() + '                  N° Identidad: ' + $('#idfaci7').val(),
+                '\nNombre del facilitador: ' + $('#nombref7').val() + '                       N° Identidad: ' + $('#idfaci7').val() + '                                     Grado: Septimo',
                  customize: function ( doc ) {
                     doc.content.splice( 1, 0, {
                         margin: [ -30, -100, 0, 90 ],
@@ -607,11 +607,11 @@ $(document).ready(function(){
                 title: 'SECRETARÍA DE EDUCACIÓN             \n' + 'REGISTRO DE MATRÍCULA POR FACILITADOR DE 1° a 6°' + '\n' + 'DIRECCIÓN GENERAL DE MODALIDADES EDUCATIVAS' + '\n' + 'SUB-DIRECCIÓN GENERAL DE EDUCACIÓN PARA JOVENES Y ADULTOS',
                 message: 
                  'Departamento: ' + $('#depto8').val() + '                                       Nombre del Centro: ' + $('#nombrec8').val() + '                           DATOS DE INSCRIPCIÓN' +
-                '\nMunicipio: ' + $('#municipio8').val() + '                                             Tipo de Centro: ' + $('#tipoc8').val() + '                                               N° Periodo: ' + $('#periodo8').val() +
-                '\nTipo Residencia: ' + $('#tipor8').val() + '                                        Funciona en: '  + $('#funciona8').val() + '                                                      Fecha inicio de clases: ' + $('#fechai8').val() +
+                '\nMunicipio: ' + $('#municipio8').val() + '                                             Tipo de Centro: ' + $('#tipoc8').val() + '                                                            N° Periodo: ' + $('#periodo8').val() +
+                '\nTipo Residencia: ' + $('#tipor8').val() + '                                          Funciona en: '  + $('#funciona8').val() + '                              Fecha inicio de clases: ' + $('#fechai8').val() +
                 '\nDirección: ' + $('#direccion8').val() + '                                              Patrocinador: ' + $('#patrocinador8').val() + '                                         Fecha fin de clases: ' + $('#fechaf8').val() +
                 '\nNombre del Promotor: ' + $('#nombrep8').val() + '                         N° Identidad: ' + $('#idpromo8').val() +
-                '\nNombre del facilitador: ' + $('#nombref8').val() + '                  N° Identidad: ' + $('#idfaci8').val(),
+                '\nNombre del facilitador: ' + $('#nombref8').val() + '                       N° Identidad: ' + $('#idfaci8').val() + '                                     Grado: Octavo',
                  customize: function ( doc ) {
                     doc.content.splice( 1, 0, {
                         margin: [ -30, -100, 0, 90 ],
@@ -677,11 +677,11 @@ $(document).ready(function(){
                 title: 'SECRETARÍA DE EDUCACIÓN             EI-002\n' + 'REGISTRO DE MATRÍCULA POR FACILITADOR DE 1° a 6°' + '\n' + 'DIRECCIÓN GENERAL DE MODALIDADES EDUCATIVAS' + '\n' + 'SUB-DIRECCIÓN GENERAL DE EDUCACIÓN PARA JOVENES Y ADULTOS',
                 message: 
                  'Departamento: ' + $('#depto9').val() + '                                       Nombre del Centro: ' + $('#nombrec9').val() + '                           DATOS DE INSCRIPCIÓN' +
-                '\nMunicipio: ' + $('#municipio9').val() + '                                             Tipo de Centro: ' + $('#tipoc9').val() + '                                               N° Periodo: ' + $('#periodo9').val() +
-                '\nTipo Residencia: ' + $('#tipor9').val() + '                                        Funciona en: '  + $('#funciona9').val() + '                                                      Fecha inicio de clases: : ' + $('#fechai9').val() +
+                '\nMunicipio: ' + $('#municipio9').val() + '                                             Tipo de Centro: ' + $('#tipoc9').val() + '                                                            N° Periodo: ' + $('#periodo9').val() +
+                '\nTipo Residencia: ' + $('#tipor9').val() + '                                          Funciona en: '  + $('#funciona9').val() + '                              Fecha inicio de clases: ' + $('#fechai9').val() +
                 '\nDirección: ' + $('#direccion9').val() + '                                              Patrocinador: ' + $('#patrocinador9').val() + '                                         Fecha fin de clases: ' + $('#fechaf9').val() +
                 '\nNombre del Promotor: ' + $('#nombrep9').val() + '                         N° Identidad: ' + $('#idpromo9').val() +
-                '\nNombre del facilitador: ' + $('#nombref9').val() + '                  N° Identidad: ' + $('#idfaci9').val(),
+                '\nNombre del facilitador: ' + $('#nombref9').val() + '                       N° Identidad: ' + $('#idfaci9').val() + '                                     Grado: Noveno',
                  customize: function ( doc ) {
                    doc.content.splice( 1, 0, {
                         margin: [ -30, -100, 0, 90 ],

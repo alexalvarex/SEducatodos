@@ -53,7 +53,20 @@
         {% endfor %}
         </select>
     </div>
+    <div class="form-group">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <label for="muni">Municipio</label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="muni">
+        <option value="" disabled selected>Seleccione</option>
+        {% for g in muni %}
+            <option value="{{g.id}}"> {{g}} </option>
+        {% endfor %}
+        </select>
+    </div>
 
+    </div>
+
+    <div class="col-md-6">
     <div class="form-group">
         <i class="fa fa-money prefix grey-text"></i>
         <label for="patro_recibe">Incentivo del Patrocinador</label>
@@ -64,11 +77,6 @@
         {% endfor %}
         </select>
     </div>
-
-
-    </div>
-
-    <div class="col-md-6">
     <div class="md-form">
         <i class="fa fa-question prefix grey-text"></i>
         <input type="text" id="que" class="form-control">
@@ -131,7 +139,8 @@
 			var _cuando = $('#cuando').val()
 			var _promo = $('#promo').val()
 			var _donde = $('#donde').val()
-			var _direccion = $('#direccion').val()
+            var _direccion = $('#direccion').val()
+			var _muni = $('#muni').val()
 			var csfrm = $('input[name=csrfmiddlewaretoken]').val()
 
 			$.ajax({
@@ -147,7 +156,8 @@
 					cuando: _cuando,
 					promo: _promo,
 					donde: _donde,
-					direccion: _direccion,
+                    direccion: _direccion,
+					muni: _muni,
 					csrfmiddlewaretoken: csfrm
 				},
 				success: function(data){
@@ -162,8 +172,8 @@
 					$('#cuando').val('')
 					$('#promo').val('')
                     $('#donde').val('')
-					$('#direccion').val('')
-					console.log(data)
+                    $('#direccion').val('')
+					$('#muni').val('')
 					
 				}
 			});

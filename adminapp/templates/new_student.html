@@ -77,6 +77,12 @@
         <label for="date-picker-example">Fecha de Nacimiento</label>
     </div>
 
+    <div class="md-form">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <input type="text" id="edad" class="form-control">
+        <label for="edad">Edad</label>
+    </div>
+
     <div class="form-group">
         <i class="fa fa-pencil prefix grey-text"></i>
         <label for="des">Trabaja?</label>
@@ -132,7 +138,8 @@
 			var _fechan = $('#fechan').val()
 			var _trabaja = $('#des').val()
 			var _ocupacion = $('#ocupacion').val()
-			var _sexo = $('#sexo').val()
+            var _sexo = $('#sexo').val()
+			var _edad = $('#edad').val()
 			var csfrm = $('input[name=csrfmiddlewaretoken]').val()
 
 			$.ajax({
@@ -150,6 +157,7 @@
 					trabaja: _trabaja,
 					ocupacion: _ocupacion,
 					sexo: _sexo,
+                    edad: _edad,
 					csrfmiddlewaretoken: csfrm
 				},
 				success: function(data){
@@ -163,7 +171,8 @@
 					$('#telefono').val('')
 					$('#ocupacion').val('')
 					$('#fechan').val('')
-					$('#sexo').val('')
+                    $('#sexo').val('')
+					$('#edad').val('')
 					console.log(data)
 					
 				}

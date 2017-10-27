@@ -65,6 +65,7 @@ def new_student_add(request):
 			grupoe = GrupoEtnico.objects.get(pk = ge)
 			tel = request.POST.get('telefono')
 			fechan = request.POST.get('fechan')
+			edad = request.POST.get('edad')
 			trabaja = request.POST.get('trabaja')
 			des = Descicion.objects.get(pk = trabaja)
 			ocupacion = request.POST.get('ocupacion')
@@ -84,7 +85,8 @@ def new_student_add(request):
 					grupo_etnico = grupoe,
 					trabaja = des,
 					ocupacion = ocupacion,
-					fecha_nacimiento = fechan)
+					fecha_nacimiento = fechan,
+					edad = edad)
 			persona.save()
 			return HttpResponseRedirect('/principal/alumnos/')
 		except Exception as e:
@@ -448,7 +450,9 @@ def new_centro(request):
 	des = Descicion.objects.all()
 	tp = TipoPersona.objects.get(pk = 2)
 	promotor = Personas.objects.filter(tipo_persona = tp)
-	return render(request, 'new_centro.html', {'des':des,'tipoc':tipoc, 'patro':patro, 'zona':zona, 'promo': promotor})
+	muni = Municipio.objects.all()
+	return render(request, 'new_centro.html', {'des':des,'tipoc':tipoc, 'patro':patro, 'zona':zona, 'promo': promotor,
+		'muni': muni})
 
 @login_required()
 def new_centro_add(request):
@@ -464,7 +468,9 @@ def new_centro_add(request):
 			promo = request.POST.get('promo')
 			donde = request.POST.get('donde')
 			direccion = request.POST.get('direccion')
+			muni = request.POST.get('muni')
 
+			municipio = Municipio.objects.get(pk = muni)
 			tc = TipoCentro.objects.get(pk = tipoc)
 			pat = Patrocinador.objects.get(pk = patro)
 			zon = Zona.objects.get(pk = zona)
@@ -481,7 +487,8 @@ def new_centro_add(request):
 					cada_cuando = cuando,
 					promotor = prom,
 					donde_funciona = donde,
-					direccion = direccion)
+					direccion = direccion,
+					municipio = municipio)
 			centro.save()
 			return HttpResponseRedirect('/principal/centros/')
 		except Exception as e:

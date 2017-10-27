@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'bemz2*h!-a@&39-ah%3ibp8zllj&vgea#a94g*4xa$qu_jigyn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -77,6 +77,7 @@ import dj_database_url
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+DATABASE_URL = 'sqlite://' + os.path.join(BASE_DIR, 'db.sqlite3')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -84,8 +85,17 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] =  dj_database_url.config()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# DATABASES['default'] =  dj_database_url.config()
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# ON_HEROKU = os.environ.get('ON_HEROKU')
+
+# if ON_HEROKU:
+#     DATABASE_URL = 'postgresql:///postgresql'
+# else:
+#     DATABASE_URL = 'sqlite://' + os.path.join(BASE_DIR, 'db.sqlite3')
+
+# DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 
 # Password validation
@@ -132,9 +142,22 @@ USE_TZ = True
 # )
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR + '/media'
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR,'staticfiles'),
+#     os.path.join(BASE_DIR, 'media'),
+
+#     )
+
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media'
@@ -142,9 +165,6 @@ MEDIA_ROOT = BASE_DIR + '/media'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'staticfiles'),
     os.path.join(BASE_DIR, 'media'),
-
     )
-
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 LOGIN_URL = '/'
