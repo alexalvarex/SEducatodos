@@ -189,6 +189,6 @@ MEDIA_ROOT = BASE_DIR + '/media'
 MEDIA_URL = '/media/' 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-os.path.join(BASE_DIR, 'static'),
+os.path.join(BASE_DIR, 'staticfiles'),
 )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
