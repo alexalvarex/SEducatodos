@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 # obtener la configuracion de la base de dato a partir de la variable $DATABASE_URL
 
 import os
+import dj_database_url
+ 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -77,7 +80,7 @@ import dj_database_url
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-DATABASE_URL = 'sqlite://' + os.path.join(BASE_DIR, 'db.sqlite3')
+# DATABASE_URL = 'sqlite://' + os.path.join(BASE_DIR, 'db.sqlite3')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -86,7 +89,7 @@ DATABASES = {
 }
 
 # DATABASES['default'] =  dj_database_url.config()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # ON_HEROKU = os.environ.get('ON_HEROKU')
 
@@ -141,9 +144,12 @@ USE_TZ = True
 #     os.path.join(BASE_DIR, 'static'),
 # )
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-# STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
+ 
+# # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 
 # MEDIA_URL = '/media/'
@@ -157,14 +163,32 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+# STATIC_URL = '/static/'
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR + '/media'
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR,'staticfiles'),
+#     os.path.join(BASE_DIR, 'media'),
+#     )
+
+# LOGIN_URL = '/'
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+ 
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+ 
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+ 
 STATIC_URL = '/static/'
-
-MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media'
-
+MEDIA_URL = '/media/' 
+# Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'staticfiles'),
-    os.path.join(BASE_DIR, 'media'),
-    )
-
-LOGIN_URL = '/'
+os.path.join(BASE_DIR, 'static'),
+)
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

@@ -1,1 +1,1 @@
-web: gunicorn seducatodos.wsgi --log-file -
+web: gunicorn SEducatodos.wsgi --log-file -
