@@ -548,8 +548,7 @@ def new_enroll(request):
 		alumnos = persona.exclude(id__in = matri)
 		periodo = Periodo.objects.all()
 		des = Descicion.objects.all()
-		return render(request, 'new_enroll.html', {'des':des, 'alumnos':alumnos, 'grado': grado, 
-			'centro':centro, 'mat':mat, 'periodo':periodo})
+		return render(request, 'new_enroll.html', {'des':des, 'alumnos':persona, 'grado': grado, 'centro':centro, 'mat':mat, 'periodo':periodo})
 
 
 @login_required()
