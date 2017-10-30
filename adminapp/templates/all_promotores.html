@@ -37,15 +37,15 @@
     				<td>{{d.fecha_nacimiento}}</td>
     				<td>{{d.trabaja}}</td>
     				<td>{{d.ocupacion}}</td>
-    			  <td>
+    			  <!--<td>
     					<div class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-info" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones </a>
                                 <div class="dropdown-menu dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                                    <!--<a class="dropdown-item" data-id="{{ d.id }}" data-numid="{{ d.numid }}" data-nombre="{{ d.nombre }}" data-apellido="{{ d.apellido }}" data-direccion="{{ d.domicilio }}" data-muni="{{ d.municipio.id }}" data-telefono="{{ d.telefono }}" data-ge="{{ d.grupo_etnico.id }}" data-fechan="{{ d.fecha_nacimiento }}" data-sexo="{{ d.sexo.id }}" data-trabaja="{{ d.trabaja.id }}" data-ocupacion="{{ d.ocupacion }}" href="http://127.0.0.1:8000/admin/adminapp/personas/{{d.id}}/change/" target="_blank">Editar</a>-->
+                                    <a class="dropdown-item" data-id="{{ d.id }}" data-numid="{{ d.numid }}" data-nombre="{{ d.nombre }}" data-apellido="{{ d.apellido }}" data-direccion="{{ d.domicilio }}" data-muni="{{ d.municipio.id }}" data-telefono="{{ d.telefono }}" data-ge="{{ d.grupo_etnico.id }}" data-fechan="{{ d.fecha_nacimiento }}" data-sexo="{{ d.sexo.id }}" data-trabaja="{{ d.trabaja.id }}" data-ocupacion="{{ d.ocupacion }}" href="http://127.0.0.1:8000/admin/adminapp/personas/{{d.id}}/change/" target="_blank">Editar</a>
                                     <a class="dropdown-item dropdown-danger btn-eliminar" href="{% url 'delete_promotor' d.id %}">Eliminar</a>
                                 </div>
                         </div>
-    				</td>
+    				</td>-->
     		</tr>
     		{% empty %}
                     <h2>No hay promotores registrados</h2>
