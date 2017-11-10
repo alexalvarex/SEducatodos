@@ -14,9 +14,11 @@
 	<!--<link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">-->
 	<link rel="stylesheet" href="{% static 'css/bootstrap-material-datetimepicker.css' %}">
 	<link href="{% static 'css/datatables.bootstrap.min.css' %}" rel="stylesheet">
-	
+	<link href="{% static 'css/jquery.dataTables.min.css' %}" rel="stylesheet">
 	<link href="{% static 'css/buttons.dataTables.min.css' %}" rel="stylesheet">
 	<link href="{% static 'css/select2.min.css' %}" rel="stylesheet">
+
+	
 
 	
 	{% block css %}{% endblock %}
@@ -25,6 +27,7 @@
 <body>
 	{% block  navtop %}{% endblock %}
 	{% block container %}{% endblock %}
+	{% block footer %}{% endblock footer %}
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
     <!-- Bootstrap tooltips -->

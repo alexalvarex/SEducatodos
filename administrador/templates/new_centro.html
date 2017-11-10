@@ -1,0 +1,202 @@
+{% extends "base_in.html" %}
+
+{% block container %}
+
+<div style="margin-left: auto; margin-right:auto" class="col-md-6 text-center" id="mensaje" >
+  
+</div>
+<div style="border: 2px solid #D3D0D0" class="container col-sm-6 col-md-12 col-lg-6 mt-4">
+
+<form id="new_student" action="" method="post">
+{% csrf_token %}
+<br>
+    <h2 class="text-center"> <a href="{% url 'all_centros_admin' %}" class="btn cyan">Ver</a> Registrar Centro</h2>
+    <hr>
+    <p>Los campos con <span style="color:red">*</span> son requeridos</p>
+	<div class="row">
+	<div class="col-md-4">
+
+    <div class="md-form">
+        <i class="fa fa-graduation-cap prefix grey-text"></i>
+        <input type="text" id="centro" name="centro" class="form-control" required="">
+        <label for="centro">Nombre del Centro <span style="color:red">*</span></label>
+    </div>
+
+    <div class="form-group">
+        <i class="fa fa-check-square prefix grey-text"></i>
+        <label for="patro">Patrocinador del Centro <span style="color:red">*</span></label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="patro">
+        <option value="" disabled selected>Seleccione</option>
+        {% for g in patro %}
+            <option value="{{g.id}}"> {{g}} </option>
+        {% endfor %}
+        </select>
+    </div>
+
+     <div class="form-group">
+        <i class="fa fa-globe prefix grey-text"></i>
+        <label for="zona">Zona <span style="color:red">*</span></label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="zona">
+        <option value="" disabled selected>Seleccione</option>
+        {% for g in zona %}
+            <option value="{{g.id}}"> {{g.zona}} </option>
+        {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <i class="fa fa-globe prefix grey-text"></i>
+        <label for="muni">Seleccione Municipio <span style="color:red">*</span></label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="muni">
+        <optgroup label="CHOLUTECA">
+        {% for m in cholu %}
+            <option value="{{m.id}}"> {{m}} </option>
+        {% endfor %}
+        <optgroup label="VALLE">
+        {% for m in valle %}
+            <option value="{{m.id}}"> {{m}} </option>
+        {% endfor %}
+        </select>
+    </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+    <div class="form-group">
+        <i class="fa fa-money prefix grey-text"></i>
+        <label for="patro_recibe">Recibe el facilitador/a algún incentivo o pago para facilitar el grado <span style="color:red">*</span></label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="patro_recibe">
+        <option value="" disabled selected>Seleccione</option>
+        {% for g in des %}
+            <option value="{{g.id}}"> {{g}} </option>
+        {% endfor %}
+        </select>
+    </div>
+    
+    <div class="md-form">
+        <i class="fa fa-question prefix grey-text"></i>
+        <input type="text" id="que" class="form-control">
+        <label for="que">Qué recibe</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-question prefix grey-text"></i>
+        <input type="text" id="quien" class="form-control">
+        <label for="quien">Quien lo proporciona</label>
+    </div>
+
+	</div>
+
+    <div class="col-md-4">
+
+        <div class="md-form">
+            <i class="fa fa-question prefix grey-text"></i>
+            <input type="text" id="cuando" class="form-control">
+            <label for="cuando">Cada cuanto</label>
+        </div>
+
+        <div class="form-group">
+            <i class="fa fa-user prefix grey-text"></i>
+            <label for="promo">Promotor <span style="color:red">*</span></label>
+            <select class="mdb-selec colorful-select dropdown-primary" id="promo">
+            <option value="" disabled selected>Seleccione</option>
+            {% for m in promo %}
+                <option value="{{m.id}}"> {{m}} </option>
+            {% endfor %}
+            </select>
+        </div>
+
+        <div class="md-form">
+            <i class="fa fa-graduation-cap prefix grey-text"></i>
+            <input type="text" id="donde" class="form-control">
+            <label for="donde">Donde funciona <span style="color:red">*</span></label>
+        </div>
+    
+        <div class="md-form">
+            <i class="fa fa-globe prefix grey-text"></i>
+            <input type="text" id="direccion" class="form-control">
+            <label for="direccion">Dirección del Centro</label>
+        </div>
+
+    </div>
+
+	</div>
+	<div class="form-group text-center">
+        <input type="submit" class="btn info-color-dark z-depth-2" value="Guardar">
+    </div>
+    
+</form>
+</div>
+
+
+{% endblock container %}
+
+{% block js %}
+	<script>
+		$(document).on('submit', '#new_student', function(e){
+			e.preventDefault();
+			var _centro = $('#centro').val()
+			var _tipoc = $('#tipoc').val()
+			var _patro = $('#patro').val()
+			var _zona = $('#zona').val()
+			var _patro_recibe = $('#patro_recibe').val()
+            var _que = $('#que').val()
+			var _quien = $('#quien').val()
+			var _cuando = $('#cuando').val()
+			var _promo = $('#promo').val()
+			var _donde = $('#donde').val()
+            var _direccion = $('#direccion').val()
+			var _muni = $('#muni').val()
+			var csfrm = $('input[name=csrfmiddlewaretoken]').val()
+
+			$.ajax({
+				type:'POST',
+				url:'/administrador/centros/new/add/',
+				data:{
+					centro: _centro,
+					tipoc: _tipoc,
+					patro: _patro,
+					zona: _zona,
+					patro_recibe: _patro_recibe,
+                    que: _que,
+					quien: _quien,
+					cuando: _cuando,
+					promo: _promo,
+					donde: _donde,
+                    direccion: _direccion,
+					muni: _muni,
+					csrfmiddlewaretoken: csfrm
+				},
+				success: function(data){
+					var html = '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><strong><span class="fa fa-check fa-2x"></span></strong> Se registró con exito el centro ' + _centro + ' satisfactoriamente.</div>'
+					$('#mensaje').html(html)
+					$('#centro').val('')
+					$('#tipoc').val('')
+					$('#patro').val('')
+					$('#zona').val('')
+					$('#patro_recibe').val('')
+					$('#que').val('')
+					$('#cuando').val('')
+					$('#promo').val('')
+                    $('#donde').val('')
+                    $('#direccion').val('')
+                    $('#muni').val('')
+					$('#quien').val('')
+					
+				}
+			});
+		});
+		$(document).ready(function(){
+        	$("#numid").mask("9999-9999-99999");
+            $("#telefono").mask("9999-9999");
+            $("#fechan").mask("9999-99-99");
+            $('#fechan').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+
+            $('.button-collapse').sideNav({
+                edge: 'left', // Choose the horizontal origin
+                closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+              });
+            
+        })
+	</script>
+{% endblock  %}

@@ -1,14 +1,15 @@
 {% extends "base_in.html" %}
-
+{% load static %}
 {% block container %}
     <div class="container">
 
 <div >
-    <br><h1 class="text-center">Lista de Alumnos <a href="{% url 'new_student' %}" class="btn btn-info">Nuevo</a> </h1>
+    <br><h1 class="text-center">Lista de Alumnos de {{grado}} <a href="{% url 'new_student' %}" class="btn btn-info">Nuevo</a> </h1>
     
     <br>
     <div class="table-responsive">
-    <table id="example" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
+      <input type="hidden" value="{{grado}}" id="grado">
+    <table id="excel" class="table table-striped table-bordered table-responsive excel" cellspacing="0" width="100%">
     	<thead class="blue lighten-2 text-white">
     		<tr>
     			<th>Identidad</th>
@@ -22,32 +23,24 @@
           <th>Edad</th>
     			<th>Trabaja Actualmente</th>
     			<th>Ocupación u Oficio</th>
-    			<th></th>
+          <th></th>
     		</tr>
     	</thead>
     	<tbody>
     	{% for d in data %}
     		<tr>
-    				<td>{{d.numid}}</td>
-    				<td>{{d.nombre}} {{d.apellido}}</td>
-    				<td>{{d.domicilio}}</td>
-    				<td>{{d.municipio.municipio}}</td>
-    				<td>{{d.telefono}}</td>
-    				<td>{{d.grupo_etnico.grupo_etnico}}</td>
-    				<td>{{d.sexo.sexo}}</td>
-            <td>{{d.fecha_nacimiento}}</td>
-    				<td>{{d.edad}}</td>
-    				<td>{{d.trabaja}}</td>
-    				<td>{{d.ocupacion}}</td>
-    			  <td>
-    					<div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle btn btn-info" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones </a>
-                                <div class="dropdown-menu dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                                    <!--<a class="dropdown-item" data-id="{{ d.id }}" data-numid="{{ d.numid }}" data-nombre="{{ d.nombre }}" data-apellido="{{ d.apellido }}" data-direccion="{{ d.domicilio }}" data-muni="{{ d.municipio.id }}" data-telefono="{{ d.telefono }}" data-ge="{{ d.grupo_etnico.id }}" data-fechan="{{ d.fecha_nacimiento }}" data-sexo="{{ d.sexo.id }}" data-trabaja="{{ d.trabaja.id }}" data-ocupacion="{{ d.ocupacion }}" href="http://127.0.0.1:8000/admin/adminapp/personas/{{d.id}}/change/" target="_blank">Editar</a>-->
-                                    <a class="dropdown-item dropdown-danger btn-eliminar" href="{% url 'delete_student' d.id %}">Eliminar</a>
-                                </div>
-                        </div>
-    				</td>
+    				<td>{{d.persona.numid}}</td>
+    				<td>{{d.persona.nombre}} {{d.persona.apellido}}</td>
+    				<td>{{d.persona.domicilio}}</td>
+    				<td>{{d.persona.municipio.municipio}}</td>
+    				<td>{{d.persona.telefono}}</td>
+    				<td>{{d.persona.grupo_etnico.grupo_etnico}}</td>
+    				<td>{{d.persona.sexo.sexo}}</td>
+            <td>{{d.persona.fecha_nacimiento}}</td>
+    				<td>{{d.persona.edad}}</td>
+    				<td>{{d.persona.trabaja}}</td>
+    				<td>{{d.persona.ocupacion}}</td>
+            <td><a class="btn btn-info" href="{% url 'all_familiar' d.persona.id %}">Ver Encargado</a></td>
     		</tr>
     		{% empty %}
                     <h2>No hay alumnos registrados</h2>
@@ -57,223 +50,21 @@
     </div>
 </div>
 
-
 </div>
-
-<!--Modal: Contact form-->
-<div class="modal fade" id="edit_student" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg cascading-modal" role="document">
-        <!--Content-->
-        <div class="modal-content">
-
-            <!--Header-->
-            <div class="modal-header light-blue darken-3 white-text">
-                <h4 class="title"><i class="fa fa-pencil"></i>Editar Alumno</h4>
-                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <!--Body-->
-            <div class="modal-body mb-0">
-            
-            	<form action="" method="post">
-		        {% csrf_token %}
-            	<div class="row">
-		                      <input type="hidden" id="idstudentedit" name="id">
-		                      
-					<div class="col-md-6">
-		                <div class="form-group">
-		                    <i class="fa fa-id-card prefix"></i>
-		                    <label>Identidad</label>
-		                    <input type="text" id="numid" class="form-control">
-		                </div>
-
-		                <div class="form-group">
-		                    <i class="fa fa-user prefix"></i>
-		                    <label>Nombre</label>
-		                    <input type="text" id="nombre" class="form-control">
-		                </div>
-
-		                <div class="form-group">
-		                    <i class="fa fa-user prefix"></i>
-		                    <label>Apellido</label>
-		                    <input type="text" id="apellido" class="form-control">
-		                </div>
-
-		                <div class="form-group">
-		                    <i class="fa fa-phone prefix"></i>
-		                    <label >Teléfono</label>
-		                    <input type="text" id="telefono" class="form-control"></input>
-		                </div>
-
-		                <div class="form-group">
-		                    <i class="fa fa-bus prefix"></i>
-		                    <label>Domicilio</label>
-		                    <textarea type="text" id="domicilio" class="md-textarea mb-0"></textarea>
-		                </div>
-
-		                <div class="form-group">
-		                    <i class="fa fa-venus-mars prefix grey-text"></i>
-					        <label for="ge">Grupo Etnico</label>
-					        <select class="mdb-select" id="ge">
-					        {% for g in ge %}
-							    <option value="{{g.id}}"> {{g.grupo_etnico}} </option>
-					        {% endfor %}
-							</select>
-		                </div>
-					</div>
-					<div class="col-md-6">
-		                <div class="form-group">
-		                    <i class="fa fa-globe prefix grey-text"></i>
-					        <label for="muni">Seleccione Municipio</label>
-					        <option value="" disabled selected>Municipio</option>
-					        <select class="mdb-selec" id="muni">
-					        {% for m in muni %}
-							    <option value="{{m.id}}"> {{m}} </option>
-					        {% endfor %}
-							</select>
-		                </div>
-
-		                <div class="form-group">
-		                    <i class="fa fa-birthday-cake prefix"></i>
-		                    <label>Fecha de Nacimiento,</label>
-                        <span>Favor volver a ingresar la Fecha</span>
-		                    <input type="text" id="fechan" class="form-control" required></input>
-		                </div>
-
-		                <div class="form-group">
-                        <i class="fa fa-venus-mars prefix grey-text"></i>
-                        <label for="des">Trabaja?</label>
-                        <select class="mdb-selec colorful-select dropdown-primary" id="des">
-                        <option value="" disabled selected>Seleccione</option>
-                        {% for s in des %}
-                            <option value="{{s.id}}"> {{s}} </option>
-                        {% endfor %}
-                        </select>
-                    </div>
-
-		                <div class="form-group">
-		                    <i class="fa fa-briefcase prefix"></i>
-		                    <label >Ocupación u Oficio</label>
-		                    <input type="text" id="ocupacion" class="form-control"></input>
-		                </div>
-
-		                <div class="form-group">
-					    	<i class="fa fa-venus-mars prefix grey-text"></i>
-					        <label for="sexo">Seleccione Sexo</label>
-					        <option value="" disabled selected>Seleccione sexo</option>
-					        <select class="mdb-selec" id="sexo">
-					        {% for s in sexo %}
-							    <option value="{{s.id}}"> {{s}} </option>
-					        {% endfor %}
-							</select>
-					    </div>
-
-		                <div class="text-center mt-1-half">
-		                    <button type="button" class="btn btn-danger btn-3d" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
-		          			<button type="submit" class="btn btn-success btn-3d btn-actualizar"><i class="fa fa-check"></i>Actualizar</button>
-		                </div>
-                	</div>
-				</div>
-                </form>
-            
-            </div>
-        </div>
-        <!--/.Content-->
-    </div>
-</div>
-<!--Modal: Contact form-->
-    
+    <input type="text" value="{% static 'docs/Basica de 7° a 9° Grado/Cuadro de Matricula de 1º a 9° Grado.txt' %}" id="archivo">
 {% endblock container %}
 
 {% block js %}
   <script>
-  $(document).ready(function() {
+    var workbook = new Excel.Workbook();
 
-    $('#btn-editar').click(function(e)
-    {
-      e.preventDefault();
-      var _id = $(this).attr('data-id');
-      var _numid = $(this).attr('data-numid');
-      var _nombre = $(this).attr('data-nombre');
-      var _apellido = $(this).attr('data-apellido');
-      var _direccion = $(this).attr('data-direccion');
-      var _telefono = $(this).attr('data-telefono');
-      var _muni = $(this).attr('data-muni');
-      var _ge = $(this).attr('data-ge');
-      var _sexo = $(this).attr('data-sexo');
-      var _trabaja = $(this).attr('data-trabaja');
-      var _fechan = $(this).attr('data-fechan');
-      var _ocupacion = $(this).attr('data-ocupacion');
-      $("#numid").val(_numid);
-      $("#nombre").val(_nombre);
-      $("#apellido").val(_apellido);
-      $("#domicilio").val(_direccion);
-      $("#telefono").val(_telefono);
-      $("#muni").val(_muni);
-      $("#ge").val(_ge);
-      $("#sexo").val(_sexo);
-      $("#des").val(_trabaja);
-      $("#ocupacion").val(_ocupacion);
-      $("#fechan").val(_fechan);
-      $("#idstudentedit").val(_id);  
-    });
-
-        $('.btn-actualizar').click(function(e){
-          var _numid = $('#numid').val()
-			var _nombre = $('#nombre').val()
-			var _apellido = $('#apellido').val()
-			var _tel = $('#telefono').val()
-			var _direccion = $('#domicilio').val()
-			var _muni = $('#muni').val()
-			var _ge = $('#ge').val()
-			var _fechan = $('#fechan').val()
-			var _trabaja = $('#des').val()
-			var _ocupacion = $('#ocupacion').val()
-			var _sexo = $('#sexo').val()
-			var _id = $('#idstudentedit').val()
-          var csfrm = $('input[name=csrfmiddlewaretoken]').val()
-          $.ajax({
-            type:'POST',
-            url:'/principal/alumnos/edit/' + _id + '/',
-            data:{
-            numid: _numid,
-            id: _id,
-      			nombre: _nombre,
-      			apellido: _apellido,
-      			telefono: _tel,
-      			direccion: _direccion,
-      			muni: _muni,
-      			ge: _ge,
-      			fechan: _fechan,
-      			trabaja: _trabaja,
-      			ocupacion: _ocupacion,
-      			sexo: _sexo,
-            csrfmiddlewaretoken: csfrm
-            },
-            success: function(){
-              location.reload()
-            },
-            error: function()
-            {
-            }
-
-        });
-});
-});
-  $(document).ready(function(){
-        	$("#numid").mask("9999-9999-99999");
-            $("#telefono").mask("9999-9999");
-            $("#fechan").mask("9999/99/99");
-            $('#fechan').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
-
-            $('.button-collapse').sideNav({
-		        edge: 'left', // Choose the horizontal origin
-		        closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
-		      });
-
-
-            
+    workbook.xlsx.readFile($('#archivo').val())
+        .then(function() {
+            var worksheet = workbook.getWorksheet(1);
+            var row = worksheet.getRow(5);
+            row.getCell(1).value = 5; // A5's value set to 5
+            row.commit();
+            return workbook.xlsx.writeFile('new.xlsx');
         })
-  </script>  
+  </script>
 {% endblock  %}

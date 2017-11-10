@@ -1,0 +1,197 @@
+{% extends "base_in.html" %}
+
+{% block container %}
+
+<div style="margin-left: 340px" class="col-md-6 text-center" id="mensaje" >
+  
+</div>
+<div style="border: 2px solid #D3D0D0" class="container col-sm-6 col-md-12 col-lg-6 mt-4">
+
+<form id="new_student" action="" method="post">
+{% csrf_token %}
+<br>
+    <h2 class="text-center">Registrar Encargado de {{alumno}}</h2>
+    <hr>
+    <p>Los elementos con <span style="color:red">*</span> son requeridos.</p>
+	<div class="row">
+	<div class="col-md-6">
+    <input type="hidden" value="{{alumno.id}}" id="alumno">
+    <div class="md-form">
+        <i class="fa fa-id-card prefix grey-text"></i>
+        <input type="text" id="numid" name="numid" class="form-control" required="">
+        <label for="numid">Identidad <span style="color:red">*</span></label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-user prefix grey-text"></i>
+        <input type="text" id="nombre" class="form-control" required="">
+        <label for="nombre">Nombre <span style="color:red">*</span></label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-user prefix grey-text"></i>
+        <input type="text" id="apellido" class="form-control" required="">
+        <label for="apellido">Apellido <span style="color:red">*</span></label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-phone prefix grey-text"></i>
+        <input type="text" id="telefono" class="form-control">
+        <label for="telefono">Telefono o Celular</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-bus prefix grey-text"></i>
+        <input type="text" id="direccion" class="form-control" required="">
+        <label for="direccion">Domicilio (Aldea o Caserio) <span style="color:red">*</span></label>
+    </div>
+
+     <div class="form-group">
+    	<i class="fa fa-globe prefix grey-text"></i>
+        <label for="muni">Seleccione Municipio <span style="color:red">*</span></label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="muni">
+        <option value="" disabled selected>Seleccione</option>
+        <optgroup label="CHOLUTECA">
+        {% for m in cholu %}
+		    <option value="{{m.id}}"> {{m}} </option>
+        {% endfor %}
+        <optgroup label="VALLE">
+        {% for m in valle %}
+            <option value="{{m.id}}"> {{m}} </option>
+        {% endfor %}
+		</select>
+    </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+    <div class="form-group">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <label for="parentezco">Parentezco <span style="color:red">*</span></label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="parentezco">
+        <option value="" disabled selected>Seleccione</option>
+        {% for g in parentezco %}
+            <option value="{{g.id}}"> {{g}} </option>
+        {% endfor %}
+        </select>
+    </div>
+
+    <div class="md-form form-check">
+        <i class="fa fa-birthday-cake prefix grey-text"></i>
+        <input id="fechan" placeholder="Seleccione fecha" type="text" id="date-picker-example" class="form-control datepicker">
+        <label for="date-picker-example">Fecha de Nacimiento <span style="color:red">*</span></label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <input type="text" id="edad" class="form-control">
+        <label for="edad">Edad</label>
+    </div>
+
+    <div class="form-group">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <label for="des">¿Trabaja? <span style="color:red">*</span></label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="des">
+        <option value="" disabled selected>Seleccione</option>
+        {% for s in des %}
+            <option value="{{s.id}}"> {{s}} </option>
+        {% endfor %}
+        </select>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-briefcase prefix grey-text"></i>
+        <input type="text" id="ocupacion" class="form-control">
+        <label for="ocupacion">Ocupación u Oficio</label>
+    </div>
+
+
+    <div class="form-group">
+    	<i class="fa fa-venus-mars prefix grey-text"></i>
+        <label for="sexo">Seleccione Sexo <span style="color:red">*</span></label>
+        <select class="mdb-selec colorful-select dropdown-primary" id="sexo">
+        <option value="" disabled selected>Seleccione</option>
+        {% for s in sexo %}
+		    <option value="{{s.id}}"> {{s}} </option>
+        {% endfor %}
+		</select>
+    </div>
+	
+	</div>
+	</div>
+	<div class="form-group text-center">
+        <input type="submit" class="btn info-color-dark z-depth-2" value="Guardar">
+    </div>
+    
+</form>
+</div>
+
+
+{% endblock container %}
+
+{% block js %}
+	<script>
+		$(document).on('submit', '#new_student', function(e){
+			e.preventDefault();
+			var _numid = $('#numid').val()
+			var _nombre = $('#nombre').val()
+			var _apellido = $('#apellido').val()
+			var _tel = $('#telefono').val()
+			var _direccion = $('#direccion').val()
+			var _muni = $('#muni').val()
+            var _parentezco = $('#parentezco').val()
+			var _fechan = $('#fechan').val()
+			var _trabaja = $('#des').val()
+			var _ocupacion = $('#ocupacion').val()
+            var _sexo = $('#sexo').val()
+            var _edad = $('#edad').val()
+            var _alumno = $('#alumno').val()
+			var csfrm = $('input[name=csrfmiddlewaretoken]').val()
+
+			$.ajax({
+				type:'POST',
+				url:'/principal/alumnos/familiar/add/',
+				data:{
+					numid: _numid,
+					nombre: _nombre,
+					apellido: _apellido,
+					telefono: _tel,
+					direccion: _direccion,
+					muni: _muni,
+                    parentezco: _parentezco,
+					fechan: _fechan,
+					trabaja: _trabaja,
+					ocupacion: _ocupacion,
+					sexo: _sexo,
+                    edad: _edad,
+                    alumno: _alumno,
+					csrfmiddlewaretoken: csfrm
+				},
+				success: function(data){
+					var html = '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><strong><span class="fa fa-check fa-2x"></span></strong> Se ingreso con exito el encargado ' + _nombre + ' ' + _apellido + ' satisfactoriamente.</div>'
+					$('#mensaje').html(html)
+					$('#numid').val('')
+					$('#nombre').val('')
+					$('#direccion').val('')
+					$('#apellido').val('')
+					$('#trabaja').val('')
+					$('#telefono').val('')
+					$('#ocupacion').val('')
+					$('#fechan').val('')
+                    $('#sexo').val('')
+                    $('#edad').val('')
+                    $('#parentezco').val('')
+					
+				}
+			});
+		});
+		$(document).ready(function(){
+        	$("#numid").mask("9999-9999-99999");
+            $("#telefono").mask("9999-9999");
+            $("#fechan").mask("9999-99-99");
+            $('#fechan').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+            
+        })
+	</script>
+{% endblock  %}

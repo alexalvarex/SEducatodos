@@ -1,0 +1,214 @@
+{% extends "base_in.html" %}
+{% load static %}
+{% block container %}
+<div class="container">
+  <br>
+    <div class="row" style="margin-left:auto; margin-right:auto">
+       <div class="card">
+          <br><img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/speaker-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Descargar Audios</h4>
+              <a href="#" class="btn btn-info">Descargar</a>
+          </div>
+      </div>
+      <div class="card">
+          <br><img class="img-fluid" src="https://cdn0.iconfinder.com/data/icons/tutor-icon-set/512/paper_with_A_text-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Descargar Pruebas <br> de Ubicación 1-6</h4>
+              <a data-toggle="modal" data-target="#modalPruebas" class="btn btn-info">Descargar</a>
+          </div>
+      </div>
+      <div class="card">
+          <br><img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/bookshelf-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Descargar Textos <br> PRALEBAH</h4>
+              <a data-toggle="modal" data-target="#modalTexto" class="btn btn-info">Descargar</a>
+          </div>
+      </div>
+      <div class="card">
+          <br><img class="img-fluid" src="https://cdn1.iconfinder.com/data/icons/ensign-11/512/112_Ensign_Flag_Nation_honduras-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Descargar Acta <br> Himno Nacional</h4>
+              <a href="#" class="btn btn-info">Descargar</a>
+          </div>
+      </div>
+  </div>
+  
+</div>
+
+<!-- MODAL DE TEXTOS -->
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalTexto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Textos</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                      <a data-toggle="modal" data-target="#modalPrimerNivel" class="btn btn-info">Textos Primer Nivel</a>
+                      <a data-toggle="modal" data-target="#modalSegundoNivel" class="btn btn-info">Textos Segundo Nivel</a>
+                      <a data-toggle="modal" data-target="#modalTercerNivel" class="btn btn-info">Textos Tercer Nivel</a>
+                      <a data-toggle="modal" data-target="#modalCuartoNivel" class="btn btn-info">Textos Cuarto Nivel</a>
+                      <a data-toggle="modal" data-target="#modalQuintoNivel" class="btn btn-info">Textos Quinto Nivel</a>
+                      <a data-toggle="modal" data-target="#modalSextoNivel" class="btn btn-info">Textos Sexto Nivel</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL DE DOCS POR ENLACE -->
+
+<!-- Primer Nivel --> 
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalPrimerNivel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Textos Primer Nivel</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                      <a href="{% static 'docs/TextosdePRALEBAH/PrimerNivel/Indice.pdf' %}" class="btn btn-info">Indice</a>
+                      <a href="{% static 'docs/TextosdePRALEBAH/PrimerNivel/Derechos del primer nivel.pdf' %}" class="btn btn-info">Derechos del primer nivel</a>
+                      <a href="{% static 'docs/TextosdePRALEBAH/PrimerNivel/Sugerencias Metodologicas.pdf' %}" class="btn btn-info">Sugerencias Metodologicas</a>
+                      <a href="{% static 'docs/TextosdePRALEBAH/PrimerNivel/Texto.pdf' %}" class="btn btn-info">Texto</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Segundo Nivel --> 
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalSegundoNivel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Textos Segundo Nivel</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                      <a href="{% static 'docs/TextosdePRALEBAH/SegundoNivel/Portada e indice.pdf' %}" class="btn btn-info">Portada e indice</a>
+                      <a href="{% static 'docs/TextosdePRALEBAH/SegundoNivel/Segundo nivel Texto.pdf' %}" class="btn btn-info">Segundo nivel Texto</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tercer Nivel --> 
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalTercerNivel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Textos Tercer Nivel</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                      <a href="{% static 'docs/TextosdePRALEBAH/TercerNivel/Portada Cy Derechos tercer nivel.pdf' %}" class="btn btn-info">Portada y Derechos tercer nivel</a>
+                      <a href="{% static 'docs/TextosdePRALEBAH/TercerNivel/Texto de tercer nivel.pdf' %}" class="btn btn-info">Texto de tercer nivel</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cuarto Nivel --> 
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalCuartoNivel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Textos Cuarto Nivel</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                      <a href="{% static 'docs/TextosdePRALEBAH/CuartoNivel/Cuarto Nivel.pdf' %}" class="btn btn-info">Cuarto Nivel</a>
+                      <a href="{% static 'docs/TextosdePRALEBAH/CuartoNivel/Indice de cuarto Nivel.pdf' %}" class="btn btn-info">Indice de cuarto Nivel</a>
+                      <a href="{% static 'docs/TextosdePRALEBAH/CuartoNivel/Portada y otras.pdf' %}" class="btn btn-info">Portada y otras</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quinto Nivel --> 
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalQuintoNivel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Textos Quinto Nivel</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                      <a href="{% static 'docs/TextosdePRALEBAH/QuintoNivel/Indice.pdf' %}" class="btn btn-info">Indice</a>
+                      <a href="{% static 'docs/TextosdePRALEBAH/QuintoNivel/Portada quinto Nivel.pdf' %}" class="btn btn-info">Portada quinto Nivel</a>
+                      <a href="{% static 'docs/TextosdePRALEBAH/QuintoNivel/Texto del quinto nivel.pdf' %}" class="btn btn-info">Texto del quinto nivel</a> 
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sexto Nivel --> 
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalSextoNivel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Textos Sexto Nivel</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                      <a href="{% static 'docs/TextosdePRALEBAH/SextoNivel/Indice.pdf' %}" class="btn btn-info">Indice</a>
+                      <a href="{% static 'docs/TextosdePRALEBAH/SextoNivel/Portada y derechos.pdf' %}" class="btn btn-info">Portada y derechos</a>
+                      <a href="{% static 'docs/TextosdePRALEBAH/SextoNivel/Texto del sexto Nivel.pdf' %}" class="btn btn-info">Texto del sexto Nivel</a> 
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PRUEBAS DE UBICACION 1-6 EDUCATODOS --> 
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalPruebas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Pruebas de Ubicación</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                      <a href="{% static 'docs/PRUEBA DE UBICACION/PRUEBA DE UBICACION PRIMER GRADO.pdf' %}" class="btn btn-info">PRUEBA DE UBICACION PRIMER GRADO</a>
+                      <a href="{% static 'docs/PRUEBA DE UBICACION/PRUEBA DE UBICACION SEGUNDO GRADO.pdf' %}" class="btn btn-info">PRUEBA DE UBICACION SEGUNDO GRADO</a>
+                      <a href="{% static 'docs/PRUEBA DE UBICACION/PRUEBA DE UBICACION TERCER GRADO.pdf' %}" class="btn btn-info">PRUEBA DE UBICACION TERCER GRADO</a>
+                      <a href="{% static 'docs/PRUEBA DE UBICACION/PRUEBA DE UBICACION CUARTO GRADO.pdf' %}" class="btn btn-info">PRUEBA DE UBICACION CUARTO GRADO</a>
+                      <a href="{% static 'docs/PRUEBA DE UBICACION/PRUEBA DE UBICACION QUINTO GRADO.pdf' %}" class="btn btn-info">PRUEBA DE UBICACION QUINTO GRADO</a>
+                      <a href="{% static 'docs/PRUEBA DE UBICACION/PRUEBA DE UBICACION SEXTO GRADO.pdf' %}" class="btn btn-info">PRUEBA DE UBICACION SEXTO GRADO</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock container %}

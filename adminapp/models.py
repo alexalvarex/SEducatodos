@@ -84,20 +84,72 @@ class GrupoEtnico(models.Model):
 		return self.grupo_etnico
 
 @python_2_unicode_compatible
-class Personas(models.Model):
+class GradoAnterior(models.Model):
+	grado_anterior = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.grado_anterior
+
+@python_2_unicode_compatible
+class Parentezco(models.Model):
+	parentezco = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.parentezco
+
+@python_2_unicode_compatible
+class Alumno(models.Model):
 	numid = models.CharField(max_length=15)	
 	nombre = models.CharField(max_length=50)	
 	apellido = models.CharField(max_length=50)
 	municipio = models.ForeignKey(Municipio)	
 	domicilio = models.CharField(max_length=100)
 	telefono = models.CharField(max_length=9, blank=True, null=True)
-	sexo = models.ForeignKey(Sexo)	
-	tipo_persona = models.ForeignKey(TipoPersona)
+	sexo = models.ForeignKey(Sexo)
 	grupo_etnico = models.ForeignKey(GrupoEtnico)
-	trabaja = models.ForeignKey(Descicion, related_name='trabaja')
+	trabaja = models.ForeignKey(Descicion, related_name='Trabaja')
 	ocupacion = models.CharField(max_length=70)
 	fecha_nacimiento = models.DateField(blank=True, null=True)
 	edad = models.IntegerField(blank=True, null=True)
+	condicion = models.CharField(max_length=100, blank=True, null=True)
+	grado_anterior = models.ForeignKey(GradoAnterior, related_name='Grado_Anterior')
+
+	def __str__(self):
+		return "%s %s" %(self.nombre, self.apellido)
+
+@python_2_unicode_compatible
+class Familiar(models.Model):
+	numid = models.CharField(max_length=15, blank=True, null=True)	
+	nombre = models.CharField(max_length=50)	
+	apellido = models.CharField(max_length=50)
+	municipio = models.ForeignKey(Municipio)	
+	domicilio = models.CharField(max_length=100)
+	telefono = models.CharField(max_length=9, blank=True, null=True)
+	sexo = models.ForeignKey(Sexo)
+	trabaja = models.ForeignKey(Descicion, related_name='Trabajo')
+	ocupacion = models.CharField(max_length=70, blank=True, null=True)
+	fecha_nacimiento = models.DateField(blank=True, null=True)
+	edad = models.IntegerField(blank=True, null=True)
+	familiar = models.ForeignKey(Alumno, related_name='Familiar')
+	parentezco = models.ForeignKey(Parentezco, related_name='Parentezco')
+
+	def __str__(self):
+		return "%s %s" %(self.nombre, self.apellido)
+
+@python_2_unicode_compatible
+class Persona(models.Model):
+	numid = models.CharField(max_length=15)	
+	nombre = models.CharField(max_length=50)	
+	apellido = models.CharField(max_length=50)
+	municipio = models.ForeignKey(Municipio)	
+	domicilio = models.CharField(max_length=100)
+	telefono = models.CharField(max_length=9, blank=True, null=True)
+	sexo = models.ForeignKey(Sexo)
+	trabaja = models.ForeignKey(Descicion, related_name='trabaja')
+	ocupacion = models.CharField(max_length=70, blank=True, null=True)
+	fecha_nacimiento = models.DateField(blank=True, null=True)
+	edad = models.IntegerField(blank=True, null=True)
+	tipo_persona = models.ForeignKey(TipoPersona, related_name='TipoPersona')
 
 	def __str__(self):
 		return "%s %s" %(self.nombre, self.apellido)
@@ -105,14 +157,14 @@ class Personas(models.Model):
 @python_2_unicode_compatible
 class Centro(models.Model):
 	centro = models.CharField(max_length=50)
-	tipo_centro = models.ForeignKey(TipoCentro)
 	patrocinador = models.ForeignKey(Patrocinador, blank=True, null=True)
 	zona = models.ForeignKey(Zona, blank=True, null=True)
 	patro_incentivo = models.ForeignKey(Descicion, related_name='Recibe_Incentivo')
-	patro_recibe = models.CharField(max_length=50, blank=True, null=True)
-	cada_cuando = models.CharField(max_length=50, blank=True, null=True)
-	promotor = models.ForeignKey(Personas, blank=True, null=True)
-	donde_funciona = models.CharField(max_length=50, blank=True, null=True)
+	patro_recibe = models.CharField(max_length=100, blank=True, null=True)
+	quien = models.CharField(max_length=100, blank=True, null=True)
+	cada_cuando = models.CharField(max_length=100, blank=True, null=True)
+	promotor = models.ForeignKey(Persona, blank=True, null=True)
+	donde_funciona = models.CharField(max_length=100, blank=True, null=True)
 	municipio = models.ForeignKey(Municipio)
 	direccion = models.CharField(max_length=100, blank=True, null=True)
 
@@ -127,6 +179,12 @@ class TipoResidencia(models.Model):
 	def __str__(self):
 		return self.tipo_residencia
 
+@python_2_unicode_compatible
+class FormacionAcademica(models.Model):
+	formacion = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.formacion
 
 @python_2_unicode_compatible
 class Facilitador(models.Model):
@@ -141,7 +199,8 @@ class Facilitador(models.Model):
 	correo = models.EmailField(blank=True, null=True)
 	ocupacion = models.CharField(max_length=70, blank=True, null=True)
 	lugar_trabajo = models.CharField(max_length=70, blank=True, null=True)
-	formacion_academica = models.CharField(max_length=70, blank=True, null=True)
+	formacion_academida = models.ForeignKey(FormacionAcademica, related_name='FormacionAcademica')
+	otra_formacion = models.CharField(max_length=70, blank=True, null=True)
 	fecha_nacimiento = models.DateField(blank=True, null=True)
 	edad = models.IntegerField(blank=True, null=True)
 	fecha_llenado = models.DateField(blank=True, null=True)
@@ -150,15 +209,41 @@ class Facilitador(models.Model):
 	estudia = models.ForeignKey(Descicion, related_name='estudia')
 	donde_estudia = models.CharField(max_length=70, blank=True, null=True)
 	que_estudia = models.CharField(max_length=70, blank=True, null=True)
+	centro = models.ForeignKey(Centro, related_name='Centro')
+	usuario = models.OneToOneField(User, related_name='Facilitador')
 
 	def __str__(self):
 		return "%s %s" %(self.nombre, self.apellido)
 
+@python_2_unicode_compatible
+class Administrador(models.Model):
+	numid = models.CharField(max_length=15)	
+	nombre = models.CharField(max_length=50)	
+	apellido = models.CharField(max_length=50)
+	municipio = models.ForeignKey(Municipio)	
+	domicilio = models.CharField(max_length=100)
+	telefono = models.CharField(max_length=9, blank=True, null=True)
+	sexo = models.ForeignKey(Sexo)	
+	correo = models.EmailField(blank=True, null=True)
+	ocupacion = models.CharField(max_length=70, blank=True, null=True)
+	lugar_trabajo = models.CharField(max_length=70, blank=True, null=True)
+	formacion_academida = models.ForeignKey(FormacionAcademica, related_name='Formacion_Academica')
+	otra_formacion = models.CharField(max_length=70, blank=True, null=True)
+	fecha_nacimiento = models.DateField(blank=True, null=True)
+	edad = models.IntegerField(blank=True, null=True)
+	usuario = models.OneToOneField(User, related_name='Administrador')
+
+	def __str__(self):
+		return "%s %s" %(self.nombre, self.apellido)
 
 @python_2_unicode_compatible
 class Grado(models.Model):
 	grado = models.CharField(max_length=50)
-	facilitador = models.ForeignKey(Facilitador)
+	facilitador = models.ForeignKey(User)
+	horario = models.CharField(max_length=100, blank=True, null=True)
+
+	class Meta:
+		unique_together = ('grado', 'horario', 'facilitador')
 
 	def __str__(self):
 		return self.grado
@@ -166,6 +251,8 @@ class Grado(models.Model):
 @python_2_unicode_compatible
 class Periodo(models.Model):
 	num_periodo = models.CharField(max_length=100)
+	inicio_clases = models.DateField(blank=True, null=True)
+	fin_clases = models.DateField(blank=True, null=True)
 
 	def __str__(self):
 		return self.num_periodo
@@ -173,13 +260,11 @@ class Periodo(models.Model):
 @python_2_unicode_compatible
 class Matricula(models.Model):
 	fecha = models.DateTimeField(auto_now_add=True)
-	persona = models.ForeignKey(Personas)
+	persona = models.ForeignKey(Alumno)
 	centro = models.ForeignKey(Centro)
 	grado = models.ForeignKey(Grado)
 	num_periodo = models.ForeignKey(Periodo, related_name='Num_Periodo')
-	horario = models.CharField(max_length=80, blank=True, null=True)
-	inicio_clases = models.DateField(blank=True, null=True)
-	fin_clases = models.DateField(blank=True, null=True)
+	requisito = models.ForeignKey(Descicion, related_name='Requisito')
 
 	def __str__(self):
 		return "%s %s" %(self.persona.nombre, self.grado.grado)

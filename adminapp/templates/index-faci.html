@@ -1,0 +1,87 @@
+{% extends "base_in.html" %}
+
+{% block container %}
+<div class="container">
+  <br>
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="card">
+          <img class="img-fluid" src="https://cdn3.iconfinder.com/data/icons/forall/110/chart-128.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Estadísticas</h4>
+              <a href="{% url 'all_reports' %}" class="btn btn-info">Ver Más</a>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+          <img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/profle-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Perfil</h4>
+              <a href="{% url 'all_facilitador' %}" class="btn btn-info">Ver Más</a>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+         <img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/mixed-rounded-flat-icon/512/briefcase-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Puesto de Trabajo</h4>
+              <a href="{% url 'all_centros' %}" class="btn btn-info">Ver Más</a>
+          </div>
+      </div>
+    </div><br><br>
+
+    <div class="col-md-4">
+      <div class="card">
+         <img class="img-fluid" src="https://cdn0.iconfinder.com/data/icons/education-135/512/4-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Notas y Certificados</h4>
+              <a  class="btn btn-info">Ver Más</a>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+          <img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/snipicons/5000/download-alt-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Zona de Descargas</h4>
+              <a href="{% url 'descargas' %}" class="btn btn-info">Ver Más</a>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+          <img class="img-fluid" src="https://cdn0.iconfinder.com/data/icons/education-flat-7/128/01_Pencil-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Alumnos</h4>
+              <a data-toggle="modal" data-target="#modalAlumno" class="btn btn-info">Ver Más</a>
+          </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalAlumno" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Alumnos</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                      <a href="{% url 'alumnosxgrado' %}" class="btn btn-info">Alumnos</a>
+               
+                      <a href="{% url 'new_enroll' %}" class="btn btn-info">Matricular Alumnos</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock container %}

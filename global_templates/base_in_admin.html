@@ -1,5 +1,157 @@
-{% extends "base_in.html" %}
+{% extends "base.html" %}
 
-{% block container %}
-   
+{% load static %}
+
+{% block navtop %}
+<header>
+<!--Navbar-->
+        <nav class="navbar fixed navbar-expand-lg navbar-dark cyan ">
+            <!-- SideNav slide-out button -->
+<a href="#" data-activates="slide-out" class="p-3 button-collapse"><i class="fa fa-bars"></i></a>
+
+<!-- SideNav Menu -->
+<ul id="slide-out" class="side-nav  indigo lighten-5 custom-scrollbar">
+
+    <!-- Logo -->
+    <li>
+        <div class="logo-wrapper waves-dark" style="height: 200px">
+            <br>
+            <a href="#"><img src="{% static 'img/logocosecha.png' %}" class="img-fluid flex-center" style="width:100%; margin-left:auto; margin-right:auto"></a>
+        </div>
+    </li>
+    <!--/. Logo -->
+
+    <!--Social
+    <li>
+        <ul class="social">
+            <li><a class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a></li>
+            <li><a class="icons-sm pin-ic"><i class="fa fa-pinterest"> </i></a></li>
+            <li><a class="icons-sm gplus-ic"><i class="fa fa-google-plus"> </i></a></li>
+            <li><a class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a></li>
+        </ul>
+    </li> 
+    /Social-->
+
+    
+
+    <!-- Side navigation links -->
+    <li>
+        <ul class="collapsible collapsible-accordion">
+
+            <!-- Collapsible link -->
+            <li><a style="color:blue;font-size:10pt" href="{% url 'all_reports' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-pie-chart"></i> Estadísticas</a>
+            </li>
+
+            <!-- Collapsible link -->
+            <li><a style="color:blue;font-size:10pt" href="{% url 'all_facilitador' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i>Perfil</a>
+            </li>
+
+            <!-- Collapsible link -->
+            <li><a style="color:blue;font-size:10pt" href="{% url 'all_centros' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-briefcase"></i>Puesto de Trabajo</a>
+            </li>
+
+            <!-- Collapsible link -->
+            <li><a style="color:blue;font-size:10pt" href="{% url 'notas' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-list"></i>Notas</a>
+            </li>
+            <li><a style="color:blue;font-size:10pt" href="{% url 'descargas' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-download"></i>Zona de Descargas</a>
+            </li>
+             <li><a style="color:blue;font-size:10pt" href="{% url 'alumnosxgrado' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-users"></i>Alumnos</a>
+            </li>
+    
+
+        </ul>
+    </li>
+    <!-- Side navigation links -->
+
+</ul>
+<!-- SideNav Menu -->
+                    <img src="{% static 'img/imagen1.png' %}" style="width: 10%;" alt="">
+                    <a class="navbar-brand" href="/" style="padding:10px">Inicio</a>
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>Administrador - {{uanombrecompleto}} </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                                    <a class="dropdown-item" href="/account/blockscreen/">Bloquear Pantalla</a>
+                                    <a class="dropdown-item" href="/account/logout/">Cerrar Sesión</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+        <!--/.Navbar-->
+</header>
 {% endblock %}
+{% block container %}
+<div class="container-fluid mimin-wrapper">
+      <div id="left-menu">
+      {% block navbar %}{% endblock %}
+      </div>
+       
+      <div id="content">   
+      {% block info %}{% endblock %}
+      </div>
+</div>
+{% endblock %}
+{% block footer %}
+    <!--Footer-->
+<footer class="page-footer center-on-small-only unique-color-dark pt-0">
+<br>
+
+    <!--Footer Links-->
+    <div class="container mt-5 mb-4 text-center text-md-left">
+        <div class="row mt-3">
+
+            <!--First column-->
+            <div class="col-md-3 col-lg-4 col-xl-3 mb-r">
+                <h6 class="title font-bold"><strong>Azucarera La Grecia S.A. de C.V.</strong></h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 250px;">
+                <img src="{% static 'img/logocosecha.png' %}" width="90%" style="margin-left:auto;margin-right:auto" alt="">
+            </div>
+            <!--/.First column-->
+
+            <!--Second column-->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-r">
+                <h6 class="title font-bold"><strong>Links</strong></h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p><a href="{% url 'all_reports' %}">Estadísticas</a></p>
+                <p><a href="{% url 'all_facilitador' %}">Perfil</a></p>
+                <p><a href="{% url 'all_centros' %}">Puesto de Trabajo</a></p>
+                <p><a href="{% url 'notas' %}">Notas</a></p>
+                <p><a href="{% url 'descargas' %}">Zona de Descargas</a></p>
+                <p><a href="{% url 'alumnosxgrado' %}">Alumnos</a></p>
+            </div>
+            <!--/.Second column-->
+
+
+            <!--Fourth column-->
+            <div class="col-md-4 col-lg-3 col-xl-3">
+                <h6 class="title font-bold"><strong>Contacto</strong></h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p><i class="fa fa-home mr-3"></i>Km 21 carretera a Cedeño, Marcovia, Choluteca</p>
+                <p><i class="fa fa-envelope mr-3"></i> desarrollosocialhnd@gmail.com</p>
+                <p><i class="fa fa-phone mr-3"></i> + 01 234 567 88</p>
+                <p><i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
+            </div>
+            <!--/.Fourth column-->
+
+        </div>
+    </div>
+    <!--/.Footer Links-->
+
+    <!-- Copyright-->
+    <div class="footer-copyright">
+        <div class="container-fluid">
+            © 2017 Copyright
+        </div>
+    </div>
+    <!--/.Copyright -->
+    
+</footer>
+<!--/.Footer-->
+{% endblock footer %}

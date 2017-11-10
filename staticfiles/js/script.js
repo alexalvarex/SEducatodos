@@ -19,7 +19,23 @@ $(function(){
 
 $(document).ready(function(){
     // REPORTERIA DE EDUCATODOS
-
+        $('.excel').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                extend: 'excelHtml5',
+                customize: function(xlsx) {
+                    var sheet = xlsx.xl.worksheets['sheet1.xml'];
+     
+                    // Loop over the cells in column `C`
+                    $('row c[r^="C"]', sheet).each( function () {
+                        // Get the value
+                        if ( $('is t', this).text() == 'xcv' ) {
+                            $(this).val($('#grado').val());
+                        }
+                    });
+                }
+            }]
+        });
     
         var hoy = new Date();
         var dd = hoy.getDate();

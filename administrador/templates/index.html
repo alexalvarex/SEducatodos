@@ -1,0 +1,67 @@
+{% extends "base_in_admin.html" %}
+
+{% block container %}
+<div class="container">
+  <br>
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="card">
+          <img class="img-fluid" src="https://cdn3.iconfinder.com/data/icons/forall/110/chart-128.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Estadísticas</h4>
+              <a href="{% url 'all_reports' %}" class="btn btn-info">Ver Más</a>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+          <img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/profle-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Perfil</h4>
+              <a href="{% url 'all_facilitador' %}" class="btn btn-info">Ver Más</a>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+         <img class="img-fluid" src="https://cdn0.iconfinder.com/data/icons/tutor-icon-set/512/set_of_three_books-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Centros</h4>
+              <a href="{% url 'all_centros_admin' %}" class="btn btn-info">Ver Más</a>
+          </div>
+      </div>
+    </div><br><br>
+
+    <div class="col-md-4">
+      <div class="card">
+         <img class="img-fluid" src="https://cdn0.iconfinder.com/data/icons/education-135/512/4-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Notas y Certificados</h4>
+              <a  class="btn btn-info">Ver Más</a>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+          <img class="img-fluid" src="https://cdn0.iconfinder.com/data/icons/education-flat-7/128/01_Pencil-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Alumnos</h4>
+              <a data-toggle="modal" data-target="#modalAlumno" class="btn btn-info">Ver Más</a>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+          <img class="img-fluid" src="https://cdn4.iconfinder.com/data/icons/online-marketing-hand-drawn-vol-4/52/setting__system__control__config__options__management__configure-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Configuración</h4>
+              <a href="{% url 'descargas' %}" class="btn btn-info">Ver Más</a>
+          </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock container %}

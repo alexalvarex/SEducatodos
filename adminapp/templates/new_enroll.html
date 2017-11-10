@@ -7,7 +7,7 @@
 <br>
 	<div class="col-md-3"></div>
 		<div style="border: 2px solid #D3D0D0" class="col-sm-6 col-md-12 col-lg-12 mt-4">
-	<h1>Matricular <a href="{% url 'all_enroll' %}" class="btn info-color-dark">Ver</a></h1>
+	<h1>Matricular <a href="{% url 'alumnosxgrado' %}" class="btn info-color-dark">Ver</a></h1>
 	
 			<form action="/principal/enroll/new/add/" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
@@ -41,6 +41,10 @@
 			        {% endfor %}
 			        </select>
 			    </div>
+
+				</div>
+				<div class="col-md-6">
+				
 				<div class="form-group">
 					<h5 for="primer">Número de Periodo</h5>
 						<select name="primer" id="primer" class="mdb-selec colorful-select dropdown-primary" required>
@@ -50,30 +54,16 @@
 						{% endfor %}
 						</select>
 				</div>
-				</div>
-				<div class="col-md-6">
-				<!--<div class="file-field">
-	                <h5>Subir Archivo</h5>
-	                <div class="btn btn-primary btn-sm">
-	                    <span>Elegir Archivos</span>
-	                    <input id="archivos" name="archivos" type="file">
-	                </div>
-	                <div class="file-path-wrapper">
-	                    <input class="file-path validate" type="text" placeholder="Sube los archivos necesarios">
-	                </div>
-	            </div>-->
 				<div class="form-group">
-			        <h5 for="horario">Horario</h5>
-			        <input type="text" id="horario" name="horario" class="form-control">
-			    </div>
-			    <div class="form-group">
-			        <h5 for="fechai">Inicio de Clases</h5>
-			        <input type="text" id="fechai" name="fechai" class="form-control">
-			    </div>
-			    <div class="form-group">
-			        <h5 for="fechaf">Fin de Clases</h5>
-			        <input type="text" id="fechaf" name="fechaf" class="form-control">
-			    </div>
+					<h5 for="requisito">¿Cumple con Requisito?</h5>
+						<select name="requisito" id="requisito" class="mdb-selec colorful-select dropdown-primary" required>
+						<option value="" disabled selected>Seleccione</option>
+  							{% for p in des %}
+							<option value="{{ p.id }}">{{ p }}</option>
+						{% endfor %}
+						</select>
+				</div>
+				
 			    </div>
 			    </div>
 				<div class="form-group">

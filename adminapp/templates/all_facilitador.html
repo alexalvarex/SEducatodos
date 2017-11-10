@@ -4,9 +4,9 @@
     <div class="container-fluid">
 
 <div >
-    <br><h1 class="text-center">Lista de Facilitadores <a href="{% url 'new_facilitador' %}" class="btn btn-info">Nuevo</a></h1>
+    <br><h1 class="text-center"> Facilitador - {{data}}</h1>
     <br>
-    <div class="table-responsive">
+    <div class="table-responsive" style=" overflow:scroll; overflow-y:hidden;">
     <table id="example" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
     	<thead class="blue lighten-2 text-white">
     		<tr>
@@ -30,37 +30,24 @@
     		</tr>
     	</thead>
     	<tbody>
-    	{% for d in data %}
     		<tr>
-    				<td>{{d.numid}}</td>
-    				<td>{{d.nombre}} {{d.apellido}}</td>
-    				<td>{{d.domicilio}}</td>
-    				<td>{{d.municipio.municipio}} | {{d.tipo_residencia}}</td>
-    				<td>{{d.telefono}}</td>
-    				<td>{{d.correo}}</td>
-    				<td>{{d.sexo.sexo}}</td>
-    				<td>{{d.fecha_nacimiento}}</td>
-    				<td>{{d.ocupacion}}</td>
-            <td>{{d.lugar_trabajo}}</td>
-            <td>{{d.formacion_academica}}</td>
-            <td>{{d.tiempo_facilitador}}</td>
-            <td>{{d.becado}}</td>
-            <td>{{d.estudia}}</td>
-            <td>{{d.donde_estudia}}</td>
-            <td>{{d.que_estudia}}</td>
-    				<!--<td>
-    					<div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle btn btn-info" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones </a>
-                                <div class="dropdown-menu dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                                    <a id="btn-editar" class="dropdown-item" href="" data-id="{{ d.id }}" data-numid="{{ d.numid }}" data-nombre="{{ d.nombre }}" data-apellido="{{ d.apellido }}" data-direccion="{{ d.domicilio }}" data-tipor="{{ d.tipo_residencia.id }}" data-muni="{{ d.municipio.id }}" data-telefono="{{ d.telefono }}" data-correo="{{ d.correo }}" data-sexo="{{ d.sexo.id }}" data-fechan="{{ d.fecha_nacimiento }}"  data-lugart="{{ d.lugar_trabajo }}" data-ocupacion="{{ d.ocupacion }}" data-formacion="{{d.formacion_academica}}" data-tiempof="{{d.tiempo_facilitador}}" data-becado="{{d.becado}}" data-estudia="{{d.estudia}}" data-dondee="{{d.donde_estudia}}" data-quee="{{d.que_estudia}}" data-toggle="modal" data-target="#edit_student">Editar</a>
-                                    <a class="dropdown-item btn-eliminar" href="{% url 'delete_facilitador' d.id %}">Eliminar</a>
-                                </div>
-                        </div>
-    				</td>-->
+    				<td>{{data.numid}}</td>
+    				<td>{{data.nombre}} {{data.apellido}}</td>
+    				<td>{{data.domicilio}}</td>
+    				<td>{{data.municipio.municipio}} | {{data.tipo_residencia}}</td>
+    				<td>{{data.telefono}}</td>
+    				<td>{{data.correo}}</td>
+    				<td>{{data.sexo.sexo}}</td>
+    				<td>{{data.fecha_nacimiento}}</td>
+    				<td>{{data.ocupacion}}</td>
+            <td>{{data.lugar_trabajo}}</td>
+            <td>{{data.formacion_academida}} {{data.otra_formacion}}</td>
+            <td>{{data.tiempo_facilitador}}</td>
+            <td>{{data.becado}}</td>
+            <td>{{data.estudia}}</td>
+            <td>{{data.donde_estudia}}</td>
+            <td>{{data.que_estudia}}</td>
     		</tr>
-    		{% empty %}
-                    <h2>No hay facilitadores registrados</h2>
-    	{% endfor %}
     	</tbody>
     </table>
     </div>

@@ -19,147 +19,200 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
-# HTTP Error 400
-def notFound(request, param):  
-	if not param:  
-		raise Http404  
-	return render_to_response('404.html')  
-
-
 @login_required()
 def index(request):
-	return render(request, 'index.html')
-@login_required()
-def all_students(request):
-	perfil = Personas.objects.all()
-	sexo = Sexo.objects.all()
-	ge = GrupoEtnico.objects.all()
-	municipio = Municipio.objects.all()
-	tp = TipoPersona.objects.get(pk = 1)
-	des = Descicion.objects.all()
-	alumnos = Personas.objects.filter(tipo_persona = tp)
-	numu = alumnos.count()
-	return render(request, 'all_students.html', {'data':alumnos, 'des':des, 'ge':ge, 'numu':numu, 'sexo':sexo, 'muni':municipio})
+	if request.user.Facilitador:
+		return render(request, 'index-faci.html')
+	else:
+		return render(request, '404.html')
 
+# ALUMNOS
+@login_required()
+def alumnosxgrado(request):
+	if request.user.Facilitador:
+		grados = Grado.objects.filter(facilitador = request.user)
+		return render(request, 'alumnosxgrado.html', {'grados': grados})
+	else:
+		return render(request, '404.html')
+
+@login_required()
+def all_students(request, pk):
+	if request.user.Facilitador:
+		grado = Grado.objects.get(pk = pk)
+		alumnos = Matricula.objects.filter(grado = pk)
+		numu = alumnos.count()
+		return render(request, 'all_students.html', {'data':alumnos, 'grado':grado})
+	else:
+		return render(request, '404.html')
+
+@login_required()
+def alumnos_sinmat(request):
+	if request.user.Facilitador:
+		alumno = Alumno.objects.all()
+		matri = Matricula.objects.all().values_list('persona_id', flat=True)
+		alumnos = alumno.exclude(id__in = matri)
+		numu = alumnos.count()
+		return render(request, 'alumnos_sinmat.html', {'data':alumnos})
+	else:
+		return render(request, '404.html')
 
 @login_required()
 def new_student(request):
-	sexo = Sexo.objects.all()
-	ge = GrupoEtnico.objects.all()
-	municipio = Municipio.objects.all()
-	des = Descicion.objects.all()
-	return render(request, 'new_student.html', {'ge':ge, 'des':des, 'sexo':sexo, 'muni':municipio})
-
+	if request.user.Facilitador:
+		sexo = Sexo.objects.all()
+		ge = GrupoEtnico.objects.all()
+		cholu = Municipio.objects.filter(depto = 1)
+		valle = Municipio.objects.filter(depto = 2)
+		des = Descicion.objects.all()
+		ga = GradoAnterior.objects.all()
+		user = User.objects.all()
+		return render(request, 'new_student.html', {'user':user,'ga':ga,'ge':ge, 'des':des, 'sexo':sexo, 'cholu':cholu, 'valle':valle})
+	else:
+		return render(request, '404.html')
 
 @login_required()
 def new_student_add(request):
-	if request.method == 'POST':
-		try:
-			numid = request.POST.get('numid')
-			nombre = request.POST.get('nombre')
-			apellido = request.POST.get('apellido')
-			direccion = request.POST.get('direccion')
-			muni = request.POST.get('muni')
-			ge = request.POST.get('ge')
-			mu = Municipio.objects.get(pk = muni)
-			grupoe = GrupoEtnico.objects.get(pk = ge)
-			tel = request.POST.get('telefono')
-			fechan = request.POST.get('fechan')
-			edad = request.POST.get('edad')
-			trabaja = request.POST.get('trabaja')
-			des = Descicion.objects.get(pk = trabaja)
-			ocupacion = request.POST.get('ocupacion')
-			sex =  request.POST.get('sexo')
-			sexo = Sexo.objects.get(pk = sex)
-			tp = TipoPersona.objects.get(pk = 1)
-
-			persona = Personas(
-					numid = numid, 
-					nombre = nombre,
-					apellido = apellido,
-					municipio = mu,
-					domicilio = direccion,
-					telefono = tel,
-					sexo = sexo,
-					tipo_persona = tp,
-					grupo_etnico = grupoe,
-					trabaja = des,
-					ocupacion = ocupacion,
-					fecha_nacimiento = fechan,
-					edad = edad)
-			persona.save()
-			return HttpResponseRedirect('/principal/alumnos/')
-		except Exception as e:
-			return HttpResponse(e)
-
-@login_required()
-def edit_students(request, pk):
+	if request.user.Facilitador:
 		if request.method == 'POST':
-			numid = request.POST.get('numid')
-			nombre = request.POST.get('nombre')
-			apellido = request.POST.get('apellido')
-			direccion = request.POST.get('direccion')
-			muni = request.POST.get('muni')
-			ge = request.POST.get('ge')
-			mu = Municipio.objects.get(pk = muni)
-			grupoe = GrupoEtnico.objects.get(pk = ge)
-			tel = request.POST.get('telefono')
-			fechan = request.POST.get('fechan')
-			trabaja = request.POST.get('trabaja')
-			des = Descicion.objects.get(pk = trabaja)
-			ocupacion = request.POST.get('ocupacion')
-			sexo =  request.POST.get('sexo')
-			sex = Sexo.objects.get(pk = sexo)
-			tp = TipoPersona.objects.get(pk = 1)
+			try:
+				numid = request.POST.get('numid')
+				nombre = request.POST.get('nombre')
+				apellido = request.POST.get('apellido')
+				direccion = request.POST.get('direccion')
+				muni = request.POST.get('muni')
+				ge = request.POST.get('ge')
+				condicion = request.POST.get('condicion')
+				mu = Municipio.objects.get(pk = muni)
+				grupoe = GrupoEtnico.objects.get(pk = ge)
+				tel = request.POST.get('telefono')
+				fechan = request.POST.get('fechan')
+				edad = request.POST.get('edad')
+				trabaja = request.POST.get('trabaja')
+				des = Descicion.objects.get(pk = trabaja)
+				ocupacion = request.POST.get('ocupacion')
+				ga = request.POST.get('ga')
+				sex =  request.POST.get('sexo')
+				sexo = Sexo.objects.get(pk = sex)
+				grado_anterior = GradoAnterior.objects.get(pk = ga)
 
-			P = Personas.objects.get(pk=pk)
-			P.numid = numid
-			P.nombre = nombre
-			P.apellido = apellido
-			P.domicilio = direccion
-			P.telefono = tel
-			P.municipio = mu
-			P.grupo_etnico = grupoe
-			P.fecha_nacimiento = fechan
-			P.trabaja = des
-			P.ocupacion = ocupacion
-			P.sexo = sex
-			P.tipo_persona = tp
-			P.save()
-		return HttpResponseRedirect('/principal/alumnos/')
+				persona = Alumno(
+						numid = numid, 
+						nombre = nombre,
+						apellido = apellido,
+						municipio = mu,
+						domicilio = direccion,
+						telefono = tel,
+						sexo = sexo,
+						grupo_etnico = grupoe,
+						trabaja = des,
+						ocupacion = ocupacion,
+						fecha_nacimiento = fechan,
+						edad = edad,
+						condicion = condicion,
+						grado_anterior = grado_anterior)
+				persona.save()
+				return HttpResponseRedirect('/principal/alumnos/')
+			except Exception as e:
+				return HttpResponse(e)
+	else:
+		return render(request, '404.html')
 
+# FAMILIAR
+@login_required()
+def all_familiar(request, pk):
+	if request.user.Facilitador:
+		alumno = Alumno.objects.get(pk = pk)
+		familiar  = Familiar.objects.filter(familiar  = alumno)
+		numu = familiar.count()
+		return render(request, 'familiarxalumno.html', {'data':familiar, 'alumno':alumno, 'numu':numu})
+	else:
+		return render(request, '404.html')
 
 @login_required()
-def delete_student(request, pk):
-	alumno = Personas.objects.get(pk = pk)
-	try:
-		alumno.delete()
-		return HttpResponseRedirect('/principal/alumnos/')
-	except Exception, e:
-		return HttpResponse(e)
+def new_familiar(request, pk):
+	if request.user.Facilitador:
+		sexo = Sexo.objects.all()
+		cholu = Municipio.objects.filter(depto = 1)
+		valle = Municipio.objects.filter(depto = 2)
+		des = Descicion.objects.all()
+		parentezco = Parentezco.objects.all()
+		alumno = Alumno.objects.get(pk = pk)
+		return render(request, 'new_familiar.html', {'des':des, 
+			'sexo':sexo, 'cholu':cholu, 'valle':valle, 'parentezco': parentezco, 'alumno':alumno})
+	else:
+		return render(request, '404.html')
 
+@login_required()
+def new_familiar_add(request):
+	if request.user.Facilitador:
+		if request.method == 'POST':
+			try:
+				numid = request.POST.get('numid')
+				nombre = request.POST.get('nombre')
+				apellido = request.POST.get('apellido')
+				direccion = request.POST.get('direccion')
+				muni = request.POST.get('muni')
+				mu = Municipio.objects.get(pk = muni)
+				tel = request.POST.get('telefono')
+				fechan = request.POST.get('fechan')
+				edad = request.POST.get('edad')
+				trabaja = request.POST.get('trabaja')
+				ocupacion = request.POST.get('ocupacion')
+				sex =  request.POST.get('sexo')
+				familiar =  request.POST.get('alumno')
+				parentezco =  request.POST.get('parentezco')
+				
+				des = Descicion.objects.get(pk = trabaja)
+				sexo = Sexo.objects.get(pk = sex)
+				alumno = Alumno.objects.get(pk = familiar)
+				pare = Parentezco.objects.get(pk = parentezco)
+
+				persona = Familiar(
+						numid = numid, 
+						nombre = nombre,
+						apellido = apellido,
+						municipio = mu,
+						domicilio = direccion,
+						telefono = tel,
+						sexo = sexo,
+						trabaja = des,
+						ocupacion = ocupacion,
+						fecha_nacimiento = fechan,
+						edad = edad,
+						familiar = alumno,
+						parentezco = pare)
+				persona.save()
+				return HttpResponseRedirect('/principal/alumnos/')
+			except Exception as e:
+				return HttpResponse(e)
+	else:
+		return render(request, '404.html')
 # PROMOTORES
 @login_required()
 def all_promotores(request):
-	perfil = Personas.objects.all()
-	sexo = Sexo.objects.all()
-	ge = GrupoEtnico.objects.all()
-	municipio = Municipio.objects.all()
-	tp = TipoPersona.objects.get(pk = 2)
-	des = Descicion.objects.all()
-	promotor = Personas.objects.filter(tipo_persona = tp)
-	numu = promotor.count()
-	return render(request, 'all_promotores.html', {'data':promotor, 'des':des, 'ge':ge, 'numu':numu, 'sexo':sexo, 'muni':municipio})
-
+	if request.user.Facilitador:
+		perfil = Personas.objects.all()
+		sexo = Sexo.objects.all()
+		ge = GrupoEtnico.objects.all()
+		municipio = Municipio.objects.all()
+		tp = TipoPersona.objects.get(pk = 2)
+		des = Descicion.objects.all()
+		promotor = Personas.objects.filter(tipo_persona = tp)
+		numu = promotor.count()
+		return render(request, 'all_promotores.html', {'data':promotor, 'des':des, 'ge':ge, 'numu':numu, 'sexo':sexo, 'muni':municipio})
+	else:
+		return render(request, '404.html')	
 
 @login_required()
 def new_promotor(request):
-	sexo = Sexo.objects.all()
-	ge = GrupoEtnico.objects.all()
-	municipio = Municipio.objects.all()
-	des = Descicion.objects.all()
-	return render(request, 'new_promotor.html', {'ge':ge, 'des':des, 'sexo':sexo, 'muni':municipio})
-
+	if request.user.Facilitador:
+		sexo = Sexo.objects.all()
+		ge = GrupoEtnico.objects.all()
+		municipio = Municipio.objects.all()
+		des = Descicion.objects.all()
+		return render(request, 'new_promotor.html', {'ge':ge, 'des':des, 'sexo':sexo, 'muni':municipio})
+	else:
+		return render(request, '404.html')
 
 @login_required()
 def new_promotor_add(request):
@@ -251,13 +304,9 @@ def delete_promotor(request, pk):
 
 @login_required()
 def all_facilitador(request):
-	faci = Facilitador.objects.all()
-	sexo = Sexo.objects.all()
-	municipio = Municipio.objects.all()
-	tipor = TipoResidencia.objects.all()
-	des = Descicion.objects.all()
-	numf = faci.count()
-	return render(request, 'all_facilitador.html', {'data':faci, 'des':des, 'numu':numf, 'sexo':sexo, 'muni':municipio, 'tipor':tipor})
+	# usuario = User.objects.get(pk = request.user)
+	faci = Facilitador.objects.get(usuario = request.user)
+	return render(request, 'all_facilitador.html', {'data':faci})
 
 @login_required()
 def new_facilitador(request):
@@ -380,6 +429,7 @@ def delete_facilitador(request, pk):
 	except Exception, e:
 		return HttpResponse(e)
 
+# GRADO
 @login_required()
 def all_grados(request):
 	grado = Grado.objects.all()
@@ -430,126 +480,67 @@ def edit_grado(request, pk):
 			F.save()
 		return HttpResponseRedirect('/principal/grados/')
 
+# CENTROS
+
 @login_required()
 def all_centros(request):
-	centro = Centro.objects.all()
-	tipoc = TipoCentro.objects.all()
-	patro = Patrocinador.objects.all()
-	zona = Zona.objects.all()
-	des = Descicion.objects.all()
-	tp = TipoPersona.objects.get(pk = 2)
-	promotor = Personas.objects.filter(tipo_persona = tp)
-	numf = centro.count()
-	return render(request, 'all_centros.html', {'data':centro, 'des':des, 'tipoc':tipoc, 'patro':patro, 'zona':zona, 'promo': promotor})
+	grado = Grado.objects.filter(facilitador = request.user)
+	centro = Matricula.objects.filter(grado = grado)
+	numc = centro.count()
+	return render(request, 'all_centros.html', {'data':centro, 'numc':numc})
 
-@login_required()
-def new_centro(request):
-	tipoc = TipoCentro.objects.all()
-	patro = Patrocinador.objects.all()
-	zona = Zona.objects.all()
-	des = Descicion.objects.all()
-	tp = TipoPersona.objects.get(pk = 2)
-	promotor = Personas.objects.filter(tipo_persona = tp)
-	muni = Municipio.objects.all()
-	return render(request, 'new_centro.html', {'des':des,'tipoc':tipoc, 'patro':patro, 'zona':zona, 'promo': promotor,
-		'muni': muni})
 
-@login_required()
-def new_centro_add(request):
-	if request.method == 'POST':
-		try:
-			centro = request.POST.get('centro')
-			tipoc = request.POST.get('tipoc')
-			patro = request.POST.get('patro')
-			zona = request.POST.get('zona')
-			patro_recibe = request.POST.get('patro_recibe')
-			que = request.POST.get('que')
-			cuando = request.POST.get('cuando')
-			promo = request.POST.get('promo')
-			donde = request.POST.get('donde')
-			direccion = request.POST.get('direccion')
-			muni = request.POST.get('muni')
-
-			municipio = Municipio.objects.get(pk = muni)
-			tc = TipoCentro.objects.get(pk = tipoc)
-			pat = Patrocinador.objects.get(pk = patro)
-			zon = Zona.objects.get(pk = zona)
-			pi = Descicion.objects.get(pk = patro_recibe)
-			prom = Personas.objects.get(pk = promo)
-
-			centro = Centro(
-					centro = centro,
-					tipo_centro = tc,
-					patrocinador = pat,
-					zona = zon,
-					patro_incentivo = pi,
-					patro_recibe = que,
-					cada_cuando = cuando,
-					promotor = prom,
-					donde_funciona = donde,
-					direccion = direccion,
-					municipio = municipio)
-			centro.save()
-			return HttpResponseRedirect('/principal/centros/')
-		except Exception as e:
-			return HttpResponse(e)
-
-@login_required()
-def delete_centro(request, pk):
-	centro = Centro.objects.get(pk = pk)
-	try:
-		centro.delete()
-		return HttpResponseRedirect('/principal/centros/')
-	except Exception, e:
-		return HttpResponse(e)
-
-@login_required()
-def edit_centro(request, pk):
-		if request.method == 'POST':
-			centro = request.POST.get('centro')
-			tipoc = request.POST.get('tipoc')
-			patro = request.POST.get('patro')
-			zona = request.POST.get('zona')
-			patro_recibe = request.POST.get('patro_recibe')
-			que = request.POST.get('que')
-			cuando = request.POST.get('cuando')
-			promo = request.POST.get('promo')
-			donde = request.POST.get('donde')
-			direccion = request.POST.get('direccion')
-
-			tc = TipoCentro.objects.get(pk = tipoc)
-			pat = Patrocinador.objects.get(pk = patro)
-			zon = Zona.objects.get(pk = zona)
-			pi = Descicion.objects.get(pk = patro_recibe)
-			prom = Personas.objects.get(pk = promo)
-
-			F = Centro.objects.get(pk=pk)
-			F.centro = centro
-			F.tipo_centro = tc
-			F.patrocinador = pat
-			F.zona = zon
-			F.patro_incentivo = pi
-			F.patro_recibe = que
-			F.cada_cuando = cuando
-			F.promotor = prom
-			F.donde_funciona = donde
-			F.direccion = direccion
-			F.save()
-		return HttpResponseRedirect('/principal/centros/')
+# MATRICULAS
 
 @login_required()
 def new_enroll(request):
 		tp = TipoPersona.objects.get(pk = 1)
-		persona = Personas.objects.filter(tipo_persona = 1)
+		alumno = Alumno.objects.all()
 		centro = Centro.objects.all()
-		grado = Grado.objects.all()
+		grado = Grado.objects.filter(facilitador = request.user)
 		mat = Matricula.objects.all()
 		matri = Matricula.objects.filter(grado = grado).values_list('persona_id', flat=True)
-		alumnos = persona.exclude(id__in = matri)
+		alumnos = alumno.exclude(id__in = matri)
 		periodo = Periodo.objects.all()
 		des = Descicion.objects.all()
-		return render(request, 'new_enroll.html', {'des':des, 'alumnos':persona, 'grado': grado, 'centro':centro, 'mat':mat, 'periodo':periodo})
+		return render(request, 'new_enroll.html', {'des':des, 'alumnos':alumnos, 'grado': grado, 
+			'centro':centro, 'mat':mat, 'periodo':periodo})
 
+# MATRICULA ALUMNO EN ESPECIFICO
+@login_required()
+def matricularxalumno(request, pk):
+		alumno = Alumno.objects.get(pk = pk)
+		grado = Grado.objects.filter(facilitador = request.user)
+		centro = Matricula.objects.filter(grado = grado)
+		periodo = Periodo.objects.all()
+		des = Descicion.objects.all()
+		return render(request, 'matricularxalumno.html', {'des':des, 'alumno':alumno, 'grado': grado, 
+			'centro':centro, 'periodo':periodo})
+
+@login_required()
+def matricularxalumno_add(request):
+	if request.method == 'POST':
+		try:
+			alumno = request.POST.get('alumno')
+			grado = request.POST.get('grado')
+			centro = request.POST.get('centro')
+			primer = request.POST.get('primer')
+			requisito = request.POST.get('requisito')
+			
+			# archivos = request.FILES['archivos']
+
+			g = Grado.objects.get(pk=grado)
+			c = Centro.objects.get(pk = centro)
+			d = Periodo.objects.get(pk=primer)
+			r = Descicion.objects.get(pk = requisito)
+			a = Alumno.objects.get(pk = alumno)
+
+			mat = Matricula(fecha = datetime.now() , persona = a, centro = c, grado = g, 
+					num_periodo = d, requisito = r)	
+			mat.save()
+			return HttpResponseRedirect('/principal/enroll/new/alumno/'+pk)
+		except Exception as e:
+			return HttpResponse(e)
 
 @login_required()
 def new_enroll_add(request):
@@ -559,19 +550,18 @@ def new_enroll_add(request):
 			grado = request.POST.get('grado')
 			centro = request.POST.get('centro')
 			primer = request.POST.get('primer')
-			horario = request.POST.get('horario')
-			fechai = request.POST.get('fechai')
-			fechaf = request.POST.get('fechaf')
+			requisito = request.POST.get('requisito')
+			
 			# archivos = request.FILES['archivos']
 
 			g = Grado.objects.get(pk=grado)
 			c = Centro.objects.get(pk = centro)
 			d = Periodo.objects.get(pk=primer)
+			r = Descicion.objects.get(pk = requisito)
 			for alumno in alumnos:	
-				a = Personas.objects.get(pk=alumno)
+				a = Alumno.objects.get(pk=alumno)
 				mat = Matricula(fecha = datetime.now() , persona = a, centro = c, grado = g, 
-					num_periodo = d, horario = horario, 
-					inicio_clases = fechai, fin_clases = fechaf)	
+					num_periodo = d, requisito = r)	
 				mat.save()
 			return HttpResponseRedirect('/principal/enroll/new/')
 		except Exception as e:
@@ -616,8 +606,11 @@ def enroll_massive_add(request):
 
 @login_required()
 def all_enroll(request):
-	m = Matricula.objects.all()
-	return render(request, 'all_enroll.html', {'m':m})
+	if request.user.Facilitador:
+		m = Matricula.objects.all()
+		return render(request, 'all_enroll.html', {'m':m})
+	else:
+		return render(request, '404.html')
 
 @login_required()
 def view_matricula(request, ida):
@@ -627,13 +620,15 @@ def view_matricula(request, ida):
 	# if matri.count() > 0:
 	return render(request, 'enroll_student.html', {'matri': matri, 'm': m})
 
+# REPORTES
+
 @login_required()
 def all_reports(request):
 	return render(request, 'all_reports.html')
 
 @login_required()
 def all_graphics(request):
-	persona = Personas.objects.filter(tipo_persona = 1)
+	persona = Alumno.objects.all()
 	# Grafrico por sexo
 	masculino = persona.filter(sexo = 1)
 	femenino = persona.filter(sexo = 2)
@@ -649,33 +644,31 @@ def all_graphics(request):
 	tercer = Grado.objects.get(grado = "Tercero")
 	mat3 = Matricula.objects.filter(grado = tercer)
 	tercero = mat3.count()
-	cuart = Grado.objects.get(grado = "Cuarto")
-	mat4 = Matricula.objects.filter(grado = cuart)
-	cuarto = mat4.count()
-	quin = Grado.objects.get(grado = "Quinto")
-	mat5 = Matricula.objects.filter(grado = quin)
-	quinto = mat5.count()
-	sex = Grado.objects.get(grado = "Sexto")
-	mat6 = Matricula.objects.filter(grado = sex)
-	sexto = mat6.count()
-	sep = Grado.objects.get(grado = "Septimo")
-	mat7 = Matricula.objects.filter(grado = sep)
-	septimo = mat7.count()
-	octa = Grado.objects.get(grado = "Octavo")
-	mat8 = Matricula.objects.filter(grado = octa)
-	octavo = mat8.count()
-	nov = Grado.objects.get(grado = "Noveno")
-	mat9 = Matricula.objects.filter(grado = nov)
-	noveno = mat9.count()
+	# cuart = Grado.objects.get(grado = "Cuarto")
+	# mat4 = Matricula.objects.filter(grado = cuart)
+	# cuarto = mat4.count()
+	# quin = Grado.objects.get(grado = "Quinto")
+	# mat5 = Matricula.objects.filter(grado = quin)
+	# quinto = mat5.count()
+	# sex = Grado.objects.get(grado = "Sexto")
+	# mat6 = Matricula.objects.filter(grado = sex)
+	# sexto = mat6.count()
+	# sep = Grado.objects.get(grado = "Septimo")
+	# mat7 = Matricula.objects.filter(grado = sep)
+	# septimo = mat7.count()
+	# octa = Grado.objects.get(grado = "Octavo")
+	# mat8 = Matricula.objects.filter(grado = octa)
+	# octavo = mat8.count()
+	# nov = Grado.objects.get(grado = "Noveno")
+	# mat9 = Matricula.objects.filter(grado = nov)
+	# noveno = mat9.count()
 	# Grafico por centro
 	centro = Centro.objects.all()
 	matriculas = Matricula.objects.filter()
 
 
 	return render(request, 'all_graphics.html', {'nummf':numf, 'numm':numm,
-		'primero':primero,'segundo':segundo,'tercero':tercero,'cuarto':cuarto,
-		'quinto':quinto,'sexto':sexto,'septimo':septimo, 'octavo':octavo,
-		'noveno':noveno})
+		'primero':primero,'segundo':segundo,'tercero':tercero})
 
 
 @login_required()
@@ -747,3 +740,14 @@ def reportes(request):
 		'segundo':segundo,'tercero':tercero,'cuarto':cuarto,
 		'quinto':quinto,'sexto':sexto,'septimo':septimo, 'octavo':octavo,
 		'noveno':noveno})
+
+@login_required
+def notas(request):
+	pass
+
+@login_required
+def descargas(request):
+	if request.user.Facilitador:
+		return render(request, 'descargas.html')
+	else:
+		return render(request, '404.html')

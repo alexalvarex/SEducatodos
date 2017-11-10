@@ -906,7 +906,7 @@ $(document).ready(function(){
                 },
                 data: [
                 {
-                    type: "pie", //change it to line, area, bar, pie, etc
+                    type: "bar", //change it to line, area, bar, pie, etc
                     startAngle: 240,
                     yValueFormatString: "##0",
                     indexLabel: "{label} {y}",

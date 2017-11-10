@@ -52,7 +52,9 @@ def log_in(request):
 			if user is not None:
 				if user.is_active:
 					login(request, user)
-					if user:
+					if user.is_staff:
+						return HttpResponseRedirect('/administrador/')
+					elif user.Facilitador:
 						return HttpResponseRedirect('/principal/')
 				else:
 					return HttpResponseRedirect('/account/login/inactive/')
