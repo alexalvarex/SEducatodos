@@ -111,8 +111,6 @@ class Alumno(models.Model):
 	ocupacion = models.CharField(max_length=70)
 	fecha_nacimiento = models.DateField(blank=True, null=True)
 	edad = models.IntegerField(blank=True, null=True)
-	condicion = models.CharField(max_length=100, blank=True, null=True)
-	grado_anterior = models.ForeignKey(GradoAnterior, related_name='Grado_Anterior')
 
 	def __str__(self):
 		return "%s %s" %(self.nombre, self.apellido)
@@ -163,7 +161,8 @@ class Centro(models.Model):
 	patro_recibe = models.CharField(max_length=100, blank=True, null=True)
 	quien = models.CharField(max_length=100, blank=True, null=True)
 	cada_cuando = models.CharField(max_length=100, blank=True, null=True)
-	promotor = models.ForeignKey(Persona, blank=True, null=True)
+	promotor = models.ForeignKey(Descicion, blank=True, null=True)
+	nombre_promotor = models.CharField(max_length=100, blank=True, null=True)
 	donde_funciona = models.CharField(max_length=100, blank=True, null=True)
 	municipio = models.ForeignKey(Municipio)
 	direccion = models.CharField(max_length=100, blank=True, null=True)
@@ -196,10 +195,9 @@ class Facilitador(models.Model):
 	domicilio = models.CharField(max_length=100)
 	telefono = models.CharField(max_length=9, blank=True, null=True)
 	sexo = models.ForeignKey(Sexo)	
-	correo = models.EmailField(blank=True, null=True)
 	ocupacion = models.CharField(max_length=70, blank=True, null=True)
 	lugar_trabajo = models.CharField(max_length=70, blank=True, null=True)
-	formacion_academida = models.ForeignKey(FormacionAcademica, related_name='FormacionAcademica')
+	formacion_academica = models.ForeignKey(FormacionAcademica, related_name='FormacionAcademica')
 	otra_formacion = models.CharField(max_length=70, blank=True, null=True)
 	fecha_nacimiento = models.DateField(blank=True, null=True)
 	edad = models.IntegerField(blank=True, null=True)
@@ -239,14 +237,15 @@ class Administrador(models.Model):
 @python_2_unicode_compatible
 class Grado(models.Model):
 	grado = models.CharField(max_length=50)
-	facilitador = models.ForeignKey(User)
+	facilitador = models.ForeignKey(Facilitador)
+	centro = models.ForeignKey(Centro)
 	horario = models.CharField(max_length=100, blank=True, null=True)
 
 	class Meta:
 		unique_together = ('grado', 'horario', 'facilitador')
 
 	def __str__(self):
-		return self.grado
+		return "%s - %s" %(self.grado, self.facilitador)
 
 @python_2_unicode_compatible
 class Periodo(models.Model):
@@ -264,7 +263,27 @@ class Matricula(models.Model):
 	centro = models.ForeignKey(Centro)
 	grado = models.ForeignKey(Grado)
 	num_periodo = models.ForeignKey(Periodo, related_name='Num_Periodo')
+	condicion = models.CharField(max_length=100, blank=True, null=True)
+	grado_anterior = models.ForeignKey(GradoAnterior, related_name='Grado_Anterior')
+	otro = models.CharField(max_length=100, blank=True, null=True)
 	requisito = models.ForeignKey(Descicion, related_name='Requisito')
 
 	def __str__(self):
 		return "%s %s" %(self.persona.nombre, self.grado.grado)
+
+@python_2_unicode_compatible
+class Metodologia(models.Model):
+	metodo = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.metodo
+
+@python_2_unicode_compatible
+class Configuracion(models.Model):
+	anio_lectivo = models.IntegerField()
+	metodo = models.ForeignKey(Metodologia)
+	periodo = models.ForeignKey(Periodo)
+	centro = models.ManyToManyField(Centro)
+
+	def __str__(self):
+		return "%s - %s - %s" %(self.metodo, self.anio_lectivo, self.periodo)

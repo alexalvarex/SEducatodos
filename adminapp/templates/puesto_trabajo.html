@@ -1,0 +1,45 @@
+{% extends "base_in.html" %}
+
+{% block container %}
+<div class="container">
+  <br>
+  <h1 class="text-center">Puesto de Trabajo de {{data}}</h1>
+    
+    <br>
+    <div class="table-responsive" style=" overflow:scroll; overflow-y:hidden;">
+    <table id="example" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
+        <thead class="blue lighten-2 text-white">
+            <tr>
+                <th>Centro</th>
+                <th>Tipo de Centro</th>
+                <th>Patrocinador</th>
+                <th>Recibe Incentivo del Patrocinador?</th>
+                <th>Que Recibe</th>
+                <th>Quien lo Recibe</th>
+                <th>Cuando lo recibe</th>
+                <th>Promotor</th>
+                <th>Donde funciona</th>
+                <th>Municipio</th>
+                <th>Dirección del Centro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                    <td>{{data.centro.centro}}</td>
+                    <td>{{data.centro.zona.zona}}</td>
+                    <td>{{data.centro.patrocinador}}</td>
+                    <td>{{data.centro.patro_incentivo}}</td>
+                    <td>{{data.centro.patro_recibe}}</td>
+                    <td>{{data.centro.quien}}</td>
+                    <td>{{data.centro.cada_cuando}}</td>
+                    <td>{{data.centro.promotor}}</td>
+                    <td>{{data.centro.donde_funciona}}</td>
+                    <td>{{data.centro.municipio}}</td>
+                    <td>{{data.centro.direccion}}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+  
+</div>
+{% endblock container %}

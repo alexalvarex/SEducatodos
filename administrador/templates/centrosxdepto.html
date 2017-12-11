@@ -1,0 +1,23 @@
+{% extends "base_in_admin.html" %}
+
+{% block container %}
+<div class="container">
+  <br>
+    <div class="row">
+  {% for g in deptos %}
+
+    <div class="col-md-4">
+      <div class="card">
+          <br><img class="img-fluid" src="https://cdn0.iconfinder.com/data/icons/tutor-icon-set/512/Globe_icon-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">{{g}}</h4>
+              <a href="{% url 'all_centros_admin' g.id %}" class="btn btn-info">Ver Centros</a>
+          </div>
+      </div>
+    </div>
+    
+  {% endfor %}
+  </div>
+  
+</div>
+{% endblock container %}

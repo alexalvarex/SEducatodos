@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 
 {% block container %}
-    <br>
-    <br>
-    <br>
-    <div class="container">
-    <div class="alert alert-danger">Contraseña/usuario invalidos</div>
-	<form class="form-signin" action="/account/login/" method="post">
+
+<header>
+<section class="view intro-2 hm-gradient" style="height:645px">
+<div>
+ <form class="form-signin" action="/account/login/" method="post">
   {% csrf_token %}
     <div class="col-md-4 mb-r pb-5" style="margin: 0 auto; margin-top:100px;">
+  <div class="alert alert-danger">Contraseña/usuario invalidos</div><br><br>
+
       <div class="card">
         <div class="card-body">
           <div class="form-header default-color">
@@ -31,7 +32,11 @@
           <div class="text-center" style="padding:5px;">
             <a href="/account/forgotpass/">¿Has olvidado tu contraseña? </a>
           </div>
-        </form>
+        </div>
+      </div>
     </div>
-
-{% endblock %}    
+  </form>
+</div>
+</section>
+</header>
+{% endblock %}

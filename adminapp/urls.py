@@ -46,4 +46,6 @@ urlpatterns = [
 	url(r'^reports/fisico/$', views.reportes ,name="reportes"),
 	url(r'^notas/$', views.notas ,name="notas"),
 	url(r'^descargas/$', views.descargas ,name="descargas"),
+	url(r'^tombola/$', views.tombola ,name="tombola"),
+
 ]

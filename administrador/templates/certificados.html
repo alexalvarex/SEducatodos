@@ -1,0 +1,98 @@
+{% extends "base_in_admin.html" %}
+{% load static %}
+{% block container %}
+<div class="container">
+  <br>
+    <div class="row" style="margin-left:auto; margin-right:auto">
+
+      <div class="card">
+          <br><img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/snipicons/500/certificate-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Descargar <br> Certificaciones</h4>
+              <a data-toggle="modal" data-target="#modalCertificados" class="btn btn-info">Descargar</a>
+          </div>
+      </div>
+      <div class="card">
+          <br><img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/bookshelf-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Descargar Matricula <br> y ficha de Facilitador</h4>
+              <a data-toggle="modal" data-target="#modalMatricula" class="btn btn-info">Descargar</a>
+          </div>
+      </div>
+      <div class="card">
+          <br><img class="img-fluid" src="https://cdn1.iconfinder.com/data/icons/ensign-11/512/112_Ensign_Flag_Nation_honduras-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">Descargar Docs <br> Himno Nacional</h4>
+              <a data-toggle="modal" data-target="#modalHimno" class="btn btn-info">Descargar</a>
+          </div>
+      </div>
+  </div>
+  
+</div>
+
+
+<!-- MODAL DE DOCS POR ENLACE -->
+
+<!-- CERTIFICADOS EDUCATODOS --> 
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalCertificados" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Certificados</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                      <a href="{% static 'docs/Basica de 7° a 9° Grado/Certificicacion 7 a 9.xlsx' %}" class="btn btn-info">Certificicacion de Estudio 7° a 9°</a>
+                      <a href="{% static 'docs/Basica de 7° a 9° Grado/Constancia de Conducta 6° a 9° .xlsx' %}" class="btn btn-info">Constancia de Conducta</a>
+                      <a href="{% static 'docs/Basica de 7° a 9° Grado/Certificado de 1 A 6 Grado.xlsx' %}" class="btn btn-info">Certificado de Estudio de 1 A 6 Grado</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CERTIFICADOS MATRICULA EDUCATODOS --> 
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalMatricula" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Matricula y Ficha de Facilitador</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                      <a href="{% static 'docs/Basica de 7° a 9° Grado/Registro Matrícula.xlsx' %}" class="btn btn-info">Registro Matrícula</a>
+                      <a href="{% static 'docs/Basica de 7° a 9° Grado/Facilitador Centro.xlsx' %}" class="btn btn-info">Registro Facilitador Centro</a>
+                      <a href="{% static 'docs/Basica de 7° a 9° Grado/Acta de Evaluación y Promoción  FINAL.xlsx' %}" class="btn btn-info">Acta de Evaluación y Promoción  por Facilitador</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DOCS HIMNO NACIONAL --> 
+<div mdbModal #style="mdb-modal" class="modal fade" id="modalHimno" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Docs Himno Nacional</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                      <a href="{% static 'docs/Basica de 7° a 9° Grado/Constacia  DEL HIMNO NACIONAL noveno grado mayo 2017.docx' %}" class="btn btn-info">Constancia Himno Nacional</a>
+                      <a href="{% static 'docs/Basica de 7° a 9° Grado/ACTA DEL HIMNO NACIONAL noveno grado mayo 2017.docx' %}" class="btn btn-info">Acta Himno Nacional</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock container %}

@@ -1,0 +1,86 @@
+@base: #94DBAF;
+
+* {
+   box-sizing:border-box;
+ }
+
+.wrapper {
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+}
+
+.tombola {
+  position:relative;
+  width: 600px;
+  height:200px;
+  margin: 120px auto;
+  transform-style: preserve-3d;
+  transform-origin:center center -480px;
+  transform: rotateX(0deg) translateZ(-480px);
+  transition:4s ease all;
+}
+
+
+.panel {
+  top:0px;
+  padding:60px;
+  font-size: 40px;
+  font-weight:bold;
+  text-transform:uppercase;
+  position: absolute;
+  width: 600px;
+  height: 200px;
+  color: white; 
+  text-align: center;
+  line-height: 2em; 
+  background: #94DBAF;
+  border: 1px solid darken(#94DBAF,40);
+}
+
+.p1 { 
+  transform: translateZ(240px); 
+  background:#94DBAF;
+  border: 1px solid darken(#94DBAF,40);
+}
+
+.p2 { 
+  transform: rotateX(-45deg) translateZ(240px);
+  background:spin(#94DBAF,45);
+  border: 1px solid darken(spin(#94DBAF,45),40);
+} 
+
+.p3 { 
+  transform: rotateX(-90deg) translateZ(240px); 
+  background:spin(#94DBAF,90);
+  border: 1px solid darken(spin(#94DBAF,90),40);
+}
+
+.p4 { 
+  transform: rotateX(-135deg) translateZ(240px);
+  background:spin(#94DBAF,135);
+  border: 1px solid darken(spin(#94DBAF,135),40);
+}
+
+.p5 { 
+  transform: rotateX(-180deg) translateZ(240px);
+  background:spin(#94DBAF,180);
+  border: 1px solid darken(spin(#94DBAF,180),40);
+}
+
+.p6 { 
+  transform: rotateX(-225deg) translateZ(240px) ;
+  background:spin(#94DBAF,225);
+  border: 1px solid darken(spin(#94DBAF,225),40);
+}
+
+.p7 { 
+  transform: rotateX( -270deg)  translateZ(240px); 
+  background:spin(#94DBAF,270);
+  border: 1px solid darken(spin(#94DBAF,270),40);
+}
+
+.p8 { 
+  transform: rotateX(45deg) translateZ(240px);
+  background:spin(#94DBAF,315);
+  border: 1px solid darken(spin(#94DBAF,315),40);
+}

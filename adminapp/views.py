@@ -30,7 +30,8 @@ def index(request):
 @login_required()
 def alumnosxgrado(request):
 	if request.user.Facilitador:
-		grados = Grado.objects.filter(facilitador = request.user)
+		faci = Facilitador.objects.get(usuario = request.user)
+		grados = Grado.objects.filter(facilitador = faci)
 		return render(request, 'alumnosxgrado.html', {'grados': grados})
 	else:
 		return render(request, '404.html')
@@ -41,7 +42,7 @@ def all_students(request, pk):
 		grado = Grado.objects.get(pk = pk)
 		alumnos = Matricula.objects.filter(grado = pk)
 		numu = alumnos.count()
-		return render(request, 'all_students.html', {'data':alumnos, 'grado':grado})
+		return render(request, 'all_students.html', {'data':alumnos, 'grado':grado, 'numu':numu})
 	else:
 		return render(request, '404.html')
 
@@ -52,7 +53,7 @@ def alumnos_sinmat(request):
 		matri = Matricula.objects.all().values_list('persona_id', flat=True)
 		alumnos = alumno.exclude(id__in = matri)
 		numu = alumnos.count()
-		return render(request, 'alumnos_sinmat.html', {'data':alumnos})
+		return render(request, 'alumnos_sinmat.html', {'data':alumnos, 'numa':numu})
 	else:
 		return render(request, '404.html')
 
@@ -81,7 +82,6 @@ def new_student_add(request):
 				direccion = request.POST.get('direccion')
 				muni = request.POST.get('muni')
 				ge = request.POST.get('ge')
-				condicion = request.POST.get('condicion')
 				mu = Municipio.objects.get(pk = muni)
 				grupoe = GrupoEtnico.objects.get(pk = ge)
 				tel = request.POST.get('telefono')
@@ -90,10 +90,8 @@ def new_student_add(request):
 				trabaja = request.POST.get('trabaja')
 				des = Descicion.objects.get(pk = trabaja)
 				ocupacion = request.POST.get('ocupacion')
-				ga = request.POST.get('ga')
 				sex =  request.POST.get('sexo')
 				sexo = Sexo.objects.get(pk = sex)
-				grado_anterior = GradoAnterior.objects.get(pk = ga)
 
 				persona = Alumno(
 						numid = numid, 
@@ -107,9 +105,7 @@ def new_student_add(request):
 						trabaja = des,
 						ocupacion = ocupacion,
 						fecha_nacimiento = fechan,
-						edad = edad,
-						condicion = condicion,
-						grado_anterior = grado_anterior)
+						edad = edad,)
 				persona.save()
 				return HttpResponseRedirect('/principal/alumnos/')
 			except Exception as e:
@@ -432,8 +428,8 @@ def delete_facilitador(request, pk):
 # GRADO
 @login_required()
 def all_grados(request):
-	grado = Grado.objects.all()
-	faci = Facilitador.objects.all()
+	faci = Facilitador.objects.get(usuario = request.user)
+	grado = Grado.objects.filter(facilitador = faci)
 	numf = grado.count()
 	return render(request, 'all_grados.html', {'data':grado, 'faci':faci})
 
@@ -484,10 +480,8 @@ def edit_grado(request, pk):
 
 @login_required()
 def all_centros(request):
-	grado = Grado.objects.filter(facilitador = request.user)
-	centro = Matricula.objects.filter(grado = grado)
-	numc = centro.count()
-	return render(request, 'all_centros.html', {'data':centro, 'numc':numc})
+	centro = Facilitador.objects.get(usuario = request.user)
+	return render(request, 'puesto_trabajo.html', {'data':centro})
 
 
 # MATRICULAS
@@ -496,26 +490,28 @@ def all_centros(request):
 def new_enroll(request):
 		tp = TipoPersona.objects.get(pk = 1)
 		alumno = Alumno.objects.all()
-		centro = Centro.objects.all()
 		grado = Grado.objects.filter(facilitador = request.user)
+		centro = Facilitador.objects.get(usuario = request.user)
 		mat = Matricula.objects.all()
-		matri = Matricula.objects.filter(grado = grado).values_list('persona_id', flat=True)
+		matri = Matricula.objects.all().values_list('persona_id', flat=True)
 		alumnos = alumno.exclude(id__in = matri)
 		periodo = Periodo.objects.all()
 		des = Descicion.objects.all()
+		ga = GradoAnterior.objects.all()
 		return render(request, 'new_enroll.html', {'des':des, 'alumnos':alumnos, 'grado': grado, 
-			'centro':centro, 'mat':mat, 'periodo':periodo})
+			'centro':centro, 'mat':mat, 'periodo':periodo, 'ga':ga})
 
 # MATRICULA ALUMNO EN ESPECIFICO
 @login_required()
 def matricularxalumno(request, pk):
 		alumno = Alumno.objects.get(pk = pk)
 		grado = Grado.objects.filter(facilitador = request.user)
-		centro = Matricula.objects.filter(grado = grado)
+		centro = Facilitador.objects.get(usuario = request.user)
 		periodo = Periodo.objects.all()
 		des = Descicion.objects.all()
+		ga = GradoAnterior.objects.all()
 		return render(request, 'matricularxalumno.html', {'des':des, 'alumno':alumno, 'grado': grado, 
-			'centro':centro, 'periodo':periodo})
+			'centro':centro, 'periodo':periodo, 'ga':ga})
 
 @login_required()
 def matricularxalumno_add(request):
@@ -524,21 +520,26 @@ def matricularxalumno_add(request):
 			alumno = request.POST.get('alumno')
 			grado = request.POST.get('grado')
 			centro = request.POST.get('centro')
-			primer = request.POST.get('primer')
 			requisito = request.POST.get('requisito')
+			gra = request.POST.get('ga')
+			condicion = request.POST.get('condicion')
+			otro = request.POST.get('otro')
 			
 			# archivos = request.FILES['archivos']
 
 			g = Grado.objects.get(pk=grado)
 			c = Centro.objects.get(pk = centro)
-			d = Periodo.objects.get(pk=primer)
 			r = Descicion.objects.get(pk = requisito)
 			a = Alumno.objects.get(pk = alumno)
+			ga = GradoAnterior.objects.get(pk=gra)
+
+			config = Configuracion.objects.latest('id')
 
 			mat = Matricula(fecha = datetime.now() , persona = a, centro = c, grado = g, 
-					num_periodo = d, requisito = r)	
+					num_periodo = config.periodo, requisito = r, grado_anterior = ga, condicion = condicion,
+					otro = otro)	
 			mat.save()
-			return HttpResponseRedirect('/principal/enroll/new/alumno/'+pk)
+			return HttpResponseRedirect('/principal/alumnos/all/')
 		except Exception as e:
 			return HttpResponse(e)
 
@@ -549,19 +550,23 @@ def new_enroll_add(request):
 			alumnos = request.POST.getlist('alumno[]')
 			grado = request.POST.get('grado')
 			centro = request.POST.get('centro')
-			primer = request.POST.get('primer')
 			requisito = request.POST.get('requisito')
-			
-			# archivos = request.FILES['archivos']
+			gra = request.POST.get('ga')
+			condicion = request.POST.get('condicion')
+			otro = request.POST.get('otro')
 
 			g = Grado.objects.get(pk=grado)
 			c = Centro.objects.get(pk = centro)
-			d = Periodo.objects.get(pk=primer)
 			r = Descicion.objects.get(pk = requisito)
+			ga = GradoAnterior.objects.get(pk=gra)
+
+			config = Configuracion.objects.latest('id')
+
 			for alumno in alumnos:	
 				a = Alumno.objects.get(pk=alumno)
 				mat = Matricula(fecha = datetime.now() , persona = a, centro = c, grado = g, 
-					num_periodo = d, requisito = r)	
+					num_periodo = config.periodo, requisito = r, grado_anterior = ga, condicion = condicion,
+					otro = otro)	
 				mat.save()
 			return HttpResponseRedirect('/principal/enroll/new/')
 		except Exception as e:
@@ -614,62 +619,69 @@ def all_enroll(request):
 
 @login_required()
 def view_matricula(request, ida):
-	alu = Alumno.objects.get(pk = ida)
-	matri = Matricula.objects.filter(alumno = alu)
-	m = matri.count()
-	# if matri.count() > 0:
-	return render(request, 'enroll_student.html', {'matri': matri, 'm': m})
+	if request.user.Facilitador:
+		alu = Alumno.objects.get(pk = ida)
+		matri = Matricula.objects.filter(alumno = alu)
+		m = matri.count()
+		# if matri.count() > 0:
+		return render(request, 'enroll_student.html', {'matri': matri, 'm': m})
+	else:
+		return render(request, '404.html')
 
 # REPORTES
 
 @login_required()
 def all_reports(request):
-	return render(request, 'all_reports.html')
+	if request.user.Facilitador:
+		return render(request, 'all_reports.html')
+	else:
+		return render(request, '404.html')
 
 @login_required()
 def all_graphics(request):
-	persona = Alumno.objects.all()
-	# Grafrico por sexo
-	masculino = persona.filter(sexo = 1)
-	femenino = persona.filter(sexo = 2)
-	numm = masculino.count()
-	numf = femenino.count()
-	# Grafico por grado
-	primer = Grado.objects.get(grado = "Primero")
-	mat1 = Matricula.objects.filter(grado = primer)
-	primero = mat1.count()
-	seg = Grado.objects.get(grado = "Segundo")
-	mat2 = Matricula.objects.filter(grado = seg)
-	segundo = mat2.count()
-	tercer = Grado.objects.get(grado = "Tercero")
-	mat3 = Matricula.objects.filter(grado = tercer)
-	tercero = mat3.count()
-	# cuart = Grado.objects.get(grado = "Cuarto")
-	# mat4 = Matricula.objects.filter(grado = cuart)
-	# cuarto = mat4.count()
-	# quin = Grado.objects.get(grado = "Quinto")
-	# mat5 = Matricula.objects.filter(grado = quin)
-	# quinto = mat5.count()
-	# sex = Grado.objects.get(grado = "Sexto")
-	# mat6 = Matricula.objects.filter(grado = sex)
-	# sexto = mat6.count()
-	# sep = Grado.objects.get(grado = "Septimo")
-	# mat7 = Matricula.objects.filter(grado = sep)
-	# septimo = mat7.count()
-	# octa = Grado.objects.get(grado = "Octavo")
-	# mat8 = Matricula.objects.filter(grado = octa)
-	# octavo = mat8.count()
-	# nov = Grado.objects.get(grado = "Noveno")
-	# mat9 = Matricula.objects.filter(grado = nov)
-	# noveno = mat9.count()
-	# Grafico por centro
-	centro = Centro.objects.all()
-	matriculas = Matricula.objects.filter()
+	if request.user.Facilitador:
+		persona = Alumno.objects.all()
+		# Grafrico por sexo
+		masculino = persona.filter(sexo = 1)
+		femenino = persona.filter(sexo = 2)
+		numm = masculino.count()
+		numf = femenino.count()
 
+		m = Matricula.objects.all()
+		# Grafico por grado
+		primer =3
+		primero = 3
+		# MATRICULA POR GRADO: SEGUNDO
+		segu = Grado.objects.get(grado = "Segundo")
+		segundo = m.filter(grado=segu).count()
+		# MATRICULA POR GRADO: TERCERO
+		terc = 3
+		tercero = 3
+		# MATRICULA POR GRADO: CUARTO
+		cuar = Grado.objects.get(grado = "Cuarto")
+		cuarto = m.filter(grado=cuar).count()
+		# MATRICULA POR GRADO: QUINTO
+		quin = Grado.objects.get(grado = "Quinto")
+		quinto = m.filter(grado=quin).count()
+		# MATRICULA POR GRADO: SEXTO
+		sex = Grado.objects.get(grado = "Sexto")
+		sexto = m.filter(grado=sex).count()
+		# MATRICULA POR GRADO: SEPTIMO
+		sep = 3
+		septimo = 3
+		# MATRICULA POR GRADO: OCTAVO
+		octa = 3
+		octavo = 3
+		# MATRICULA POR GRADO: NOVENO
+		nove = 3
+		noveno = 3
 
-	return render(request, 'all_graphics.html', {'nummf':numf, 'numm':numm,
-		'primero':primero,'segundo':segundo,'tercero':tercero})
-
+		return render(request, 'all_graphics.html', {'nummf':numf, 'numm':numm,
+			'primero':primero,'segundo':segundo,'tercero':tercero,'cuarto':cuarto,
+		'quinto':quinto,'sexto':sexto,'septimo':septimo, 'octavo':octavo,
+		'noveno':noveno})
+	else:
+		return render(request, '404.html')
 
 @login_required()
 def reportes(request):
@@ -749,5 +761,13 @@ def notas(request):
 def descargas(request):
 	if request.user.Facilitador:
 		return render(request, 'descargas.html')
+	else:
+		return render(request, '404.html')
+
+@login_required
+def tombola(request):
+	if request.user.Facilitador:
+		alumnos = Alumno.objects.all()
+		return render(request, 'tombola.html', {'alumnos': alumnos})
 	else:
 		return render(request, '404.html')

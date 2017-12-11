@@ -1,0 +1,130 @@
+{% extends "base_in_admin.html" %}
+
+{% block container %}
+<div class="container">
+<br><br>
+<div class="row">
+  <div class="form-elegant col-md-6">
+  	 <div class="text-center">
+        <h3 class="dark-grey-text mb-5"><strong>Configuración Actual</strong></h3>
+    </div>
+  	<div class="table-responsive" style=" overflow:scroll; overflow-y:hidden;">
+    <table  class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
+        <thead class="blue lighten-2 text-white">
+            <tr>
+                <th>Año Lectivo</th>
+                <th>Metodología</th>
+                <th>Periodo</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Centros</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            	    <td>{{config.anio_lectivo}}</td>
+                    <td>{{config.metodo}}</td>
+                    <td>{{config.periodo}}</td>
+                    <td>{{config.periodo.inicio_clases}}</td>
+                    <td>{{config.periodo.fin_clases}}</td>
+                    <td>
+                    	{% for c in config.centro.all %}
+                    		{{c}},
+                    	{% endfor %}
+                    </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+<div class="col-md-6">
+
+<form action="/administrador/configuracion/add/" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+    <!--Form without header-->
+    <div class="card">
+
+        <div class="card-body mx-4">
+
+            <!--Header-->
+            <div class="text-center">
+                <h3 class="dark-grey-text mb-5"><strong>Configuración</strong></h3>
+            </div>
+
+            <!--Body-->
+            <div class="md-form">
+                <input type="text" id="anio" name="anio" class="form-control">
+                <label for="anio">Año Lectivo</label>
+            </div>
+
+		    <div class="form-group">
+		        <i class="fa fa-check-square prefix grey-text"></i>
+		        <label for="metodo">Metodología</label>
+		        <select class="mdb-selec colorful-select dropdown-primary" name="metodo" id="metodo">
+		        <option value="" disabled selected>Seleccione</option>
+		        {% for g in metodo %}
+		            <option value="{{g.id}}"> {{g}} </option>
+		        {% endfor %}
+		        </select>
+		    </div>
+
+		    <div class="md-form">
+                <input type="text" id="periodo" name="periodo" class="form-control">
+                <label for="periodo">Periodo</label>
+            </div>
+
+		     <div class="md-form form-check">
+		        <i class="fa fa-calendar-o prefix grey-text"></i>
+		        <input id="fechai" placeholder="Seleccione fecha" type="text" name="fechai" id="date-picker-example" class="form-control datepicker" required="">
+		        <label for="date-picker-example">Inicio de Clases</label>
+		    </div>
+
+		    <div class="md-form form-check">
+		        <i class="fa fa-calendar-o prefix grey-text"></i>
+		        <input id="fechaf" name="fechaf" placeholder="Seleccione fecha" type="text" id="date-picker-example" class="form-control datepicker" required="">
+		        <label for="date-picker-example">Fin de Clases</label>
+		    </div>
+
+		    <div class="form-group">
+				<h5 for="centro">Centros</h5>
+				<select name="centro[]" style="width:100%" id="centro" class="js-example-basic-multiples selectpicker" multiple="multiple" required>
+					<option value="" disabled selected>Seleccione</option>
+				  {% for a in centro %}
+						<option value="{{ a.id }}">{{ a }}</option>
+					{% endfor %}
+				</select>
+					
+			</div>
+
+            <div class="text-center mb-3">
+                <button type="submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a">Guardar</button>
+            </div>
+
+        </div>
+
+        <!--Footer-->
+        <div class="modal-footer mx-5 pt-3 mb-1">
+            <p class="font-small grey-text d-flex justify-content-end">Recuerda que estos cambios afectarán todos los módulos.</p>
+        </div>
+
+    </div>
+    <!--/Form without header-->
+</form>
+</div>
+</div>
+</div>
+  
+{% endblock container %}
+
+{% block js %}
+    <script>
+    	$(document).ready(function(){
+    		$("#fechai").mask("9999-99-99");
+            $("#fechaf").mask("9999-99-99");
+
+             $('#centro').select2({
+				  placeholder: 'Escriba el nombre del centro'
+				});
+    	})
+    </script>
+{% endblock js %}

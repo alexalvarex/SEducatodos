@@ -26,8 +26,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='form_login'),
     url(r'^account/', include('account.urls')),
-    url(r'^principal/', include('adminapp.urls')),
     url(r'^administrador/', include('administrador.urls')),
+    url(r'^principal/', include('adminapp.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

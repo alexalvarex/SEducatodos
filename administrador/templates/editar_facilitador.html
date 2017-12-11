@@ -1,0 +1,234 @@
+{% extends "base_in_admin.html" %}
+
+{% block container %}
+
+<!-- Grid row -->
+<div class="row pt-5 d-flex justify-content-center">
+
+    <!-- Grid column -->
+    <div class="col-md-2 pl-5 pl-md-0 pb-5">
+
+        <div class="steps-form-3">
+            <div class="steps-row-3 setup-panel-3 d-flex justify-content-between">
+                <div class="steps-step-3">
+                    <a href="#step-8" type="button" class="btn btn-info btn-circle-3 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Información de Usuario"><i class="fa fa-user" aria-hidden="true"></i></a>
+                </div>
+                <div class="steps-step-3">
+                    <a href="#step-9" type="button" class="btn btn-pink btn-circle-3 waves-effect p-3" data-toggle="tooltip" data-placement="top" title="Información del Facilitador"><i class="fa fa-folder-open-o" aria-hidden="true"></i></a>
+                </div>
+                <div class="steps-step-3 no-height">
+                    <a href="#step-11" type="button" class="btn btn-pink btn-circle-3 waves-effect p-3" data-toggle="tooltip" data-placement="top" title="Guardar"><i class="fa fa-check" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-7">
+
+        <form id="aa" action="/administrador/facilitador/editar/add/" method="post">
+            {% csrf_token %}
+            <div class="row setup-content-3" id="step-8">
+                <div class="col-md-12">
+                    <h3 class="font-bold pl-0 my-4"><strong>Información de Usuario</strong></h3>
+                    <p>La información del usuario no es modificable.</p>
+                    <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right" type="button">Siguiente</button>
+                </div>
+            </div>
+            <div class="row setup-content-3" id="step-9">
+                <div class="col-md-12">
+                    <h3 class="font-bold pl-0 my-4"><strong>Información del Facilitador</strong></h3>
+                    <p>Los elementos con <span style="color:red">*</span> son requeridos.</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                        <input type="hidden" value="{{faci.id}}" name="id" id="id">
+                        <div class="md-form">
+                            <i class="fa fa-id-card prefix grey-text"></i>
+                            <input type="text" id="numid" name="numid" value="{{faci.numid}}" class="form-control" required="">
+                            <label for="numid">Identidad <span style="color:red">*</span></label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-user prefix grey-text"></i>
+                            <input type="text" id="nombre" name="nombre" value="{{faci.apellido}}" class="form-control" required="">
+                            <label for="nombre">Nombre <span style="color:red">*</span></label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-user prefix grey-text"></i>
+                            <input type="text" id="apellido" name="apellido" value="{{faci.apellido}}" class="form-control" required="">
+                            <label for="apellido">Apellido <span style="color:red">*</span></label>
+                        </div>
+
+                        
+                        <div class="md-form">
+                            <i class="fa fa-phone prefix grey-text"></i>
+                            <input type="text" id="telefono" name="telefono" value="{{faci.telefono}}" class="form-control">
+                            <label for="telefono">Teléfono o Celular</label>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-pencil prefix grey-text"></i>
+                            <label for="lugar">Lugar de Residencia <span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="opcio" id="lugar" required="">
+                            <option value="{{faci.tipo_residencia.id}}" >{{faci.tipo_residencia}}</option>
+                                {% for t in tipor %}
+                                    <option value="{{t.id}}">{{t}}</option> 
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-bus prefix grey-text"></i>
+                            <input type="text" id="direccion" value="{{faci.domicilio}}" name="direccion" class="form-control" required="">
+                            <label for="direccion">Domicilio Exacto <span style="color:red">*</span></label>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-globe prefix grey-text"></i>
+                            <label for="muni">Seleccione Municipio <span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="muni" id="muni">
+                                <option value="{{faci.municipio.id}}">{{faci.municipio}}</option>
+                                <optgroup label="CHOLUTECA">
+                                {% for m in cholu %}
+                                    <option value="{{m.id}}"> {{m}} </option>
+                                {% endfor %}
+                                <optgroup label="VALLE">
+                                {% for m in valle %}
+                                    <option value="{{m.id}}"> {{m}} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                        <div class="md-form">
+                            <i class="fa fa-briefcase prefix grey-text"></i>
+                            <input type="text" id="ocupacion" value="{{faci.ocupacion}}" name="ocupacion" class="form-control" required="">
+                            <label for="ocupacion">Ocupación u Oficio <span style="color:red">*</span></label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-briefcase prefix grey-text"></i>
+                            <input type="text" id="lugart" value="{{faci.lugar_trabajo}}" name="lugart" class="form-control">
+                            <label for="lugart">Lugar de Trabajo</label>
+                        </div>
+                            
+                         <div class="form-group">
+                            <i class="fa fa-globe prefix grey-text"></i>
+                            <label for="formacion">Formación Académica <span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="formacion" id="formacion" required="">
+                            <option value="{{faci.formacion_academica.id}}">{{faci.formacion_academica}}</option>
+                            {% for m in fa %}
+                                <option value="{{m.id}}"> {{m}} </option>
+                            {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="otro">Otra Formación</label>
+                            <input type="text" name="otro" id="otro" value="{{faci.otra_formacion}}" class="form-control">
+                        </div>
+
+                        <div class="md-form form-check">
+                            <i class="fa fa-birthday-cake prefix grey-text"></i>
+                            <input id="fecha_nacimiento" name="fechan" value="{{faci.fecha_nacimiento|date:"Y-m-d"}}" placeholder="9999/99/99" type="text" class="form-control datepicker" required="">
+                            <label for="date-picker-example">Fecha de Nacimiento <span style="color:red">*</span></label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edad">Edad <span style="color:red">*</span></label>
+                            <input type="text" id="edad" name="edad" value="{{faci.edad}}" class="form-control">
+                        </div>
+
+                        <div class="md-form form-check">
+                            <i class="fa fa-calendar-o prefix grey-text"></i>
+                            <input id="fechafaci" value="{{faci.tiempo_facilitador|date:"Y-m-d"}}" name="fechaf" placeholder="9999/99/99" type="text" id="date-picker-example2" class="form-control datepicker" required="">
+                            <label for="date-picker-example">Fecha desde ser Facilitador <span style="color:red">*</span></label>
+                        </div>
+
+                        </div>
+                        <div class="col-md-4">
+                        
+
+                        <div class="form-group">
+                            <i class="fa fa-pencil prefix grey-text"></i>
+                            <label for="becado">¿Es Becado? <span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="becado" id="becado" required="">
+                                <option value="{{faci.becado.id}}" >{{faci.becado}}</option>
+                                {% for d in des %}
+                                    <option value="{{d.id}}">{{d}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa prefix grey-text"></i>
+                            <label for="estudia">¿Estudia Actualmente? <span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="estudia" id="estudia" required="">
+                                <option value="{{faci.estudia.id}}">{{faci.estudia}}</option>
+                                {% for d in des %}
+                                    <option value="{{d.id}}">{{d}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-briefcase prefix grey-text"></i>
+                            <input type="text" id="dondee" value="{{faci.donde_estudia}}" name="dondee" class="form-control">
+                            <label for="dondee">¿Donde Estudia?</label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-briefcase prefix grey-text"></i>
+                            <input type="text" id="quee" value="{{faci.que_estudia}}" name="quee" class="form-control">
+                            <label for="quee">¿Qué Estudia?</label>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-venus-mars prefix grey-text"></i>
+                            <label for="sexo">Seleccione Genero <span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="sexo" id="sexo" required="">
+                                <option value="{{faci.sexo.id}}"> {{faci.sexo}} </option>
+                                {% for s in sexo %}
+                                    <option value="{{s.id}}"> {{s}} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-pencil prefix grey-text"></i>
+                            <label for="centro">Centro<span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="centro" id="centro" required="">
+                                <option value="{{centro.id}}">{{centro}}</option>
+                            </select>
+                        </div>
+                        
+                        </div>
+                    </div>
+                    <button class="btn btn-mdb-color btn-rounded prevBtn-3 float-left" type="button">Anterior</button>
+                    <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right" type="button">Siguiente</button>
+                </div>
+            </div>
+            <div class="row setup-content-3" id="step-11">
+                <div class="col-md-12">
+                    <h3 class="font-bold pl-0 my-4"><strong>Finalizado</strong></h3>
+                    <h2 class="text-center font-bold my-4">Registro completado!</h2>
+                    <button class="btn btn-mdb-color btn-rounded prevBtn-3 float-left" type="button">Anterior</button>
+                    <input class="btn success-color z-depth-2 btn-rounded float-right" type="submit" value="Enviar">
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <!-- Grid column -->
+
+</div>
+<!-- Grid row -->
+    
+{% endblock container %}

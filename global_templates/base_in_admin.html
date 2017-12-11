@@ -39,23 +39,23 @@
         <ul class="collapsible collapsible-accordion">
 
             <!-- Collapsible link -->
-            <li><a style="color:blue;font-size:10pt" href="{% url 'all_reports' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-pie-chart"></i> Estadísticas</a>
+            <li><a style="color:blue;font-size:10pt" href="{% url 'graficos' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-pie-chart"></i> Estadísticas</a>
             </li>
 
             <!-- Collapsible link -->
-            <li><a style="color:blue;font-size:10pt" href="{% url 'all_facilitador' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i>Perfil</a>
+            <li><a style="color:blue;font-size:10pt" href="{% url 'perfil' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i>Perfil</a>
             </li>
 
             <!-- Collapsible link -->
-            <li><a style="color:blue;font-size:10pt" href="{% url 'all_centros' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-briefcase"></i>Puesto de Trabajo</a>
+            <li><a style="color:blue;font-size:10pt" href="{% url 'centrosxdepto' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-briefcase"></i>Centros</a>
             </li>
 
             <!-- Collapsible link -->
-            <li><a style="color:blue;font-size:10pt" href="{% url 'notas' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-list"></i>Notas</a>
+            <li><a style="color:blue;font-size:10pt" href="{% url 'certificados' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-list"></i>Certificados y Docs</a>
             </li>
-            <li><a style="color:blue;font-size:10pt" href="{% url 'descargas' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-download"></i>Zona de Descargas</a>
+            <li><a style="color:blue;font-size:10pt" href="{% url 'alumnossinmat' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-download"></i>Alumnos</a>
             </li>
-             <li><a style="color:blue;font-size:10pt" href="{% url 'alumnosxgrado' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-users"></i>Alumnos</a>
+             <li><a style="color:blue;font-size:10pt" href="{% url 'config' %}" class="collapsible-header waves-effect arrow-r"><i class="fa fa-users"></i>Configuración</a>
             </li>
     
 
@@ -66,7 +66,7 @@
 </ul>
 <!-- SideNav Menu -->
                     <img src="{% static 'img/imagen1.png' %}" style="width: 10%;" alt="">
-                    <a class="navbar-brand" href="/" style="padding:10px">Inicio</a>
+                    <a class="navbar-brand" href="{% url 'index_admin' %}" style="padding:10px">Inicio</a>
                     
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -119,12 +119,12 @@
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-r">
                 <h6 class="title font-bold"><strong>Links</strong></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p><a href="{% url 'all_reports' %}">Estadísticas</a></p>
-                <p><a href="{% url 'all_facilitador' %}">Perfil</a></p>
-                <p><a href="{% url 'all_centros' %}">Puesto de Trabajo</a></p>
-                <p><a href="{% url 'notas' %}">Notas</a></p>
-                <p><a href="{% url 'descargas' %}">Zona de Descargas</a></p>
-                <p><a href="{% url 'alumnosxgrado' %}">Alumnos</a></p>
+                <p><a href="{% url 'graficos' %}">Estadísticas</a></p>
+                <p><a href="{% url 'perfil' %}">Perfil</a></p>
+                <p><a href="{% url 'centrosxdepto' %}">Centros</a></p>
+                <p><a href="{% url 'certificados' %}">Certificados y Docs</a></p>
+                <p><a href="{% url 'alumnossinmat' %}">Alumnos</a></p>
+                <p><a href="{% url 'config' %}">Configuración</a></p>
             </div>
             <!--/.Second column-->
 

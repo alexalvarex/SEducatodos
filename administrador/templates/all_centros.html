@@ -1,45 +1,112 @@
-{% extends "base_in.html" %}
+{% extends "base_in_admin.html" %}
 
 {% block info %}
-    <br><h1 class="text-center">Lista de Centros</h1>
-    
+    <br><h1 class="text-center">Lista de Centros de {{depto}}</h1><br>
+
     <br>
-    <h4>Actualmente hay {{numc}} centros registrados, <a href="{% url 'new_centro' %}" class="btn btn-info">¿Desea agregar uno nuevo?</a></h4>
+    <div class="table-responsive" style=" overflow:scroll; overflow-y:hidden;">
     <table id="example" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
         <thead class="blue lighten-2 text-white">
             <tr>
                 <th>Centro</th>
                 <th>Tipo de Centro</th>
-                <th>Zona</th>
                 <th>Patrocinador</th>
                 <th>Recibe Incentivo del Patrocinador?</th>
                 <th>Que Recibe</th>
+                <th>Quien lo Recibe</th>
                 <th>Cuando lo recibe</th>
                 <th>Promotor</th>
+                <th>Nombre Promotor</th>
                 <th>Donde funciona</th>
+                <th>Municipio</th>
                 <th>Dirección del Centro</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-        {% for d in centros %}
+        {% if depto.id == 1 %}
+            {% for d in centros_cholu %}
             <tr>
                     <td>{{d.centro}}</td>
-                    <td>{{d.tipo_centro}}</td>
                     <td>{{d.zona.zona}}</td>
                     <td>{{d.patrocinador}}</td>
                     <td>{{d.patro_incentivo}}</td>
                     <td>{{d.patro_recibe}}</td>
+                    <td>{{d.quien}}</td>
                     <td>{{d.cada_cuando}}</td>
                     <td>{{d.promotor}}</td>
+                    <td>{{d.nombre_promotor}}</td>
                     <td>{{d.donde_funciona}}</td>
+                    <td>{{d.municipio}}</td>
                     <td>{{d.direccion}}</td>
                     <td>
                         <div class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-info" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones </a>
                                 <div class="dropdown-menu dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                                    <a class="dropdown-item dropdown-danger" href="{% url 'facilitadorxcentro' d.id %}">Ver Facilitadores</a>
+                                    <a href="{% url 'matricular' d.id %}" class="dropdown-item dropdown-danger">Matricula masiva</a>
+                                    <a class="dropdown-item" href="{% url 'editar_centros' d.id %}">Editar</a>
+                                    <a class="dropdown-item dropdown-danger" data-toggle="modal" data-target="#confirmar2">Eliminar</a>
+                                </div>
+                        </div>
+                        <!-- Central Modal Medium Danger -->
+                                <div class="modal fade" id="confirmar2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-notify modal-danger" role="document">
+                                        <!--Content-->
+                                        <div class="modal-content">
+                                            <!--Header-->
+                                            <div class="modal-header">
+                                                <p class="heading lead">Confirmación para Eliminar</p>
+
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true" class="white-text">&times;</span>
+                                                </button>
+                                            </div>
+
+                                            <!--Body-->
+                                            <div class="modal-body">
+                                                <div class="text-center">
+                                                    <i class="fa fa-times fa-4x mb-3 animated rotateIn"></i>
+                                                    <p>¿Seguro que desea eliminar este centro?</p>
+                                                </div>
+                                            </div>
+
+                                            <!--Footer-->
+                                            <div class="modal-footer justify-content-center">
+                                                <a type="button"  class="btn btn-primary-modal btn-eliminar" href="{% url 'delete_centro' d.id %}">SI <i class="fa fa-times ml-1"></i></a>
+                                                <a type="button" class="btn btn-outline-secondary-modal waves-effect" data-dismiss="modal">No</a>
+                                            </div>
+                                        </div>
+                                        <!--/.Content-->
+                                    </div>
+                                </div>
+                                <!-- Central Modal Medium Danger-->
+                    </td>
+            </tr>
+        {% endfor %}
+            <h4>Actualmente hay {{numc}} centros registrados en choluteca, <a href="{% url 'new_centro' %}" class="btn btn-info">¿Desea agregar uno nuevo?</a></h4>
+        {% else %}
+            {% for d in centros_valle %}
+            <tr>
+                    <td>{{d.centro}}</td>
+                    <td>{{d.zona.zona}}</td>
+                    <td>{{d.patrocinador}}</td>
+                    <td>{{d.patro_incentivo}}</td>
+                    <td>{{d.patro_recibe}}</td>
+                    <td>{{d.quien}}</td>
+                    <td>{{d.cada_cuando}}</td>
+                    <td>{{d.promotor}}</td>
+                    <td>{{d.nombre_promotor}}</td>
+                    <td>{{d.donde_funciona}}</td>
+                    <td>{{d.municipio}}</td>
+                    <td>{{d.direccion}}</td>
+                    <td>
+                        <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle btn btn-info" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones </a>
+                                <div class="dropdown-menu dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                                    <a class="dropdown-item dropdown-danger" href="{% url 'facilitadorxcentro' d.id %}">Ver Facilitadores</a>
                                     <a id="btn-editar" class="dropdown-item" href="http://127.0.0.1:8000/admin/adminapp/centros/{{d.id}}/change/" target="_blank" data-id="{{ d.id }}" data-centro="{{ d.centro }}" data-tipoc="{{ d.tipo_centro.id }}" data-patrocinador="{{ d.patrocinador.id }}" data-zona="{{ d.zona.id }}" data-patroi="{{ d.patro_incentivo.id }}" data-patror="{{ d.patro_recibe }}" data-cuando="{{ d.cada_cuando }}" data-promotor="{{ d.promotor.id }}" data-donde="{{ d.donde_funciona }}" data-direccion="{{ d.direccion }}" data-toggle="modal" data-target="#edit_centro">Editar</a>
-                                    <a class="dropdown-item dropdown-danger" href="{% url 'delete_centro' d.id %}">Eliminar</a>
+                                    <a class="dropdown-item dropdown-danger" data-toggle="modal" data-target="#confirmar">Eliminar</a>
                                 </div>
                         </div>
                         <!-- Central Modal Medium Danger -->
@@ -76,12 +143,12 @@
                                 <!-- Central Modal Medium Danger-->
                     </td>
             </tr>
-            {% empty %}
-                    <h2>No hay centros registrados</h2>
         {% endfor %}
+             <h4>Actualmente hay {{numv}} centros registrados en valle, <a href="{% url 'new_centro' %}" class="btn btn-info">¿Desea agregar uno nuevo?</a></h4>
+        {% endif %}
         </tbody>
     </table>
-
+    </div>
 
 <!--Modal: Contact form-->
 <div class="modal fade" id="edit_centro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -31,25 +31,31 @@
 				<div class="form-group">
 			        <h5 for="centro">Centro</h5>
 			        <select name="centro" class="mdb-selec colorful-select dropdown-primary" id="centro">
-			        <option value="" disabled selected>Seleccione</option>
-			        {% for g in centro %}
-			            <option value="{{g.id}}"> {{g.centro}} </option>
-			        {% endfor %}
+			           	<option value="{{centro.centro.id}}"> {{centro.centro}} </option>
 			        </select>
+			    </div>
+			    <div class="form-group">
+			        <h5 for="condicion">Condición de Ingreso</h5>
+			        <input type="text" id="condicion" class="form-control">
 			    </div>
 
 				</div>
 				<div class="col-md-6">
 				
 				<div class="form-group">
-					<h5 for="primer">Número de Periodo</h5>
-						<select name="primer" id="primer" class="mdb-selec colorful-select dropdown-primary" required>
-						<option value="" disabled selected>Seleccione</option>
-  							{% for p in periodo %}
-							<option value="{{ p.id }}">{{ p }}</option>
+					<h5 for="ga">Grado Anterior</h5>
+						<select name="ga" id="ga" class="mdb-selec colorful-select dropdown-primary" required>
+							<option value="" disabled selected>Seleccione</option>
+  							{% for g in ga %}
+							<option value="{{ g.id }}">{{ g }}</option>
 						{% endfor %}
 						</select>
 				</div>
+				<div class="form-group">
+			        <h6 for="otro">En caso si el grado anterior es otro por favor especifique</h6>
+			        <input type="text" name="otro" id="otro" class="form-control">
+			    </div>
+	
 				<div class="form-group">
 					<h5 for="requisito">¿Cumple con Requisito?</h5>
 						<select name="requisito" id="requisito" class="mdb-selec colorful-select dropdown-primary" required>
@@ -71,16 +77,3 @@
 	</div>	
 	
 {% endblock %}
-
-{% block js %}
-    <script>
-    	 $(document).ready(function(){
-            $("#fechai").mask("9999/99/99");
-            $('#fechai').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
-            // $('#horario').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
-            $("#fechaf").mask("9999/99/99");
-            $('#fechaf').bootstrapMaterialDatePicker({ weekStart : false, time: false });
-            
-        })
-    </script>
-{% endblock js %}

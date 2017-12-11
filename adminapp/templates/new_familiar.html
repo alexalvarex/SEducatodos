@@ -10,7 +10,7 @@
 <form id="new_student" action="" method="post">
 {% csrf_token %}
 <br>
-    <h2 class="text-center">Registrar Encargado de {{alumno}}</h2>
+    <h2 class="text-center">Registrar Encargado de {{alumno}} <a class="btn btn-info" href="{% url 'all_familiar' alumno.id %}">Ver</a></h2>
     <hr>
     <p>Los elementos con <span style="color:red">*</span> son requeridos.</p>
 	<div class="row">

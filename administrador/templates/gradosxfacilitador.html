@@ -1,0 +1,25 @@
+{% extends "base_in_admin.html" %}
+
+{% block container %}
+<div class="container">
+  <br>
+  <h1 class="text-center">Grados de {{facilitador}}</h1><br>
+  <h4>Actualmente {{facilitador}} tiene {{numg}} grados asignados, <a href="{% url 'nuevo_grado' facilitador.id centro.id %}" class="btn btn-info">Agregar uno nuevo</a></h4>
+    <div class="row">
+  {% for g in grados %}
+
+    <div class="col-md-4">
+      <div class="card">
+          <br><img class="img-fluid" src="https://cdn3.iconfinder.com/data/icons/iconic-1/32/list-256.png" style="width:50%; margin-left:auto; margin-right: auto" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title text-center">{{g.grado}}</h4>
+              <a href="{% url 'alumnos' g.id %}" class="btn btn-info">Ver Alumnos</a>
+          </div>
+      </div>
+    </div>
+    
+  {% endfor %}
+  </div>
+  
+</div>
+{% endblock container %}

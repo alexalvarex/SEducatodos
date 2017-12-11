@@ -1,0 +1,379 @@
+{% extends "base_in_admin.html" %}
+
+{% block container %}
+
+<!-- Grid row -->
+<div class="row pt-5 d-flex justify-content-center">
+
+    <!-- Grid column -->
+    <div class="col-md-2 pl-5 pl-md-0 pb-5">
+
+        <div class="steps-form-3">
+            <div class="steps-row-3 setup-panel-3 d-flex justify-content-between">
+                <div class="steps-step-3">
+                    <a href="#step-8" type="button" class="btn btn-info btn-circle-3 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Información de Usuario"><i class="fa fa-user" aria-hidden="true"></i></a>
+                </div>
+                <div class="steps-step-3">
+                    <a href="#step-9" type="button" class="btn btn-pink btn-circle-3 waves-effect p-3" data-toggle="tooltip" data-placement="top" title="Información del Facilitador"><i class="fa fa-folder-open-o" aria-hidden="true"></i></a>
+                </div>
+                <div class="steps-step-3 no-height">
+                    <a href="#step-11" type="button" class="btn btn-pink btn-circle-3 waves-effect p-3" data-toggle="tooltip" data-placement="top" title="Guardar"><i class="fa fa-check" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-7">
+
+        <form id="aa" action="/administrador/facilitador/nuevo/add/" method="post">
+            {% csrf_token %}
+            <div class="row setup-content-3" id="step-8">
+                <div class="col-md-12">
+                    <h3 class="font-bold pl-0 my-4"><strong>Información de Usuario</strong></h3>
+                    <p>Los elementos con <span style="color:red">*</span> son requeridos.</p>
+                    <div class="form-group md-form">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <label for="username">Username (nombre de usuario) <span style="color:red">*</span></label>
+                        <input type="text" id="username" name="username" class="form-control">
+                    </div>
+                    <div class="form-group md-form">
+                        <i class="fa fa-key prefix grey-text"></i>
+                        <label for="pass">Contraseña <span style="color:red">*</span></label>
+                        <input type="password" id="pass" name="pass" class="form-control">
+                        <ul style="font-size: 12px">
+                            <li>Su contraseña no puede asemejarse tanto a su otra información personal.</li>
+                            <li>Su contraseña debe contener al menos 8 caracteres, mayusculas, minusculas, numeros y signos.</li>
+                            <li>Su contraseña no puede ser una clave utilizada comunmente.</li>
+                            <li>Su contraseña no puede ser completamente numérica.</li>
+                        </ul>
+                    </div>
+                    <div class="form-group md-form">
+                        <i class="fa fa-key prefix grey-text"></i>
+                        <label for="confirmar">Confirmar contraseña <span style="color:red">*</span></label>
+                        <input type="password" id="confirmar" class="form-control">
+                        <p class="brand">Para verificar, introduzca la misma contraseña anterior.
+</p>
+                    </div>
+                    <div class="form-group md-form">
+                        <i class="fa fa-envelope prefix grey-text"></i>
+                        <label for="correo" data-error="correcto" data-success="incorrecto">Correo</label>
+                        <input type="email" id="correo" name="correo" class="form-control validate">
+                    </div>
+                    <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right" type="button">Siguiente</button>
+                </div>
+            </div>
+            <div class="row setup-content-3" id="step-9">
+                <div class="col-md-12">
+                    <h3 class="font-bold pl-0 my-4"><strong>Información del Facilitador</strong></h3>
+                    <p>Los elementos con <span style="color:red">*</span> son requeridos.</p>
+                    <div class="row">
+                        <div class="col-md-4">
+
+                        <div class="md-form">
+                            <i class="fa fa-id-card prefix grey-text"></i>
+                            <input type="text" id="numid" name="numid" class="form-control" required="">
+                            <label for="numid">Identidad <span style="color:red">*</span></label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-user prefix grey-text"></i>
+                            <input type="text" id="nombre" name="nombre" class="form-control" required="">
+                            <label for="nombre">Nombre <span style="color:red">*</span></label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-user prefix grey-text"></i>
+                            <input type="text" id="apellido" name="apellido" class="form-control" required="">
+                            <label for="apellido">Apellido <span style="color:red">*</span></label>
+                        </div>
+
+                        
+                        <div class="md-form">
+                            <i class="fa fa-phone prefix grey-text"></i>
+                            <input type="text" id="telefono" name="telefono" class="form-control">
+                            <label for="telefono">Teléfono o Celular</label>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-pencil prefix grey-text"></i>
+                            <label for="lugar">Lugar de Residencia <span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="opcio" id="lugar" required="">
+                            <option value="" disabled selected>Seleccione</option>
+                                {% for t in tipor %}
+                                    <option value="{{t.id}}">{{t}}</option> 
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-bus prefix grey-text"></i>
+                            <input type="text" id="direccion" name="direccion" class="form-control" required="">
+                            <label for="direccion">Domicilio Exacto <span style="color:red">*</span></label>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-globe prefix grey-text"></i>
+                            <label for="muni">Seleccione Municipio <span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="muni" id="muni">
+                                <optgroup label="CHOLUTECA">
+                                {% for m in cholu %}
+                                    <option value="{{m.id}}"> {{m}} </option>
+                                {% endfor %}
+                                <optgroup label="VALLE">
+                                {% for m in valle %}
+                                    <option value="{{m.id}}"> {{m}} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                        <div class="md-form">
+                            <i class="fa fa-briefcase prefix grey-text"></i>
+                            <input type="text" id="ocupacion" name="ocupacion" class="form-control" required="">
+                            <label for="ocupacion">Ocupación u Oficio <span style="color:red">*</span></label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-briefcase prefix grey-text"></i>
+                            <input type="text" id="lugart" name="lugart" class="form-control">
+                            <label for="lugart">Lugar de Trabajo</label>
+                        </div>
+                            
+                         <div class="form-group">
+                            <i class="fa fa-globe prefix grey-text"></i>
+                            <label for="formacion">Formación Académica <span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="formacion" id="formacion" required="">
+                            <option value="" disabled selected>Seleccione</option>
+                            {% for m in fa %}
+                                <option value="{{m.id}}"> {{m}} </option>
+                            {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="otro">Si la respuesta anterior es otro favor especificar su formación académica</label>
+                            <input type="text" name="otro" id="otro" class="form-control">
+                        </div>
+
+                        <div class="md-form form-check">
+                            <i class="fa fa-birthday-cake prefix grey-text"></i>
+                            <input id="fechan" name="fechan" placeholder="Seleccione fecha" type="text" id="date-picker-example" class="form-control datepicker" required="">
+                            <label for="date-picker-example">Fecha de Nacimiento <span style="color:red">*</span></label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edad">Edad <span style="color:red">*</span></label>
+                            <input type="text" id="edad" name="edad" class="form-control">
+                        </div>
+
+                        <div class="md-form form-check">
+                            <i class="fa fa-calendar-o prefix grey-text"></i>
+                            <input id="fechaf" name="fechaf" placeholder="Seleccione fecha" type="text" id="date-picker-example2" class="form-control datepicker" required="">
+                            <label for="date-picker-example">Fecha desde ser Facilitador <span style="color:red">*</span></label>
+                        </div>
+
+                        </div>
+                        <div class="col-md-4">
+                        
+
+                        <div class="form-group">
+                            <i class="fa fa-pencil prefix grey-text"></i>
+                            <label for="becado">¿Es Becado? <span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="becado" id="becado" required="">
+                                <option value="" disabled selected>Seleccione</option>
+                                {% for d in des %}
+                                    <option value="{{d.id}}">{{d}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa prefix grey-text"></i>
+                            <label for="estudia">¿Estudia Actualmente? <span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="estudia" id="estudia" required="">
+                                <option value="" disabled selected>Seleccione</option>
+                                {% for d in des %}
+                                    <option value="{{d.id}}">{{d}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-briefcase prefix grey-text"></i>
+                            <input type="text" id="dondee" name="dondee" class="form-control">
+                            <label for="dondee">¿Donde Estudia?</label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-briefcase prefix grey-text"></i>
+                            <input type="text" id="quee" name="quee" class="form-control">
+                            <label for="quee">¿Qué Estudia?</label>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-venus-mars prefix grey-text"></i>
+                            <label for="sexo">Seleccione Genero <span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="sexo" id="sexo" required="">
+                            <option value="" disabled selected>Seleccione</option>
+                            {% for s in sexo %}
+                                <option value="{{s.id}}"> {{s}} </option>
+                            {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-pencil prefix grey-text"></i>
+                            <label for="centro">Centro<span style="color:red">*</span></label>
+                            <select class="mdb-selec colorful-select dropdown-primary" name="centro" id="centro" required="">
+                                <option value="{{centro.id}}">{{centro}}</option>
+                            </select>
+                        </div>
+                        
+                        </div>
+                    </div>
+                    <button class="btn btn-mdb-color btn-rounded prevBtn-3 float-left" type="button">Anterior</button>
+                    <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right" type="button">Siguiente</button>
+                </div>
+            </div>
+            <div class="row setup-content-3" id="step-11">
+                <div class="col-md-12">
+                    <h3 class="font-bold pl-0 my-4"><strong>Finalizado</strong></h3>
+                    <h2 class="text-center font-bold my-4">Registro completado!</h2>
+                    <button class="btn btn-mdb-color btn-rounded prevBtn-3 float-left" type="button">Anterior</button>
+                    <input class="btn success-color z-depth-2 btn-rounded float-right" type="submit" value="Enviar">
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <!-- Grid column -->
+
+</div>
+<!-- Grid row -->
+    
+{% endblock container %}
+
+{% block js %}
+    <script>
+     function checkPassword(str)
+      {
+        var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+        return re.test(str);
+      }
+
+      function checkForm(form)
+      {
+        if(form.username.value == "") {
+          alert("Error: El username no debe estar en blanco!");
+          form.username.focus();
+          return false;
+        }
+        re = /^\w+$/;
+        if(form.pass.value != "" && form.pass.value == form.confimar.value) {
+          if(!checkPassword(form.pass.value)) {
+            alert("La contraseña ingresada no es valida!");
+            form.pass.focus();
+            return false;
+          }
+        } else {
+          alert("Error: Por favor confirma correctamente la contraseña!");
+          form.pass.focus();
+          return false;
+        }
+        return true;
+      }
+        $(document).on('submit', '#new_facilitador', function(e){
+            e.preventDefault();
+            var _numid = $('#numid').val()
+            var _nombre = $('#nombre').val()
+            var _apellido = $('#apellido').val()
+            var _tel = $('#telefono').val()
+            var _direccion = $('#direccion').val()
+            var _muni = $('#muni').val()
+            var _opcio = $("#lugar").val()
+            var _sexo = $('#sexo').val()
+            var _ocupacion = $('#ocupacion').val()
+            var _lugart = $('#lugart').val()
+            var _formacion = $('#formacion').val()
+            var _otra_formacion = $('#otro').val()
+            var _fechan = $('#fechan').val()
+            var _edad = $('#edad').val()
+            var _fechaf = $('#fechaf').val()
+            var _becado = $('#becado').val()
+            var _estudia = $('#estudia').val()
+            var _dondee = $('#dondee').val()
+            var _quee = $('#quee').val()
+            var _centro = $('#centro').val()
+            var _username = $('#username').val()
+            var _pass = $('#pass').val()
+            var _correo = $('#correo').val()
+            var csfrm = $('input[name=csrfmiddlewaretoken]').val()
+
+            $.ajax({
+                type:'POST',
+                url:'/administrador/facilitador/nuevo/add/',
+                data:{
+                    numid: _numid,
+                    nombre: _nombre,
+                    apellido: _apellido,
+                    telefono: _tel,
+                    direccion: _direccion,
+                    muni: _muni,
+                    opcio: _opcio,
+                    sexo: _sexo,
+                    ocupacion: _ocupacion,
+                    lugart: _lugart,
+                    formacion: _formacion,
+                    otra_formacion: _otra_formacion,
+                    fechan: _fechan,
+                    edad: _edad,
+                    fechaf: _fechaf,
+                    becado: _becado,
+                    estudia: _estudia,
+                    dondee: _dondee,
+                    quee: _quee,
+                    centro: _centro,
+                    username: _username,
+                    pass: _pass,
+                    correo: _correo,
+                    csrfmiddlewaretoken: csfrm
+                },
+                success: function(data){
+                    var html = '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><strong><span class="fa fa-check fa-2x"></span></strong> Se ingreso con exito el Facilitador ' + _nombre + ' ' + _apellido + ' satisfactoriamente.</div>'
+                    $('#mensaje').html(html)
+                    $('#numid').val('')
+                    $('#nombre').val('')
+                    $('#direccion').val('')
+                    $('#apellido').val('')
+                    $('#trabaja').val('')
+                    $('#telefono').val('')
+                    $('#ocupacion').val('')
+                    $('#fechan').val('')
+                    $('#lugart').val('')
+                    $('#fechaf').val('')
+                    $('#correo').val('')
+                    $('#dondee').val('')
+                    $('#quee').val('')
+                    $('#muni').val('')
+                    $('#becado').val('')
+                    $('#estudia').val('')
+                    $('#sexo').val('')
+                    $('#formacion').val('')
+                    $('#otro').val('')
+                    $('#edad').val('')
+                    $('#username').val('')
+                    $('#pass').val('')
+                    $('#confirmar').val('')
+                    console.log(data)
+                }
+            });
+        });
+    </script>
+{% endblock  %}

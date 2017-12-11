@@ -1,0 +1,168 @@
+{% extends "base_in_admin.html" %}
+
+{% block container %}
+<div class="container">
+	<br>
+	<h1 class="text-center">Generar Certificación de Estudios</h1>
+	<br>
+	<div class="row">
+	    
+	    <div class="col-md-12">
+	    	<div class="table-responsive">
+	    	<table id="example" class="table table-striped table-bordered table-responsive datatable" cellspacing="0" width="100%">
+		    	<thead class="blue lighten-2 text-white">
+		    		<tr>
+		    			<th>Identidad</th>
+		    			<th>Nombre Completo</th>
+		    			<th>Domicilio</th>
+		    			<th>Municipio</th>
+		    			<th>Telefonos</th>
+		    			<th>Grupo Etnico</th>
+		    			<th>Sexo</th>
+		    			<th>Fecha de Nacimiento</th>
+		          		<th>Edad</th>
+		    			<th>Trabaja Actualmente</th>
+		    			<th>Ocupación u Oficio</th>
+		          <th></th>
+		    		</tr>
+		    	</thead>
+		    	<tbody>
+		    	{% for d in alumnos %}
+		    		<tr>
+		    				<td>{{d.persona.numid}}</td>
+		    				<td>{{d.persona.nombre}} {{d.persona.apellido}} {{d.id}}</td>
+		    				<td>{{d.persona.domicilio}}</td>
+		    				<td>{{d.persona.municipio.municipio}}</td>
+		    				<td>{{d.persona.telefono}}</td>
+		    				<td>{{d.persona.grupo_etnico.grupo_etnico}}</td>
+		    				<td>{{d.persona.sexo.sexo}}</td>
+		            		<td>{{d.persona.fecha_nacimiento}}</td>
+		    				<td>{{d.persona.edad}}</td>
+		    				<td>{{d.persona.trabaja}}</td>
+		    				<td>{{d.persona.ocupacion}}</td>
+		            		<td>
+		                        <a id="btn-generar" class="btn btn-info" target="_blank" data-id="{{ d.id }}" data-nombre="{{ d.persona }}" data-apellido="{{ d.persona.apellido }}" data-grado="{{ d.grado }}" data-centro="{{ d.centro }}" data-municipio="{{ d.centro.municipio }}" data-depto="{{ d.centro.municipio.depto }}" data-periodo="{{ d.periodo.num_periodo }}" data-periododia="{{ d.periodo.inicio_clases.day }}" data-periodomes="{{ d.periodo.inicio_clases.month }}" data-periodoanio="{{ d.periodo.inicio_clases.year }}" data-periododiafin="{{ d.periodo.fin_clases.day }}" data-periodomesfin="{{ d.periodo.fin_clases.month }}" data-periodoaniofin="{{ d.periodo.fin_clases.year }}" data-toggle="modal" data-target="#edit_centro">Generar</a>
+		            		</td>
+		    		</tr>
+		    		{% empty %}
+		                    <h2>No hay alumnos registrados</h2>
+		    	{% endfor %}
+		    	</tbody>
+    		</table>
+    		</div>
+    		<!--<form action="">
+	    		<div class="form-group">
+					<h5 for="alumno">Alumno</h5>
+					<select name="alumno" id="alumno">
+						{% for a in alumnos %}
+							<option value="{{a.id}}">{{a.persona}}</option>	
+						{% endfor %}
+					</select>
+				</div>
+    		</form>-->
+	    </div>
+		<input type="button" id="test" onClick="fnExcelReport();" value="download" />
+
+
+<a href="#" id="testAnchor"></a>
+
+</div>
+<div id='MessageHolder'>
+		<div class="col-md-10">
+			<div id="cuerpo">
+				<div class="text-center">
+					<br>
+					<h3>REPUBLICA DE HONDURAS</h3>
+					<strong><h3>SECRETARIA DE EDUCACIÓN</h3></strong>
+					<h3>DIRECCIÓN DEPARTAMENTAL DE EDUCACIÓN</h3>
+					<br>
+					<h3>Certificado  de Estudios  de Educación Básica</h3>
+					<h3>Programa Educatodos </h3>
+				</div>
+				<br>
+				<h6><strong>PROMOCIÓN:__________________________________________________________________</strong></h6>
+				<br>
+				<p>
+					Nombre del alumno (a): <input type="text" id="nombree"> Alumno (a) de <span id="grado"></span> Grado de Centro: <span id="tipoc"></span> <span id="centro"></span> de <span id="lugar"></span> <span id="muni"></span> <span id="depto"></span>
+					<br>
+					Completó su estudios correspondientes al <span id="grado"></span> en el <span id="periodo"></span> periodo del año <span id="anio"></span> comprendido del <span id="periododia"></span> <span id="periodomes"></span> del año <span id="periodoanio"></span> al <span id="periododiafin"></span> <span id="periodomesfin"></span> del año <span id="periodoaniofin"></span> Contemplando un total de ____ Meses, obteniendo una calificación de ________ ____________ que lo promueve al _____________ grado.
+					<br>
+					Y, para los fines que al interesado (a) convengan, se le extiende el presente Certificaco de Estudios en el Municipio de _______________________ Departamento de _____________________
+
+				</p>
+
+			</div>
+		</div>
+				<div class="col-md-3 text-center">
+				_________________________ <br>	
+					Facilitador (a)		
+				</div>
+
+				<div class="col-md-3 text-center">
+				_________________________ <br>	
+					Director(a) Distrital/Municipal 
+					de educación		
+				</div>
+
+				<div class="col-md-3 text-center">
+				_________________________ <br>	
+					Coordinación Departamental de Jóvenes
+					y Adultos / Programa Educatodos		
+				</div>
+
+    </div>
+ </div>
+</div>
+{% endblock container %}
+
+{% block js %}
+    <script>
+    	$(document).ready(function(){
+
+             $('#alumno').select2({
+				  placeholder: 'Escriba el nombre del alumno'
+				});
+
+             $('#btn-editar').click(function(e)
+		    {
+		      e.preventDefault();
+		      var _id = $(this).attr('data-id');
+		      var _nombre = $(this).attr('data-nombre');
+		      var _apellido = $(this).attr('data-apellido');
+		      var _grado = $(this).attr('data-grado');
+		      var _tipoc = $(this).attr('data-tipoc');
+		      var _muni = $(this).attr('data-muni');
+		      var _centro = $(this).attr('data-centro');
+		      var _lugar = $(this).attr('data-lugar');
+		      var _muni = $(this).attr('data-municipio');
+		      var _depto = $(this).attr('data-depto');
+		      var _periodo = $(this).attr('data-periodo');
+		      var _periododia = $(this).attr('data-periododia');
+		      var _periodomes = $(this).attr('data-periodomes');
+		      var _periodoanio = $(this).attr('data-periodoanio');
+		      var _periodoaniofin = $(this).attr('data-periodoaniofin');
+		      var _periododiafin = $(this).attr('data-periododiafin');
+		      var _periodomesfin = $(this).attr('data-periodomesfin');
+		     
+		          $('#nombre').val(_nombre)
+		          $('#apellido').val(_apellido)
+		          $('#direccion').val(_direccion)
+		          $('#tipor').val(_tipor)
+		          $('#telefono').val(_telefono)
+		          $('#ocupacion').val(_ocupacion)
+		          $('#fechan').val(_fechan)
+		          $('#lugart').val(_lugart)
+		          $('#fechaf').val(_tiempof)
+		          $('#correo').val(_correo)
+		          $('#dondee').val(_dondee)
+		          $('#quee').val(_quee)
+		          $('#muni').val(_muni)
+		          $('#becado').val(_becado)
+		          $('#estudia').val(_estudia)
+		          $('#sexo').val(_sexo)
+		          $('#formacion').val(_formacion)
+		          $("#idfacilitadoredit").val(_id);  
+		    });
+    	})
+    </script>
+{% endblock js %}

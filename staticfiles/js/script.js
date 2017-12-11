@@ -1,3 +1,66 @@
+$(document).ready(function(){
+            $("#numid").mask("9999-9999-99999");
+            $("#telefono").mask("9999-9999");
+            $("#fechan").mask("9999-99-99");
+            $("#fechaf").mask("9999-99-99");
+            $('#fechan').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+            $('#fechaf').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+            $('#fechai').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+            
+        })
+        $(document).ready(function () {
+              var navListItems = $('div.setup-panel-3 div a'),
+                      allWells = $('.setup-content-3'),
+                      allNextBtn = $('.nextBtn-3'),
+                      allPrevBtn = $('.prevBtn-3');
+
+              allWells.hide();
+
+              navListItems.click(function (e) {
+                  e.preventDefault();
+                  var $target = $($(this).attr('href')),
+                          $item = $(this);
+
+                  if (!$item.hasClass('disabled')) {
+                      navListItems.removeClass('btn-info').addClass('btn-pink');
+                      $item.addClass('btn-info');
+                      allWells.hide();
+                      $target.show();
+                      $target.find('input:eq(0)').focus();
+                  }
+              });
+              
+              allPrevBtn.click(function(){
+                  var curStep = $(this).closest(".setup-content-3"),
+                      curStepBtn = curStep.attr("id"),
+                      prevStepSteps = $('div.setup-panel-3 div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
+
+                      prevStepSteps.removeAttr('disabled').trigger('click');
+              });
+
+              allNextBtn.click(function(){
+                  var curStep = $(this).closest(".setup-content-3"),
+                      curStepBtn = curStep.attr("id"),
+                      nextStepSteps = $('div.setup-panel-3 div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+                      curInputs = curStep.find("input[type='text'],input[type='url']"),
+                      isValid = true;
+
+                  $(".form-group").removeClass("has-error");
+                  for(var i=0; i< curInputs.length; i++){
+                      if (!curInputs[i].validity.valid){
+                          isValid = false;
+                          $(curInputs[i]).closest(".form-group").addClass("has-error");
+                      }
+                  }
+
+                  if (isValid)
+                      nextStepSteps.removeAttr('disabled').trigger('click');
+              });
+
+              $('div.setup-panel-3 div a.btn-info').trigger('click');
+
+
+});
 $(function(){
 
 	$('#slide-submenu').on('click',function() {			        
@@ -897,7 +960,7 @@ $(document).ready(function(){
                 exportEnabled: true,
                 animationEnabled: true,
                 title: {
-                    text: "Gráfico de Alumnos por su Sexo"
+                    text: "Gráfico de Alumnos\n por su Sexo"
                 },
                 data: [
                 {
@@ -918,7 +981,7 @@ $(document).ready(function(){
                 exportEnabled: true,
                 animationEnabled: true,
                 title: {
-                    text: "Gráfico de Alumnos por su Grado"
+                    text: "Gráfico de Alumnos\n por su Grado"
                 },
                 data: [
                 {
@@ -927,15 +990,10 @@ $(document).ready(function(){
                     yValueFormatString: "##0",
                     indexLabel: "{label} {y}",
                     dataPoints: [
-                        { y: $('#primero').val(), label: "Primero" },
                         { y: $('#segundo').val(), label: "Segundo" },
-                        { y: $('#tercero').val(), label: "Tercero" },
                         { y: $('#cuarto').val(), label: "Cuarto" },
                         { y: $('#quinto').val(), label: "Quinto" },
-                        { y: $('#sexto').val(), label: "Sexto" },
-                        { y: $('#septimo').val(), label: "Septimo" },
-                        { y: $('#octavo').val(), label: "Octavo" },
-                        { y: $('#noveno').val(), label: "Noveno" }
+                        { y: $('#sexto').val(), label: "Sexto" }
                     ]
                 }
                 ]

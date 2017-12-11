@@ -1,0 +1,139 @@
+{% extends "base_in_admin.html" %}
+
+{% block container %}
+
+<div style="margin-left: auto; margin-right:auto" class="col-md-6 text-center" id="mensaje" >
+  
+</div>
+<div style="border: 2px solid #D3D0D0" class="container col-sm-6 col-md-12 col-lg-6 mt-4">
+
+<form id="new_student" action="/administrador/centros/editar/add/" method="post">
+{% csrf_token %}
+<br>
+    <h2 class="text-center">Editar Centro</h2>
+    <hr>
+    <p>Los campos con <span style="color:red">*</span> son requeridos</p>
+	<div class="row">
+	<div class="col-md-4">
+    <input type="hidden" value="{{centro.id}}" name="id" id="id">
+    <div class="md-form">
+        <i class="fa fa-graduation-cap prefix grey-text"></i>
+        <input type="text" id="centro" name="centro" value="{{centro.centro}}" class="form-control" required="">
+        <label for="centro">Nombre del Centro <span style="color:red">*</span></label>
+    </div>
+
+    <div class="form-group">
+        <i class="fa fa-check-square prefix grey-text"></i>
+        <label for="patro">Patrocinador del Centro <span style="color:red">*</span></label>
+        <select class="mdb-selec colorful-select dropdown-primary" name="patro" id="patro">
+        <option value="{{centro.patrocinador.id}}">{{centro.patrocinador}}</option>
+        {% for g in patro %}
+            <option value="{{g.id}}"> {{g}} </option>
+        {% endfor %}
+        </select>
+    </div>
+
+     <div class="form-group">
+        <i class="fa fa-globe prefix grey-text"></i>
+        <label for="zona">Zona <span style="color:red">*</span></label>
+        <select class="mdb-selec colorful-select dropdown-primary" name="zona" id="zona">
+        <option value="{{centro.zona.id}}" selected>{{centro.zona}}</option>
+        {% for g in zona %}
+            <option value="{{g.id}}"> {{g.zona}} </option>
+        {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <i class="fa fa-globe prefix grey-text"></i>
+        <label for="muni">Seleccione Municipio <span style="color:red">*</span></label>
+        <select class="mdb-selec colorful-select dropdown-primary" name="muni" id="muni">
+            <option value="{{centro.municipio.id}}">{{centro.municipio}}</option>
+            <optgroup label="CHOLUTECA">
+            {% for m in cholu %}
+                <option value="{{m.id}}"> {{m}} </option>
+            {% endfor %}
+            <optgroup label="VALLE">
+            {% for m in valle %}
+                <option value="{{m.id}}"> {{m}} </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+    <div class="form-group">
+        <i class="fa fa-money prefix grey-text"></i>
+        <label for="patro_recibe">Recibe el facilitador/a algún incentivo o pago para facilitar el grado <span style="color:red">*</span></label>
+        <select class="mdb-selec colorful-select dropdown-primary" name="patro_recibe" id="patro_recibe">
+        <option value="{{centro.patro_incentivo.id}}" selected>{{centro.patro_incentivo}}</option>
+        {% for g in des %}
+            <option value="{{g.id}}"> {{g}} </option>
+        {% endfor %}
+        </select>
+    </div>
+    
+    <div class="md-form que">
+        <i class="fa fa-question prefix grey-text"></i>
+        <input type="text" value="{{centro.patro_recibe}}" name="que" id="que" class="form-control">
+        <label for="que">Qué recibe</label>
+    </div>
+
+    <div class="md-form quien">
+        <i class="fa fa-question prefix grey-text"></i>
+        <input type="text" value="{{centro.quien}}" id="quien" name="quien" class="form-control">
+        <label for="quien">Quien lo proporciona</label>
+    </div>
+
+	</div>
+
+    <div class="col-md-4">
+
+        <div class="md-form cuando">
+            <i class="fa fa-question prefix grey-text"></i>
+            <input type="text" name="cuando" value="{{centro.cada_cuando}}" id="cuando" class="form-control">
+            <label for="cuando">Cada cuanto</label>
+        </div>
+
+        <div class="form-group">
+            <i class="fa fa-user prefix grey-text"></i>
+            <label for="promo">Promotor <span style="color:red">*</span></label>
+            <select class="mdb-selec colorful-select dropdown-primary" name="promo" id="promo">
+            <option value="{{centro.promotor.id}}" selected>{{centro.promotor}}</option>
+            {% for m in des %}
+                <option value="{{m.id}}"> {{m}} </option>
+            {% endfor %}
+            </select>
+        </div>
+
+        <div class="md-form">
+            <i class="fa fa-pencil prefix grey-text"></i>
+            <input type="text" value="{{centro.nombre_promotor}}" id="nombrepromo" name="nombrepromo" class="form-control">
+            <label for="nombrepromo">Nombre del Promotor</label>
+        </div>
+
+        <div class="md-form">
+            <i class="fa fa-graduation-cap prefix grey-text"></i>
+            <input type="text" id="donde" name="donde" value="{{centro.donde_funciona}}" class="form-control">
+            <label for="donde">Donde funciona <span style="color:red">*</span></label>
+        </div>
+    
+        <div class="md-form">
+            <i class="fa fa-globe prefix grey-text"></i>
+            <input type="text" id="direccion" name="direccion" value="{{centro.direccion}}" class="form-control">
+            <label for="direccion">Dirección del Centro</label>
+        </div>
+
+    </div>
+
+	</div>
+	<div class="form-group text-center">
+        <input type="submit" class="btn info-color-dark z-depth-2" value="Guardar">
+    </div>
+    
+</form>
+</div>
+
+
+{% endblock container %}

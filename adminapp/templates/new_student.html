@@ -10,7 +10,7 @@
 <form id="new_student" action="" method="post">
 {% csrf_token %}
 <br>
-    <h2 class="text-center">Registrar Alumno</h2>
+    <h2 class="text-center">Registrar Alumno <a class="btn btn-info" href="{% url 'alumnos_sinmat' %}">Ver</a></h2>
     <hr>
     <p>Los elementos con <span style="color:red">*</span> son requeridos.</p>
 	<div class="row">
@@ -62,34 +62,17 @@
 		</select>
     </div>
 
-	 <div class="form-group">
-    	<i class="fa fa-pencil prefix grey-text"></i>
+	 
+    </div>
+
+    <div class="col-md-6">
+    <div class="form-group">
+        <i class="fa fa-pencil prefix grey-text"></i>
         <label for="ge">Grupo Etnico <span style="color:red">*</span></label>
         <select class="mdb-selec colorful-select dropdown-primary" id="ge">
         <option value="" disabled selected>Seleccione</option>
         {% for g in ge %}
-		    <option value="{{g.id}}"> {{g.grupo_etnico}} </option>
-        {% endfor %}
-		</select>
-    </div>
-
-    </div>
-
-    <div class="col-md-6">
-    
-    <div class="md-form">
-        <i class="fa fa-pencil prefix grey-text"></i>
-        <input type="text" id="condicion" class="form-control" >
-        <label for="condicion">Condición de Ingreso</label>
-    </div>
-
-    <div class="form-group">
-        <i class="fa fa-pencil prefix grey-text"></i>
-        <label for="ga">Egresado del Grado Anterior <span style="color:red">*</span></label>
-        <select class="mdb-selec colorful-select dropdown-primary" id="ga">
-        <option value="" disabled selected>Seleccione</option>
-        {% for g in ga %}
-            <option value="{{g.id}}"> {{g}} </option>
+            <option value="{{g.id}}"> {{g.grupo_etnico}} </option>
         {% endfor %}
         </select>
     </div>
@@ -158,8 +141,6 @@
 			var _direccion = $('#direccion').val()
 			var _muni = $('#muni').val()
             var _ge = $('#ge').val()
-            var _ga = $('#ga').val()
-			var _condicion = $('#condicion').val()
 			var _fechan = $('#fechan').val()
 			var _trabaja = $('#des').val()
 			var _ocupacion = $('#ocupacion').val()
@@ -178,8 +159,6 @@
 					direccion: _direccion,
 					muni: _muni,
                     ge: _ge,
-                    ga: _ga,
-					condicion: _condicion,
 					fechan: _fechan,
 					trabaja: _trabaja,
 					ocupacion: _ocupacion,
@@ -214,10 +193,6 @@
             $("#fechan").mask("9999-99-99");
             $('#fechan').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
 
-            $('.button-collapse').sideNav({
-                edge: 'left', // Choose the horizontal origin
-                closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
-              });
             
         })
 	</script>

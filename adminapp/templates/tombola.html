@@ -1,0 +1,60 @@
+{% extends "base_in.html" %}
+
+{% block container %}
+    
+<div class="container">
+
+	<h1>Tombola</h1>
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="wrapper">
+			  <div class="tombola">
+			    <div class="panel p1">One</div>
+			    <div class="panel p2">Two</div>
+			    <div class="panel p3">Three</div>
+			    <div class="panel p4">Four</div>
+			    <div class="panel p5">Five</div>
+			    <div class="panel p6">Six</div>
+			    <div class="panel p7">Seven</div>
+			    <div class="panel p8">Eight</div>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="wrapper">
+			  <div class="tombola">
+			    <div class="panel p1">Regalo 1</div>
+			    <div class="panel p2">Regalo 2</div>
+			    <div class="panel p3">Regalo 3</div>
+			    <div class="panel p4">Gracias por Participar</div>
+			    <div class="panel p5">Regalo 5</div>
+			    <div class="panel p6">Gracias por Participar</div>
+			    <div class="panel p7">Regalo 6</div>
+			    <div class="panel p8">Gracias por Participar</div>
+			  </div>
+			</div>
+		</div>
+	</div>
+
+	
+</div>
+
+{% endblock container %}
+
+{% block js %}
+    <script>
+    	// Script to randomise the panel the tombola lands on
+
+		$('.tombola').mouseenter(function(){
+		  var rotation = [1440,1485,1530,1575,1620,1665,1710,1755];
+		  var pick = Math.floor(Math.random()*8);
+		  var spin = rotation[pick];
+		 $('.tombola').css({'transform':'rotateX('+spin+'deg) translateZ(-480px)'});
+		});
+
+		$('.tombola').mouseleave(function(){
+		  $('.tombola').css({'transform':'rotateX(0deg) translateZ(-480px)'});
+		});
+    </script>
+{% endblock js %}

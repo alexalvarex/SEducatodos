@@ -1,0 +1,101 @@
+{% extends "base_in_admin.html" %}
+
+{% block info %}
+
+
+<div class="container" align="center">
+<br>
+	<div class="col-md-3"></div>
+		<div style="border: 2px solid #D3D0D0" class="col-sm-6 col-md-12 col-lg-12 mt-4">
+	<h1>Matricular en {{centro}}</h1>
+	
+			<form action="/administrador/matricula/nueva/add/" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="row">
+				<div class="col-md-6">
+				<div class="form-group">
+					<h5 for="alumno">Alumno</h5>
+					<select name="alumno[]" style="width:100%" id="alumno" class="js-example-basic-multiples selectpicker" multiple="multiple" required>
+						<option value="" disabled selected>Seleccione</option>
+					  {% for a in alumnos %}
+							<option value="{{ a.id }}">{{ a }}</option>
+						{% endfor %}
+					</select>
+					
+				</div>
+				<div class="form-group">
+					<h5 for="grado">Grados ofertados</h5>
+						<select name="grado" id="grado" class="mdb-selec colorful-select dropdown-primary" required>
+							<option value="" disabled selected>Seleccione</option>
+  							{% for g in grado %}
+							<option value="{{ g.id }}">{{ g }}</option>
+						{% endfor %}
+						</select>
+				</div>
+				<div class="form-group">
+			        <h5 for="centro">Centro</h5>
+			        <select name="centro" class="mdb-selec colorful-select dropdown-primary" id="centro">
+						<option value="{{ centro.id }}">{{ centro }}</option>
+			        </select>
+			    </div>
+
+			    <div class="form-group">
+			        <h5 for="condicion">Condición de Ingreso</h5>
+			        <input type="text" id="condicion" class="form-control">
+			    </div>
+
+				</div>
+				<div class="col-md-6">
+
+				<div class="form-group">
+					<h5 for="ga">Grado Anterior</h5>
+						<select name="ga" id="ga" class="mdb-selec colorful-select dropdown-primary" required>
+							<option value="" disabled selected>Seleccione</option>
+  							{% for g in ga %}
+							<option value="{{ g.id }}">{{ g }}</option>
+						{% endfor %}
+						</select>
+				</div>
+				<div class="form-group">
+			        <h6 for="otro">En caso si el grado anterior es otro por favor especifique</h6>
+			        <input type="text" name="otro" id="otro" class="form-control">
+			    </div>
+				
+				<div class="form-group">
+					<h5 for="requisito">¿Cumple con Requisito?</h5>
+						<select name="requisito" id="requisito" class="mdb-selec colorful-select dropdown-primary" required>
+						<option value="" disabled selected>Seleccione</option>
+  							{% for p in des %}
+							<option value="{{ p.id }}">{{ p }}</option>
+						{% endfor %}
+						</select>
+				</div>
+				
+			    </div>
+			    </div>
+				<div class="form-group">
+					<input type="submit" value="Realizar matricula" class="btn info-color-dark">
+				</div>
+			</form>
+		</div>
+	
+	</div>	
+	
+{% endblock %}
+
+{% block js %}
+    <script>
+    	 $(document).ready(function(){
+            $("#fechai").mask("9999/99/99");
+            $('#fechai').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+            // $('#horario').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+            $("#fechaf").mask("9999/99/99");
+            $('#fechaf').bootstrapMaterialDatePicker({ weekStart : false, time: false });
+
+            $('#alumno').select2({
+				  placeholder: 'Escriba el nombre del alumno'
+				});
+            
+        })
+    </script>
+{% endblock js %}
